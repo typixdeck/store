@@ -2,6 +2,53 @@
   "schemaVersion": 1,
   "applications": [
     {
+      "id": "ai.typixdeck.reader",
+      "package": "typix-reader",
+      "filename": "typix-reader_0.2.0-1_all.deb",
+      "sha256": "16deac32eae1b97de5aed88af2235d72788ef7fd04373bfe8d297486591dd958",
+      "name": {
+        "zh-CN": "Typix 阅读器",
+        "en": "Typix Reader"
+      },
+      "summary": {
+        "zh-CN": "本地电子书、书架与阅读进度"
+      },
+      "description": {
+        "zh-CN": "完整 GTK3 阅读器，包含 TXT、Markdown、EPUB 和 CBZ 解析代码、书架、目录、全文搜索、字号与本地阅读进度。默认全屏，不依赖远程网页或另行部署的应用程序。"
+      },
+      "categories": [
+        "Office"
+      ],
+      "desktopFile": "typix-reader.desktop",
+      "runtime": {
+        "kind": "python-module",
+        "module": "typix_reader",
+        "root": "/usr/lib/python3/dist-packages"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-reader",
+        "/usr/lib/python3/dist-packages/typix_reader/__init__.py",
+        "/usr/lib/python3/dist-packages/typix_reader/__main__.py",
+        "/usr/lib/python3/dist-packages/typix_reader/app.py",
+        "/usr/lib/python3/dist-packages/typix_reader/formats.py",
+        "/usr/lib/python3/dist-packages/typix_reader/navigation.py",
+        "/usr/lib/python3/dist-packages/typix_reader/state.py",
+        "/usr/share/typix-reader/typix-reader.css"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      }
+    },
+    {
       "id": "ai.typixdeck.gamer",
       "package": "typix-gamer",
       "filename": "typix-gamer_0.2.0-1_all.deb",
@@ -30,6 +77,99 @@
         "/usr/share/typix-gamer/app/library.json",
         "/usr/share/typix-gamer/app/styles.css",
         "/usr/share/typix-gamer/app/retroarch-pi.cfg"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      }
+    },
+    {
+      "id": "ai.typixdeck.launcher",
+      "package": "typix-launcher",
+      "filename": "typix-launcher_0.2.0-1_all.deb",
+      "sha256": "9292a77465823e60bd0776505c986165dc5caebcd5be839356a1871318c3375a",
+      "name": {
+        "zh-CN": "Typix 启动器",
+        "en": "Typix Launcher"
+      },
+      "summary": {
+        "zh-CN": "仅显示桌面快捷方式的原生全屏启动器"
+      },
+      "description": {
+        "zh-CN": "完整 GTK3 启动器，读取 XDG Desktop 快捷方式，键盘启动原生应用并请求全屏，应用关闭后返回。"
+      },
+      "categories": [
+        "System"
+      ],
+      "desktopFile": "typix-launcher.desktop",
+      "runtime": {
+        "kind": "python-module",
+        "module": "typix_launcher",
+        "root": "/usr/lib/python3/dist-packages"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-launcher",
+        "/usr/lib/python3/dist-packages/typix_launcher/__init__.py",
+        "/usr/lib/python3/dist-packages/typix_launcher/__main__.py",
+        "/usr/lib/python3/dist-packages/typix_launcher/app.py",
+        "/usr/share/typix-launcher/typix-launcher.css"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      }
+    },
+    {
+      "id": "ai.typixdeck.store",
+      "package": "typix-store",
+      "filename": "typix-store_0.3.0-1_all.deb",
+      "sha256": "be00e32375042ce022b1a85dfae052660db0749ed6424bc86d5c55a734551d41",
+      "name": {
+        "zh-CN": "Typix 应用商店",
+        "en": "Typix Store"
+      },
+      "summary": {
+        "zh-CN": "签名 GitHub deb 下载与系统授权安装"
+      },
+      "description": {
+        "zh-CN": "完整 GTK3 商店，支持签名应用源、完整 deb 下载、独立授权校验、安装更新移除和桌面快捷方式管理。"
+      },
+      "categories": [
+        "System"
+      ],
+      "desktopFile": "typix-store.desktop",
+      "runtime": {
+        "kind": "python-module",
+        "module": "typix_store",
+        "root": "/usr/lib/python3/dist-packages"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-store",
+        "/usr/lib/python3/dist-packages/typix_store/__init__.py",
+        "/usr/lib/python3/dist-packages/typix_store/__main__.py",
+        "/usr/lib/python3/dist-packages/typix_store/app.py",
+        "/usr/libexec/typix-store-stage",
+        "/usr/lib/python3/dist-packages/typix_store/catalog.py",
+        "/usr/lib/python3/dist-packages/typix_store/client.py",
+        "/usr/lib/python3/dist-packages/typix_store/remote.py",
+        "/usr/lib/python3/dist-packages/typix_store/staging.py",
+        "/usr/lib/python3/dist-packages/typix_store/transactions.py"
       ],
       "compatibility": {
         "arch": [

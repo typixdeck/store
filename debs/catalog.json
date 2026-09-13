@@ -2,6 +2,55 @@
   "applications": [
     {
       "categories": [
+        "Office"
+      ],
+      "currentVersion": "0.2.0-1",
+      "description": {
+        "zh-CN": "完整 GTK3 阅读器，包含 TXT、Markdown、EPUB 和 CBZ 解析代码、书架、目录、全文搜索、字号与本地阅读进度。默认全屏，不依赖远程网页或另行部署的应用程序。"
+      },
+      "desktopFile": "typix-reader.desktop",
+      "id": "ai.typixdeck.reader",
+      "name": {
+        "en": "Typix Reader",
+        "zh-CN": "Typix 阅读器"
+      },
+      "package": "typix-reader",
+      "summary": {
+        "zh-CN": "本地电子书、书架与阅读进度"
+      },
+      "versions": [
+        {
+          "artifact": {
+            "arch": "all",
+            "depends": "python3 (>= 3.11), python3-gi, gir1.2-gtk-3.0, gir1.2-gdkpixbuf-2.0",
+            "filename": "typix-reader_0.2.0-1_all.deb",
+            "installedSizeBytes": 59540,
+            "payload": "complete-deb",
+            "sha256": "16deac32eae1b97de5aed88af2235d72788ef7fd04373bfe8d297486591dd958",
+            "sizeBytes": 15588
+          },
+          "compatibility": {
+            "arch": [
+              "arm64"
+            ],
+            "display": [
+              "wayland",
+              "x11"
+            ],
+            "minFreeDiskMB": 65,
+            "minMemoryMB": 128,
+            "os": [
+              "raspios-bookworm",
+              "raspios-trixie"
+            ],
+            "requiredFeatures": []
+          },
+          "version": "0.2.0-1"
+        }
+      ]
+    },
+    {
+      "categories": [
         "Game"
       ],
       "currentVersion": "0.2.0-1",
@@ -48,12 +97,110 @@
           "version": "0.2.0-1"
         }
       ]
+    },
+    {
+      "categories": [
+        "System"
+      ],
+      "currentVersion": "0.2.0-1",
+      "description": {
+        "zh-CN": "完整 GTK3 启动器，读取 XDG Desktop 快捷方式，键盘启动原生应用并请求全屏，应用关闭后返回。"
+      },
+      "desktopFile": "typix-launcher.desktop",
+      "id": "ai.typixdeck.launcher",
+      "name": {
+        "en": "Typix Launcher",
+        "zh-CN": "Typix 启动器"
+      },
+      "package": "typix-launcher",
+      "summary": {
+        "zh-CN": "仅显示桌面快捷方式的原生全屏启动器"
+      },
+      "versions": [
+        {
+          "artifact": {
+            "arch": "all",
+            "depends": "python3, python3-gi, gir1.2-gtk-3.0, xdg-user-dirs",
+            "filename": "typix-launcher_0.2.0-1_all.deb",
+            "installedSizeBytes": 48496,
+            "payload": "complete-deb",
+            "sha256": "9292a77465823e60bd0776505c986165dc5caebcd5be839356a1871318c3375a",
+            "sizeBytes": 13552
+          },
+          "compatibility": {
+            "arch": [
+              "arm64"
+            ],
+            "display": [
+              "wayland",
+              "x11"
+            ],
+            "minFreeDiskMB": 65,
+            "minMemoryMB": 128,
+            "os": [
+              "raspios-bookworm",
+              "raspios-trixie"
+            ],
+            "requiredFeatures": []
+          },
+          "version": "0.2.0-1"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "System"
+      ],
+      "currentVersion": "0.3.0-1",
+      "description": {
+        "zh-CN": "完整 GTK3 商店，支持签名应用源、完整 deb 下载、独立授权校验、安装更新移除和桌面快捷方式管理。"
+      },
+      "desktopFile": "typix-store.desktop",
+      "id": "ai.typixdeck.store",
+      "name": {
+        "en": "Typix Store",
+        "zh-CN": "Typix 应用商店"
+      },
+      "package": "typix-store",
+      "summary": {
+        "zh-CN": "签名 GitHub deb 下载与系统授权安装"
+      },
+      "versions": [
+        {
+          "artifact": {
+            "arch": "all",
+            "depends": "python3, python3-gi, python3-cryptography, gir1.2-gtk-3.0, dpkg, packagekit, pkexec, xdg-user-dirs",
+            "filename": "typix-store_0.3.0-1_all.deb",
+            "installedSizeBytes": 79896,
+            "payload": "complete-deb",
+            "sha256": "be00e32375042ce022b1a85dfae052660db0749ed6424bc86d5c55a734551d41",
+            "sizeBytes": 21032
+          },
+          "compatibility": {
+            "arch": [
+              "arm64"
+            ],
+            "display": [
+              "wayland",
+              "x11"
+            ],
+            "minFreeDiskMB": 65,
+            "minMemoryMB": 128,
+            "os": [
+              "raspios-bookworm",
+              "raspios-trixie"
+            ],
+            "requiredFeatures": []
+          },
+          "version": "0.3.0-1"
+        }
+      ]
     }
   ],
   "channel": "github-repository",
-  "expiresAt": "2026-12-12T03:49:15.517132+00:00",
-  "generatedAt": "2026-09-13T03:49:15.517132+00:00",
+  "expiresAt": "2026-12-12T08:47:23.217676+00:00",
+  "generatedAt": "2026-09-13T08:47:23.217676+00:00",
   "repository": "typixdeck/store",
-  "revision": "20260913T034915Z",
+  "revision": "20260913T084723Z",
   "schemaVersion": 1
 }
