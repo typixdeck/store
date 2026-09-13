@@ -305,7 +305,7 @@
       "categories": [
         "Network"
       ],
-      "currentVersion": "0.1.1-1",
+      "currentVersion": "0.1.2-1",
       "description": {
         "zh-CN": "完整原生 GTK3 微信安装适配程序。首次点击安装后从腾讯官网下载原版 ARM64 客户端，核对固定版本与 SHA256，再由系统授权安装；以后从 Launcher 直接打开微信。适配 deb 不内含腾讯客户端，不提供网页版或未授权镜像；登录和消息功能由官方微信提供，需要用户自己的账号。"
       },
@@ -331,11 +331,11 @@
           "artifact": {
             "arch": "all",
             "depends": "python3 (>= 3.11), python3-gi, gir1.2-gtk-3.0, typix-store (>= 0.3.0-1), typix-launcher (>= 0.2.0-1), dpkg, packagekit, pkexec, ca-certificates, desktop-file-utils, shared-mime-info",
-            "filename": "typix-wechat_0.1.1-1_all.deb",
-            "installedSizeBytes": 40936,
+            "filename": "typix-wechat_0.1.2-1_all.deb",
+            "installedSizeBytes": 41306,
             "payload": "complete-deb",
-            "sha256": "7b1d4d53cb3b3f4e0ecbcc468ddb8ce7e9b7b29a7843c9b4bef86c60971cb0d5",
-            "sizeBytes": 13916
+            "sha256": "bd92a14fe460c115a91020ea140c2f830ed94e9375e0da5fb0355eb2b3380d21",
+            "sizeBytes": 14012
           },
           "compatibility": {
             "arch": [
@@ -353,15 +353,15 @@
             ],
             "requiredFeatures": []
           },
-          "version": "0.1.1-1"
+          "version": "0.1.2-1"
         }
       ]
     }
   ],
   "channel": "github-repository",
-  "expiresAt": "2026-12-12T12:47:31.902206+00:00",
-  "generatedAt": "2026-09-13T12:47:31.902206+00:00",
+  "expiresAt": "2026-12-12T13:03:11.133959+00:00",
+  "generatedAt": "2026-09-13T13:03:11.133959+00:00",
   "repository": "typixdeck/store",
-  "revision": "20260913T124731Z",
+  "revision": "20260913T130311Z",
   "schemaVersion": 1
 }
