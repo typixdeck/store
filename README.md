@@ -2,6 +2,18 @@
 
 原生 GTK3/PyGObject 全屏商店，支持从配置的公开 GitHub 仓库下载**完整 deb 软件包**，然后经过系统授权安装、更新、移除。标准 `.desktop` 快捷方式仍单独管理，安装不会自动向桌面堆放图标。没有浏览器、遥测或整机安装清单上传。
 
+<!-- app-screenshots:start -->
+
+![应用目录、兼容性与桌面快捷方式管理](docs/screenshots/catalog.png)
+
+应用目录、兼容性与桌面快捷方式管理。
+
+![按名称搜索应用并查看安装状态](docs/screenshots/search.png)
+
+按名称搜索应用并查看安装状态。
+
+<!-- app-screenshots:end -->
+
 界面沿用 Launcher 的深色背景、青色焦点和系统主题图标。支持搜索、详情、已安装筛选、Tab、方向键、Enter、Esc、Ctrl+F 和 F5。介绍和技术详情滚动，状态和三项操作固定可见。版本 0.3 延续 CM4、官方 Raspberry Pi OS ARM64 和约 800×600 逻辑显示要求。
 
 ## GitHub 应用源
@@ -36,13 +48,13 @@ raw 模式从 `raw.githubusercontent.com/typixdeck/store/main/debs/` 读取平�
 {
   "id": "ai.typixdeck.reader",
   "package": "typix-reader",
-  "currentVersion": "0.2.0-1",
+  "currentVersion": "0.3.0-1",
   "name": {"zh-CN": "阅读器"},
   "desktopFile": "typix-reader.desktop",
   "versions": [{
-    "version": "0.2.0-1",
+    "version": "0.3.0-1",
     "artifact": {
-      "filename": "typix-reader_0.2.0-1_all.deb",
+      "filename": "typix-reader_0.3.0-1_all.deb",
       "arch": "all",
       "sizeBytes": 12345,
       "sha256": "<实际文件的 64 位十六进制 SHA-256>",
@@ -111,4 +123,19 @@ PYTHONPATH=src python3 -m unittest discover -s tests -v
 
 URL 规则依据 [GitHub Release 链接文档](https://docs.github.com/en/repositories/releasing-projects-on-github/linking-to-releases) 和 [GitHub 仓库内容文档](https://docs.github.com/en/rest/repos/contents)。
 
-本仓库只发布当前应用代码、构建文件和可公开文档；历史设备快照、凭据、设备采集记录及本地运行数据不在提交范围内。
+## 仓库目录
+
+| 路径 | 用途 |
+| --- | --- |
+| `app.json` | 应用描述、完整 deb 版本与 SHA-256、截图索引 |
+| `README.md` | 功能、真机截图、安装与使用说明 |
+| `src/` | 当前程序源码或启动入口 |
+| `packaging/` | desktop 与打包辅助文件 |
+| `tests/` | 功能与边界验证 |
+| `docs/screenshots/` | 可公开的真实运行截图 |
+| `build-deb.sh` | 本地构建入口 |
+| `dist/` | 构建生成的完整 deb；不提交 Git |
+
+Store 另有 `debs/`（完整包提交与签名目录）、`tools/`（导入与发布工具）、`schemas/`（声明格式）和 `config/`（配置示例）。详情见 [应用仓库约定](docs/APP-REPOSITORY.md) 与 [发布流程](docs/PUBLISHING.md)。
+
+构建后核对并更新 `app.json` 的版本、SHA-256 和截图索引。Store 发布工具读取声明并校验完整软件包；构建不会自动签名、上传或安装。应用仓库不包含用户数据、凭据、私钥或设备采集记录。

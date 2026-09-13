@@ -372,6 +372,16 @@ def inspect_packages(source: Path = DEFAULT_SOURCE) -> list[dict[str, Any]]:
                             "sizeBytes": path.stat().st_size, "installedSizeBytes": installed_size,
                             "depends": fields["Depends"], "payload": "complete-deb"},
                             "compatibility": compatibility}]})
+        if "sourceRepository" in metadata or "screenshots" in metadata:
+            repo, shots = metadata.get("sourceRepository"), metadata.get("screenshots")
+            require(isinstance(repo, str) and bool(REPOSITORY_RE.fullmatch(repo)), "Invalid application sourceRepository")
+            require(isinstance(shots, list) and 1 <= len(shots) <= 8, "Provide 1–8 screenshots")
+            for shot in shots:
+                require(isinstance(shot, dict) and isinstance(shot.get("path"), str)
+                        and re.fullmatch(r"docs/screenshots/[A-Za-z0-9][A-Za-z0-9_-]*\.(?:png|jpg|jpeg)", shot["path"])
+                        and isinstance(shot.get("caption"), str) and 0 < len(shot["caption"]) <= 200,
+                        "Invalid screenshot path/caption")
+            entries[-1].update(sourceRepository=repo, screenshots=shots)
         ids.add(identity)
         packages.add(fields["Package"])
         filenames.add(filename)

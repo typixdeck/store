@@ -4,9 +4,9 @@
       "categories": [
         "Office"
       ],
-      "currentVersion": "0.2.0-1",
+      "currentVersion": "0.3.0-1",
       "description": {
-        "zh-CN": "完整 GTK3 阅读器，包含 TXT、Markdown、EPUB 和 CBZ 解析代码、书架、目录、全文搜索、字号与本地阅读进度。默认全屏，不依赖远程网页或另行部署的应用程序。"
+        "zh-CN": "完整 GTK3 阅读器，支持 TXT、Markdown、EPUB 与 CBZ，书架、目录、搜索和阅读进度。支持用户自己的 Calibre OPDS 分类、搜索、分页、认证与下载；没有内置测试书库。"
       },
       "desktopFile": "typix-reader.desktop",
       "id": "ai.typixdeck.reader",
@@ -15,19 +15,34 @@
         "zh-CN": "Typix 阅读器"
       },
       "package": "typix-reader",
+      "screenshots": [
+        {
+          "caption": "最近书架与继续阅读",
+          "path": "docs/screenshots/reader-shelf.png"
+        },
+        {
+          "caption": "原创短文《海风与书页》的阅读界面",
+          "path": "docs/screenshots/reader-reading.png"
+        },
+        {
+          "caption": "使用原创条目的 OPDS 演示书库",
+          "path": "docs/screenshots/reader-opds.png"
+        }
+      ],
+      "sourceRepository": "typixdeck/reader",
       "summary": {
-        "zh-CN": "本地电子书、书架与阅读进度"
+        "zh-CN": "本地阅读与 Calibre OPDS 在线书库"
       },
       "versions": [
         {
           "artifact": {
             "arch": "all",
-            "depends": "python3 (>= 3.11), python3-gi, gir1.2-gtk-3.0, gir1.2-gdkpixbuf-2.0",
-            "filename": "typix-reader_0.2.0-1_all.deb",
-            "installedSizeBytes": 59540,
+            "depends": "python3 (>= 3.11), python3-gi, gir1.2-gtk-3.0, gir1.2-gdkpixbuf-2.0, ca-certificates",
+            "filename": "typix-reader_0.3.0-1_all.deb",
+            "installedSizeBytes": 94241,
             "payload": "complete-deb",
-            "sha256": "16deac32eae1b97de5aed88af2235d72788ef7fd04373bfe8d297486591dd958",
-            "sizeBytes": 15588
+            "sha256": "b8c887b7cff113bd8982b54e05e548ad099d8e23d3c085f13206f0db40488ec9",
+            "sizeBytes": 23164
           },
           "compatibility": {
             "arch": [
@@ -45,7 +60,7 @@
             ],
             "requiredFeatures": []
           },
-          "version": "0.2.0-1"
+          "version": "0.3.0-1"
         }
       ]
     },
@@ -64,6 +79,13 @@
         "zh-CN": "Pixel Relay 游戏厅"
       },
       "package": "typix-gamer",
+      "screenshots": [
+        {
+          "caption": "尚未导入 ROM 的游戏库与本地导入入口",
+          "path": "docs/screenshots/library.png"
+        }
+      ],
+      "sourceRepository": "typixdeck/gamer",
       "summary": {
         "zh-CN": "完整游戏库前端，自备合法 ROM 与核心"
       },
@@ -113,6 +135,17 @@
         "zh-CN": "Typix 启动器"
       },
       "package": "typix-launcher",
+      "screenshots": [
+        {
+          "caption": "桌面快捷方式首页与键盘焦点",
+          "path": "docs/screenshots/home.png"
+        },
+        {
+          "caption": "开机自动启动设置",
+          "path": "docs/screenshots/settings.png"
+        }
+      ],
+      "sourceRepository": "typixdeck/launcher",
       "summary": {
         "zh-CN": "仅显示桌面快捷方式的原生全屏启动器"
       },
@@ -162,6 +195,17 @@
         "zh-CN": "Typix 应用商店"
       },
       "package": "typix-store",
+      "screenshots": [
+        {
+          "caption": "应用目录、兼容性与桌面快捷方式管理",
+          "path": "docs/screenshots/catalog.png"
+        },
+        {
+          "caption": "按名称搜索应用并查看安装状态",
+          "path": "docs/screenshots/search.png"
+        }
+      ],
+      "sourceRepository": "typixdeck/store",
       "summary": {
         "zh-CN": "签名 GitHub deb 下载与系统授权安装"
       },
@@ -195,12 +239,118 @@
           "version": "0.3.0-1"
         }
       ]
+    },
+    {
+      "categories": [
+        "Network",
+        "AudioVideo"
+      ],
+      "currentVersion": "0.3.0-1",
+      "description": {
+        "zh-CN": "包含 MyAI Flutter 客户端 1.0.0+4015、运行引擎、原生插件与界面资源，安装后无需手动部署 /opt 程序。支持账号配对后的语音与图像服务；账号、服务权限与网络由用户自行配置，包内不包含设备凭据、聊天记录或代理密码。"
+      },
+      "desktopFile": "typix-myai.desktop",
+      "id": "ai.typixdeck.myai",
+      "name": {
+        "en": "MyAI",
+        "zh-CN": "MyAI 智能助手"
+      },
+      "package": "typix-myai",
+      "summary": {
+        "zh-CN": "完整 ARM64 语音与图像客户端"
+      },
+      "versions": [
+        {
+          "artifact": {
+            "arch": "arm64",
+            "depends": "libc6 (>= 2.34), libstdc++6, libgtk-3-0 | libgtk-3-0t64, libglib2.0-0 | libglib2.0-0t64, libgstreamer1.0-0, libgstreamer-plugins-base1.0-0, gstreamer1.0-plugins-good, libasound2 | libasound2t64, libpulse0, ca-certificates",
+            "filename": "typix-myai_0.3.0-1_arm64.deb",
+            "installedSizeBytes": 53555026,
+            "payload": "complete-deb",
+            "sha256": "74862cf1908b4942324f7c5bbe7f09834c62c3a00be9538da0d852b7debb7f4d",
+            "sizeBytes": 13219312
+          },
+          "compatibility": {
+            "arch": [
+              "arm64"
+            ],
+            "display": [
+              "wayland",
+              "x11"
+            ],
+            "minFreeDiskMB": 256,
+            "minMemoryMB": 512,
+            "os": [
+              "raspios-bookworm",
+              "raspios-trixie"
+            ],
+            "requiredFeatures": []
+          },
+          "version": "0.3.0-1"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "Network"
+      ],
+      "currentVersion": "0.1.0-1",
+      "description": {
+        "zh-CN": "完整原生 GTK3 微信安装适配程序。首次点击安装后从腾讯官网下载原版 ARM64 客户端，核对固定版本与 SHA256，再由系统授权安装；以后从 Launcher 直接打开微信。适配 deb 不内含腾讯客户端，不提供网页版或未授权镜像；登录和消息功能由官方微信提供，需要用户自己的账号。"
+      },
+      "desktopFile": "typix-wechat.desktop",
+      "id": "ai.typixdeck.wechat",
+      "name": {
+        "en": "WeChat native setup",
+        "zh-CN": "微信（官方客户端安装）"
+      },
+      "package": "typix-wechat",
+      "screenshots": [
+        {
+          "caption": "真机首次安装界面；官方微信从腾讯下载",
+          "path": "docs/screenshots/setup.png"
+        }
+      ],
+      "sourceRepository": "typixdeck/wechat",
+      "summary": {
+        "zh-CN": "从腾讯安装官方 ARM64 微信并全屏启动"
+      },
+      "versions": [
+        {
+          "artifact": {
+            "arch": "all",
+            "depends": "python3 (>= 3.11), python3-gi, gir1.2-gtk-3.0, typix-store (>= 0.3.0-1), typix-launcher (>= 0.2.0-1), dpkg, packagekit, pkexec, ca-certificates, desktop-file-utils, shared-mime-info",
+            "filename": "typix-wechat_0.1.0-1_all.deb",
+            "installedSizeBytes": 37679,
+            "payload": "complete-deb",
+            "sha256": "14492064b418225c9224f87b02b46b8c706ec240a7d5f48f9bf7ed26887c5199",
+            "sizeBytes": 12984
+          },
+          "compatibility": {
+            "arch": [
+              "arm64"
+            ],
+            "display": [
+              "wayland",
+              "x11"
+            ],
+            "minFreeDiskMB": 1400,
+            "minMemoryMB": 512,
+            "os": [
+              "raspios-bookworm",
+              "raspios-trixie"
+            ],
+            "requiredFeatures": []
+          },
+          "version": "0.1.0-1"
+        }
+      ]
     }
   ],
   "channel": "github-repository",
-  "expiresAt": "2026-12-12T08:47:23.217676+00:00",
-  "generatedAt": "2026-09-13T08:47:23.217676+00:00",
+  "expiresAt": "2026-12-12T09:23:00.244558+00:00",
+  "generatedAt": "2026-09-13T09:23:00.244558+00:00",
   "repository": "typixdeck/store",
-  "revision": "20260913T084723Z",
+  "revision": "20260913T092300Z",
   "schemaVersion": 1
 }

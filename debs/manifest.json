@@ -4,17 +4,17 @@
     {
       "id": "ai.typixdeck.reader",
       "package": "typix-reader",
-      "filename": "typix-reader_0.2.0-1_all.deb",
-      "sha256": "16deac32eae1b97de5aed88af2235d72788ef7fd04373bfe8d297486591dd958",
+      "filename": "typix-reader_0.3.0-1_all.deb",
+      "sha256": "b8c887b7cff113bd8982b54e05e548ad099d8e23d3c085f13206f0db40488ec9",
       "name": {
         "zh-CN": "Typix 阅读器",
         "en": "Typix Reader"
       },
       "summary": {
-        "zh-CN": "本地电子书、书架与阅读进度"
+        "zh-CN": "本地阅读与 Calibre OPDS 在线书库"
       },
       "description": {
-        "zh-CN": "完整 GTK3 阅读器，包含 TXT、Markdown、EPUB 和 CBZ 解析代码、书架、目录、全文搜索、字号与本地阅读进度。默认全屏，不依赖远程网页或另行部署的应用程序。"
+        "zh-CN": "完整 GTK3 阅读器，支持 TXT、Markdown、EPUB 与 CBZ，书架、目录、搜索和阅读进度。支持用户自己的 Calibre OPDS 分类、搜索、分页、认证与下载；没有内置测试书库。"
       },
       "categories": [
         "Office"
@@ -33,7 +33,9 @@
         "/usr/lib/python3/dist-packages/typix_reader/formats.py",
         "/usr/lib/python3/dist-packages/typix_reader/navigation.py",
         "/usr/lib/python3/dist-packages/typix_reader/state.py",
-        "/usr/share/typix-reader/typix-reader.css"
+        "/usr/share/typix-reader/typix-reader.css",
+        "/usr/lib/python3/dist-packages/typix_reader/opds.py",
+        "/usr/lib/python3/dist-packages/typix_reader/opds_ui.py"
       ],
       "compatibility": {
         "arch": [
@@ -46,7 +48,22 @@
           "x11"
         ],
         "requiredFeatures": []
-      }
+      },
+      "sourceRepository": "typixdeck/reader",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/reader-shelf.png",
+          "caption": "最近书架与继续阅读"
+        },
+        {
+          "path": "docs/screenshots/reader-reading.png",
+          "caption": "原创短文《海风与书页》的阅读界面"
+        },
+        {
+          "path": "docs/screenshots/reader-opds.png",
+          "caption": "使用原创条目的 OPDS 演示书库"
+        }
+      ]
     },
     {
       "id": "ai.typixdeck.gamer",
@@ -89,7 +106,14 @@
           "x11"
         ],
         "requiredFeatures": []
-      }
+      },
+      "sourceRepository": "typixdeck/gamer",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/library.png",
+          "caption": "尚未导入 ROM 的游戏库与本地导入入口"
+        }
+      ]
     },
     {
       "id": "ai.typixdeck.launcher",
@@ -133,7 +157,18 @@
           "x11"
         ],
         "requiredFeatures": []
-      }
+      },
+      "sourceRepository": "typixdeck/launcher",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/home.png",
+          "caption": "桌面快捷方式首页与键盘焦点"
+        },
+        {
+          "path": "docs/screenshots/settings.png",
+          "caption": "开机自动启动设置"
+        }
+      ]
     },
     {
       "id": "ai.typixdeck.store",
@@ -182,7 +217,132 @@
           "x11"
         ],
         "requiredFeatures": []
+      },
+      "sourceRepository": "typixdeck/store",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/catalog.png",
+          "caption": "应用目录、兼容性与桌面快捷方式管理"
+        },
+        {
+          "path": "docs/screenshots/search.png",
+          "caption": "按名称搜索应用并查看安装状态"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.myai",
+      "package": "typix-myai",
+      "filename": "typix-myai_0.3.0-1_arm64.deb",
+      "sha256": "74862cf1908b4942324f7c5bbe7f09834c62c3a00be9538da0d852b7debb7f4d",
+      "name": {
+        "zh-CN": "MyAI 智能助手",
+        "en": "MyAI"
+      },
+      "summary": {
+        "zh-CN": "完整 ARM64 语音与图像客户端"
+      },
+      "description": {
+        "zh-CN": "包含 MyAI Flutter 客户端 1.0.0+4015、运行引擎、原生插件与界面资源，安装后无需手动部署 /opt 程序。支持账号配对后的语音与图像服务；账号、服务权限与网络由用户自行配置，包内不包含设备凭据、聊天记录或代理密码。"
+      },
+      "categories": [
+        "Network",
+        "AudioVideo"
+      ],
+      "desktopFile": "typix-myai.desktop",
+      "runtime": {
+        "kind": "native",
+        "path": "/usr/lib/typix-myai/myai_flutter_client"
+      },
+      "requiredPayload": [
+        "/usr/lib/typix-myai/myai_flutter_client",
+        "/usr/lib/typix-myai/data/flutter_assets/NOTICES.Z",
+        "/usr/lib/typix-myai/data/flutter_assets/NativeAssetsManifest.json",
+        "/usr/lib/typix-myai/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
+        "/usr/lib/typix-myai/data/flutter_assets/packages/record_web/assets/js/record.fixwebmduration.js",
+        "/usr/lib/typix-myai/data/flutter_assets/packages/record_web/assets/js/record.worklet.js",
+        "/usr/lib/typix-myai/data/flutter_assets/FontManifest.json",
+        "/usr/lib/typix-myai/data/flutter_assets/fonts/MaterialIcons-Regular.otf",
+        "/usr/lib/typix-myai/data/flutter_assets/version.json",
+        "/usr/lib/typix-myai/data/flutter_assets/AssetManifest.bin",
+        "/usr/lib/typix-myai/data/flutter_assets/shaders/ink_sparkle.frag",
+        "/usr/lib/typix-myai/data/flutter_assets/shaders/stretch_effect.frag",
+        "/usr/lib/typix-myai/data/icudtl.dat",
+        "/usr/lib/typix-myai/lib/libflutter_linux_gtk.so",
+        "/usr/lib/typix-myai/lib/librecord_linux_plugin.so",
+        "/usr/lib/typix-myai/lib/libapp.so",
+        "/usr/lib/typix-myai/lib/native_assets.json",
+        "/usr/lib/typix-myai/lib/liburl_launcher_linux_plugin.so",
+        "/usr/lib/typix-myai/lib/libaudioplayers_linux_plugin.so"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 512,
+        "minFreeDiskMB": 256,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
       }
+    },
+    {
+      "id": "ai.typixdeck.wechat",
+      "package": "typix-wechat",
+      "filename": "typix-wechat_0.1.0-1_all.deb",
+      "sha256": "14492064b418225c9224f87b02b46b8c706ec240a7d5f48f9bf7ed26887c5199",
+      "name": {
+        "zh-CN": "微信（官方客户端安装）",
+        "en": "WeChat native setup"
+      },
+      "summary": {
+        "zh-CN": "从腾讯安装官方 ARM64 微信并全屏启动"
+      },
+      "description": {
+        "zh-CN": "完整原生 GTK3 微信安装适配程序。首次点击安装后从腾讯官网下载原版 ARM64 客户端，核对固定版本与 SHA256，再由系统授权安装；以后从 Launcher 直接打开微信。适配 deb 不内含腾讯客户端，不提供网页版或未授权镜像；登录和消息功能由官方微信提供，需要用户自己的账号。"
+      },
+      "categories": [
+        "Network"
+      ],
+      "desktopFile": "typix-wechat.desktop",
+      "runtime": {
+        "kind": "python-module",
+        "module": "typix_wechat",
+        "root": "/usr/lib/python3/dist-packages"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-wechat",
+        "/usr/libexec/typix-wechat-stage",
+        "/usr/share/typix-wechat/native.desktop",
+        "/usr/lib/python3/dist-packages/typix_wechat/backend.py",
+        "/usr/lib/python3/dist-packages/typix_wechat/transport.py",
+        "/usr/lib/python3/dist-packages/typix_wechat/pinned.py",
+        "/usr/lib/python3/dist-packages/typix_wechat/__init__.py",
+        "/usr/lib/python3/dist-packages/typix_wechat/app.py",
+        "/usr/lib/python3/dist-packages/typix_wechat/staging.py",
+        "/usr/lib/python3/dist-packages/typix_wechat/__main__.py"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 512,
+        "minFreeDiskMB": 1400,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "sourceRepository": "typixdeck/wechat",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/setup.png",
+          "caption": "真机首次安装界面；官方微信从腾讯下载"
+        }
+      ]
     }
   ]
 }

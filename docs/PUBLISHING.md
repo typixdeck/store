@@ -1,8 +1,8 @@
 # 完整 deb 提交与 Store 发布
 
-Store 分发提交者已经构建、审查的完整 `.deb`，不会把应用改造成仅能调用外部程序的包装入口。当前公开源 `debs/` 包含完整 Reader 0.2.0-1 和 Gamer 0.2.0-1；Gamer 用户须另备合法 ROM 与适配的 RetroArch 核心。旧 MyAI 包缺少 Flutter 客户端主体，已从新目录排除。
+Store 分发已构建、审查的完整 `.deb`。当前 `debs/` 包括 Launcher、Store、Reader（含 OPDS）、Gamer、完整 MyAI ARM64 客户端及微信安装适配程序。Gamer 的合法 ROM 与核心由用户提供；腾讯微信原包由设备直接从官网下载，GitHub 只分发我们自己的完整安装/启动程序。
 
-目标 GitHub 仓库为 `typixdeck/store`。公开源采用 `main` 分支根目录下的 `debs/`。本地工作区的 `debs/` 与远端根目录 `debs/` 是不同路径；工具支持两种项目结构。源仓库为私有的 Python 应用，其完整 deb 也包含 Python 代码，因此公开仓库的待发布目录只放已授权公开的应用。
+目标 GitHub 仓库为 `typixdeck/store`。公开源采用 `main` 分支根目录下的 `debs/`。在完整工作区使用 `apps/store/debs/`，在独立 Store 仓库使用 `debs/`；工具支持两种结构。Python 完整 deb 包含应用代码，公开目录只放已经获得公开发布授权的内容。
 
 ## 准备完整包和清单
 
@@ -12,7 +12,7 @@ Store 分发提交者已经构建、审查的完整 `.deb`，不会把应用改�
 store/
 ├── debs/
 │   ├── manifest.json
-│   ├── typix-gamer_0.2.0-1_all.deb
+│   ├── typix-<app>_<version>_<arch>.deb
 │   ├── catalog.json
 │   ├── catalog.json.sig
 │   ├── public-key.pem
@@ -118,4 +118,4 @@ gh release create store-20260913 dist/store-release/*.deb \
 python3 tools/build-offline-repository.py --source debs --version 0.3.0-1
 ```
 
-得到 `dist/typix-store-offline-repository_0.3.0-1_all.deb`，其中应用仍为各自实际 0.2.0-1 版本；仓库版本与应用版本独立。离线 catalog 为 `development-offline`，只包含当前 manifest 中已审查的完整应用；此公开仓库包含完整 Reader / Gamer，没有 MyAI 包装入口。设备安装、卸载继续走 Store 的可审计授权事务。
+仓库版本与各应用版本独立。修改离线源内容时必须升级仓库包版本，不能覆盖已发布的同版本包。离线 catalog 为 `development-offline`，只包含当前 manifest 中已审查的完整应用。当前公开 raw 目录有六个应用包；MyAI 为完整 ARM64 客户端，微信为官方客户端安装适配程序。设备安装、卸载继续走 Store 的可审计授权事务。
