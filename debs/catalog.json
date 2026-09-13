@@ -256,6 +256,13 @@
         "zh-CN": "MyAI 智能助手"
       },
       "package": "typix-myai",
+      "screenshots": [
+        {
+          "caption": "CM4 独立显示会话中的聊天区局部截图（未绑定账号、网络隔离）",
+          "path": "docs/screenshots/home.png"
+        }
+      ],
+      "sourceRepository": "typixdeck/myai",
       "summary": {
         "zh-CN": "完整 ARM64 语音与图像客户端"
       },
@@ -348,9 +355,9 @@
     }
   ],
   "channel": "github-repository",
-  "expiresAt": "2026-12-12T09:23:00.244558+00:00",
-  "generatedAt": "2026-09-13T09:23:00.244558+00:00",
+  "expiresAt": "2026-12-12T09:38:24.863331+00:00",
+  "generatedAt": "2026-09-13T09:38:24.863331+00:00",
   "repository": "typixdeck/store",
-  "revision": "20260913T092300Z",
+  "revision": "20260913T093824Z",
   "schemaVersion": 1
 }

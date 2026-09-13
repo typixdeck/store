@@ -286,7 +286,14 @@
           "x11"
         ],
         "requiredFeatures": []
-      }
+      },
+      "sourceRepository": "typixdeck/myai",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/home.png",
+          "caption": "CM4 独立显示会话中的聊天区局部截图（未绑定账号、网络隔离）"
+        }
+      ]
     },
     {
       "id": "ai.typixdeck.wechat",
