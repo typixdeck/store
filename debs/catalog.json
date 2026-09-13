@@ -4,9 +4,9 @@
       "categories": [
         "Office"
       ],
-      "currentVersion": "0.3.0-1",
+      "currentVersion": "0.4.0-1",
       "description": {
-        "zh-CN": "完整 GTK3 阅读器，支持 TXT、Markdown、EPUB 与 CBZ，书架、目录、搜索和阅读进度。支持用户自己的 Calibre OPDS 分类、搜索、分页、认证与下载；没有内置测试书库。"
+        "zh-CN": "完整 GTK3 阅读器，支持 TXT、Markdown、EPUB、CBZ、PDF 与未加密 MOBI / PRC / AZW / AZW3，包含书架、目录、搜索和阅读进度。PDF 保留页面版式，Kindle 正文使用自己的文字阅读界面。支持用户自己的 Calibre OPDS 分类、搜索、分页、认证与下载；没有内置测试书库。"
       },
       "desktopFile": "typix-reader.desktop",
       "id": "ai.typixdeck.reader",
@@ -27,6 +27,10 @@
         {
           "caption": "使用原创条目的 OPDS 演示书库",
           "path": "docs/screenshots/reader-opds.png"
+        },
+        {
+          "caption": "CM4 独立 800×600 显示会话中的原创 PDF 页面",
+          "path": "docs/screenshots/reader-pdf.png"
         }
       ],
       "sourceRepository": "typixdeck/reader",
@@ -37,12 +41,12 @@
         {
           "artifact": {
             "arch": "all",
-            "depends": "python3 (>= 3.11), python3-gi, gir1.2-gtk-3.0, gir1.2-gdkpixbuf-2.0, ca-certificates",
-            "filename": "typix-reader_0.3.0-1_all.deb",
-            "installedSizeBytes": 94241,
+            "depends": "python3 (>= 3.11), python3-gi, python3-gi-cairo, gir1.2-gtk-3.0, gir1.2-gdkpixbuf-2.0, gir1.2-poppler-0.18, libmobi-tools (>= 0.11), ca-certificates",
+            "filename": "typix-reader_0.4.0-1_all.deb",
+            "installedSizeBytes": 124920,
             "payload": "complete-deb",
-            "sha256": "b8c887b7cff113bd8982b54e05e548ad099d8e23d3c085f13206f0db40488ec9",
-            "sizeBytes": 23164
+            "sha256": "dcf8f16bd927f1259f4258850f89a84bd82acbd5bed4537792911c78edc74b9e",
+            "sizeBytes": 30252
           },
           "compatibility": {
             "arch": [
@@ -60,7 +64,7 @@
             ],
             "requiredFeatures": []
           },
-          "version": "0.3.0-1"
+          "version": "0.4.0-1"
         }
       ]
     },
@@ -355,9 +359,9 @@
     }
   ],
   "channel": "github-repository",
-  "expiresAt": "2026-12-12T09:38:24.863331+00:00",
-  "generatedAt": "2026-09-13T09:38:24.863331+00:00",
+  "expiresAt": "2026-12-12T11:47:56.167849+00:00",
+  "generatedAt": "2026-09-13T11:47:56.167849+00:00",
   "repository": "typixdeck/store",
-  "revision": "20260913T093824Z",
+  "revision": "20260913T114756Z",
   "schemaVersion": 1
 }
