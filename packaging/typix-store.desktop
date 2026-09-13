@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=TypixDeck 商店
+Comment=Browse and install TypixDeck-optimized ARM64 applications
+Exec=/usr/bin/typix-store
+Icon=system-software-install
+Terminal=false
+Categories=System;Utility;
+StartupNotify=true
+X-TypixDeck-LaunchMode=supervised
+X-TypixDeck-FullscreenAppId=ai.typixdeck.store

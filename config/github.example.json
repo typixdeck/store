@@ -1,0 +1,7 @@
+{
+  "repository": "typixdeck/store",
+  "mode": "raw",
+  "ref": "main",
+  "directory": "debs",
+  "publicKey": "/usr/share/typix-store/keys/development.pem"
+}

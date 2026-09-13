@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "applications": [
+    {
+      "id": "ai.typixdeck.gamer",
+      "package": "typix-gamer",
+      "filename": "typix-gamer_0.2.0-1_all.deb",
+      "sha256": "e13da7d16d922c79b97eed1893daa44bf8f5487f443743605eb7610fd13f466c",
+      "name": {
+        "zh-CN": "Pixel Relay 游戏厅",
+        "en": "Pixel Relay"
+      },
+      "summary": {
+        "zh-CN": "完整游戏库前端，自备合法 ROM 与核心"
+      },
+      "description": {
+        "zh-CN": "包含完整原生 GTK3 游戏库前端、样式与 RetroArch 配置。系统依赖由 deb 的 Depends 声明。包内不分发游戏 ROM 或模拟器核心，用户需自行提供合法 ROM 及适配核心。"
+      },
+      "categories": [
+        "Game"
+      ],
+      "desktopFile": "typix-gamer.desktop",
+      "runtime": {
+        "kind": "python-script",
+        "path": "/usr/share/typix-gamer/app/pixel_relay.py"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-gamer",
+        "/usr/share/typix-gamer/app/pixel_relay.py",
+        "/usr/share/typix-gamer/app/library.json",
+        "/usr/share/typix-gamer/app/styles.css",
+        "/usr/share/typix-gamer/app/retroarch-pi.cfg"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      }
+    }
+  ]
+}
