@@ -119,6 +119,19 @@ class CompleteDebPublicationTests(unittest.TestCase):
         with self.assertRaisesRegex(PublicationError, "outside"):
             inspect_packages(self.source)
 
+    def test_isolated_python_launcher_keeps_declared_package_validation(self):
+        self.write_file("usr/bin/typix-test", '#!/bin/sh\nexec /usr/bin/python3 -I -m typix_test "$@"\n', 0o755)
+        self.build()
+        self.assertEqual(inspect_packages(self.source)[0]["package"], "typix-test")
+
+    def test_isolated_python_does_not_allow_other_entrypoints_or_flags(self):
+        for args in ['-I -m other_app', '-I -c "import typix_test"', '-I -S -m typix_test']:
+            with self.subTest(args=args):
+                self.write_file("usr/bin/typix-test", '#!/bin/sh\nexec /usr/bin/python3 ' + args + ' "$@"\n', 0o755)
+                self.build()
+                with self.assertRaisesRegex(PublicationError, "outside"):
+                    inspect_packages(self.source)
+
     def test_desktop_exec_must_exist_and_be_executable_in_package(self):
         self.write_file("usr/share/applications/typix-test.desktop", "[Desktop Entry]\nType=Application\nName=Test\nExec=/opt/missing-app\n")
         self.build()
@@ -173,10 +186,16 @@ class CompleteDebPublicationTests(unittest.TestCase):
             load_key(ROOT / "apps/store/debs/must-not-create.pem", create=True)
         self.assertFalse((ROOT / "apps/store/debs/must-not-create.pem").exists())
 
-    def test_actual_submission_directory_contains_complete_packages_not_myai_wrapper(self):
+    def test_actual_submission_directory_contains_complete_packages(self):
         entries = inspect_packages(DEFAULT_SOURCE)
         self.assertTrue(entries)
-        self.assertNotIn("typix-myai", {entry["package"] for entry in entries})
+        # MyAI 0.3 replaced the old entry-only wrapper with a complete native app.
+        myai = next((entry for entry in entries if entry["package"] == "typix-myai"), None)
+        if myai is not None:
+            self.assertEqual(myai["versions"][0]["artifact"]["arch"], "arm64")
+            metadata = json.loads((DEFAULT_SOURCE / "manifest.json").read_text())
+            submission = next(app for app in metadata["applications"] if app["package"] == "typix-myai")
+            self.assertEqual(submission["runtime"]["kind"], "native")
         self.assertTrue(all(entry["versions"][0]["artifact"]["payload"] == "complete-deb" for entry in entries))
 
     def test_slow_pipe_has_a_wall_deadline_during_iteration(self):

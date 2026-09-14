@@ -1,6 +1,6 @@
 # 完整 deb 应用源
 
-这里保存当前签名目录和六个可安装的软件包：Launcher 0.2、Store 0.3、Reader 0.4（PDF、未加密 Kindle 格式与 OPDS）、Gamer 0.2、MyAI 0.3、微信安装适配程序 0.1.2（修复已安装时的启动提示）。Reader、Gamer、MyAI 均包含实际程序；Gamer 的 ROM 与核心由用户提供。微信适配包包含完整安装/启动代码，腾讯原客户端由设备直接从官网下载，未在 GitHub 镜像。
+这里保存当前签名目录和七个可安装的软件包：Launcher 0.2、Store 0.3、Reader 0.4（PDF、未加密 Kindle 格式与 OPDS）、Gamer 0.2、MyAI 0.3、微信安装适配程序 0.1.2（修复已安装时的启动提示）、Copilot 0.1.6（官方与 DIY 在线固件目录）。Reader、Gamer、MyAI 均包含实际程序；Gamer 的 ROM 与核心由用户提供。微信适配包包含完整安装/启动代码，腾讯原客户端由设备直接从官网下载，未在 GitHub 镜像。
 
 应用仓库用根目录 `app.json` 和 `docs/screenshots/` 声明内容。先按照 [仓库规范](../docs/APP-REPOSITORY.md) 导入、审核实际 deb，再生成并签名整份目录：
 

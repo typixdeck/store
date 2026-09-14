@@ -311,6 +311,10 @@ def verify_complete_payload(path: Path, metadata: dict[str, Any]) -> int:
             require(files[executable].data.startswith(b"#!/usr/bin/python3"), "Direct Python executable must declare its interpreter")
         else:
             launcher = _launcher_command(files[executable].data)
+            # Isolated Python keeps system modules independent of user paths.
+            # Accept only this exact flag; retain the declared module/script check.
+            if launcher[:2] == ["/usr/bin/python3", "-I"]:
+                launcher = [launcher[0], *launcher[2:]]
             require(launcher[:len(expected)] == expected and launcher[len(expected):] in ([], ["$@"]),
                     "Launcher points outside the declared packaged runtime")
     return installed_size
