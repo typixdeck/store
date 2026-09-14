@@ -1,6 +1,6 @@
 # 完整 deb 提交与 Store 发布
 
-Store 分发已构建、审查的完整 `.deb`。当前 `debs/` 包括 Launcher、Store、Reader（含 OPDS）、Gamer、完整 MyAI ARM64 客户端、微信安装适配程序及 Copilot 板载固件商店。Gamer 的合法 ROM 与核心由用户提供；腾讯微信原包由设备直接从官网下载，GitHub 只分发我们自己的完整安装/启动程序。
+Store 分发已构建、审查的完整 `.deb`。当前 `debs/` 包括 Launcher、Store、Reader（含 OPDS）、Gamer、完整 MyAI ARM64 客户端、微信安装适配程序及 Copilot 0.2.0 板载固件商店（所有签名目录版本统一写入、本地缓存管理）。Gamer 的合法 ROM 与核心由用户提供；腾讯微信原包由设备直接从官网下载，GitHub 只分发我们自己的完整安装/启动程序。
 
 目标 GitHub 仓库为 `typixdeck/store`。公开源采用 `main` 分支根目录下的 `debs/`。在完整工作区使用 `apps/store/debs/`，在独立 Store 仓库使用 `debs/`；工具支持两种结构。Python 完整 deb 包含应用代码，公开目录只放已经获得公开发布授权的内容。
 
