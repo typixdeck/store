@@ -1,0 +1,3 @@
+*.deb binary
+*.sig binary
+debs/catalog.json -text

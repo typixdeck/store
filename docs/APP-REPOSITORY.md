@@ -1,6 +1,6 @@
 # 应用仓库与 Store 识别
 
-每个应用使用独立仓库，文件名固定。`app.json` 是发布入口；Store 发布工具读取它，不运行仓库里的脚本。
+应用通常使用独立仓库，文件名固定。`app.json` 是发布入口；Store 发布工具读取它，不运行仓库里的脚本。共享代码的应用集合也可以使用一个源码仓库，每个应用仍有独立的导出目录、manifest 和完整 deb。
 
 ```text
 app.json                 应用信息、完整包版本/SHA256、截图索引
@@ -28,6 +28,14 @@ python3 tools/import-apps.py --apps-root ../checked-apps --output build/submissi
 ```
 
 输出目录必须尚不存在。工具校验实际 deb 的版本、架构、依赖、OS、SHA256、desktop 入口和完整程序载荷，拒绝重复包、目录穿越、符号链接与入口包装器。任一应用失败时不生成半份提交目录。只会读取明确指定的本地仓库，不访问任意下载链接，不执行仓库构建脚本，也不扫描用户的已安装应用。
+
+## 共享源码仓库
+
+例如 `typixdeck/c1max-suite` 在 `packages/<应用名>/` 导出每个应用的 `app.json`、`dist/` 和 `docs/screenshots/`。可使用 `--apps-root ../c1max-suite/packages` 一次导入，仍逐包审核；共享仓库不等于把所有应用强制安装为一个包。
+
+每个 manifest 的 `repository` 指向同一个实际源码仓库。截图路径必须同时能相对于导出目录和 GitHub 仓库根目录解析，因此构建时在导出目录复制对应截图，仓库根目录也保留 `docs/screenshots/<应用名>.png`。构建产物和临时导出目录可忽略，但源码、构建脚本、许可、截图与固定上游来源须可公开追溯。需要 GPL 对应源码的应用必须连同完整构建源码发布；不得只提供二进制或失效的源链接。
+
+发行版兼容性以实际构建依赖为准，例如在 Trixie 链接新 glibc 的 ARM64 包只能声明 `raspios-trixie`。需要相机、合法 ROM、游戏 BIOS、服务账号或远端设备的功能在应用中检测并说明，不打包个人数据或凭据。
 
 审核生成的 `manifest.json`，再按 [发布说明](PUBLISHING.md) 签名并发布：
 

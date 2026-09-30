@@ -16,6 +16,10 @@
 
 界面沿用 Launcher 的深色背景、青色焦点和系统主题图标。支持搜索、详情、已安装筛选、Tab、方向键、Enter、Esc、Ctrl+F 和 F5。介绍和技术详情滚动，状态和三项操作固定可见。版本 0.3 延续 CM4、官方 Raspberry Pi OS ARM64 和约 800×600 逻辑显示要求。
 
+## 应用目录
+
+当前分发 22 个完整 deb：原有七个应用和新增 15 个 [C1Max Linux 应用](https://github.com/typixdeck/c1max-suite)。其中 Launcher 已更新为支持单应用/后台切换的 0.3.0。新增应用按需单独安装，本批针对官方 Raspberry Pi OS ARM64 Trixie；完整清单和外部设备/服务条件见 [debs/README.md](debs/README.md)。
+
 ## GitHub 应用源
 
 管理员配置文件固定为 `/etc/typix-store/github.json`。配置、公钥及所有上级路径必须 root 所有、非符号链接且不可由普通用户改写。没有配置时继续使用签名离线应用源，不猜测仓库。

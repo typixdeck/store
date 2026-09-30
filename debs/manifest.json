@@ -130,10 +130,10 @@
         "en": "Typix Launcher"
       },
       "summary": {
-        "zh-CN": "桌面快捷方式、实时电量与 Wi-Fi 信号的原生全屏启动器"
+        "zh-CN": "支持单应用省内存与后台切换的原生全屏启动器"
       },
       "description": {
-        "zh-CN": "完整 GTK3 启动器，每次打开自动读取最新桌面快捷方式，启动应用并请求全屏，应用关闭后返回。顶部用纯图标显示电池电量与 Wi-Fi 信号，悬停可查看详情。"
+        "zh-CN": "完整 GTK3 启动器，只读取桌面快捷方式。设置中可选择自动、单应用省内存或后台模式：后台保留 Launcher 窗口供 Alt+Tab 切换，重复点击运行中的启动项优先切回；单应用启动前退出 Launcher，应用关闭后返回。顶部显示电量与 Wi-Fi 纯图标。"
       },
       "categories": [
         "System"
@@ -153,7 +153,8 @@
         "/usr/lib/python3/dist-packages/typix_launcher/status.py",
         "/usr/lib/python3/dist-packages/typix_launcher/status_ui.py",
         "/usr/lib/python3/dist-packages/typix_launcher/battery.py",
-        "/usr/lib/tmpfiles.d/typix-launcher.conf"
+        "/usr/lib/tmpfiles.d/typix-launcher.conf",
+        "/usr/lib/python3/dist-packages/typix_launcher/runtime.py"
       ],
       "compatibility": {
         "arch": [
@@ -167,10 +168,14 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-launcher_0.2.2-1_all.deb",
-      "sha256": "542d97c3dd74274672bb6478ffa83ccc3603807497090f56c7645977c149c0f7",
+      "filename": "typix-launcher_0.3.0-1_all.deb",
+      "sha256": "d29978a232f15e63cf4a46e23c12bce0b0a34983fe1a4c4e54b8e981635b4ee8",
       "sourceRepository": "typixdeck/launcher",
       "screenshots": [
+        {
+          "path": "docs/screenshots/runtime-settings.png",
+          "caption": "0.3.0 应用运行模式设置（CM4 GTK 演示预览）"
+        },
         {
           "path": "docs/screenshots/status.png",
           "caption": "0.2.2 纯图标状态栏与自动刷新（CM4 GTK 渲染，演示数据）"
@@ -450,6 +455,751 @@
         {
           "path": "docs/screenshots/history-stages.png",
           "caption": "阶段耗时与读取进度（测试记录）"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.airtune",
+      "package": "typix-airtune",
+      "name": {
+        "zh-CN": "网络电台",
+        "en": "Typix Airtune"
+      },
+      "summary": {
+        "zh-CN": "电台目录、搜索、收藏、自定义电台与本地列表"
+      },
+      "description": {
+        "zh-CN": "电台目录、搜索、收藏、自定义电台与本地列表。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "AudioVideo"
+      ],
+      "desktopFile": "typix-airtune.desktop",
+      "runtime": {
+        "kind": "native",
+        "path": "/usr/bin/typix-airtune"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-airtune",
+        "/usr/share/typix-airtune/shared/NotoSansSC-Regular.ttf"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-airtune_0.1.0-1_arm64.deb",
+      "sha256": "4ecd37b58213a84f7cf77b04bc6a0316df71eb3b9e2a041bb33b30e99ae2e111",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/airtune.png",
+          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.bilibili",
+      "package": "typix-bilibili",
+      "name": {
+        "zh-CN": "哔哩哔哩",
+        "en": "Typix Bilibili"
+      },
+      "summary": {
+        "zh-CN": "热门、搜索、BV、分 P、扫码登录与直连 MP4"
+      },
+      "description": {
+        "zh-CN": "热门、搜索、BV、分 P、扫码登录与直连 MP4。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "AudioVideo"
+      ],
+      "desktopFile": "typix-bilibili.desktop",
+      "runtime": {
+        "kind": "native",
+        "path": "/usr/bin/typix-bilibili"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-bilibili",
+        "/usr/share/typix-bilibili/shared/NotoSansSC-Regular.ttf"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-bilibili_0.1.0-1_arm64.deb",
+      "sha256": "ce1853bc71447a6d6d8db5ac3abd153a55643d896da795d7c7321f95f06e9c77",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/bilibili.png",
+          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.calculator",
+      "package": "typix-calculator",
+      "name": {
+        "zh-CN": "计算器",
+        "en": "Typix Calculator"
+      },
+      "summary": {
+        "zh-CN": "四则、括号、乘方、历史与实体键盘计算"
+      },
+      "description": {
+        "zh-CN": "四则、括号、乘方、历史与实体键盘计算。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "Utility"
+      ],
+      "desktopFile": "typix-calculator.desktop",
+      "runtime": {
+        "kind": "native",
+        "path": "/usr/bin/typix-calculator"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-calculator",
+        "/usr/share/typix-calculator/shared/NotoSansSC-Regular.ttf"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-calculator_0.1.0-1_arm64.deb",
+      "sha256": "d91db4a6af389d8c0883b2c7ffe602ba1aa40488d91a1bf656e6c2282dbef18f",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/calculator.png",
+          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.calendar",
+      "package": "typix-calendar",
+      "name": {
+        "zh-CN": "日历",
+        "en": "Typix Calendar"
+      },
+      "summary": {
+        "zh-CN": "月历、本地日程、ICS 导入导出与订阅"
+      },
+      "description": {
+        "zh-CN": "月历、本地日程、ICS 导入导出与订阅。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "Office"
+      ],
+      "desktopFile": "typix-calendar.desktop",
+      "runtime": {
+        "kind": "native",
+        "path": "/usr/bin/typix-calendar"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-calendar",
+        "/usr/share/typix-calendar/shared/NotoSansSC-Regular.ttf"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-calendar_0.1.0-1_arm64.deb",
+      "sha256": "cb8f2bc6054d21554ffc390fc9ef177fe31202a60a6666624b5a9e7d3a16b9ab",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/calendar.png",
+          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.camera",
+      "package": "typix-camera",
+      "name": {
+        "zh-CN": "拍立得",
+        "en": "Typix Camera"
+      },
+      "summary": {
+        "zh-CN": "V4L2 取景、画幅滤镜、相纸边框与本地相册"
+      },
+      "description": {
+        "zh-CN": "V4L2 取景、画幅滤镜、相纸边框与本地相册。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "Graphics"
+      ],
+      "desktopFile": "typix-camera.desktop",
+      "runtime": {
+        "kind": "python-script",
+        "path": "/usr/share/typix-camera/camera.py"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-camera",
+        "/usr/share/typix-camera/camera.py",
+        "/usr/share/typix-camera/assets/shutter.wav",
+        "/usr/share/typix-camera/assets/frame-prompts.json",
+        "/usr/share/typix-camera/assets/frames/film.window",
+        "/usr/share/typix-camera/assets/frames/white.png",
+        "/usr/share/typix-camera/assets/frames/film.png",
+        "/usr/share/typix-camera/assets/frames/white.window",
+        "/usr/share/typix-camera/assets/frames/cream.window",
+        "/usr/share/typix-camera/assets/frames/cream.png"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-camera_0.1.0-1_all.deb",
+      "sha256": "4c18841269bbceb8462712190f01227e5c2ad900ef47cbe5975e2396a9758a2d",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/camera.png",
+          "caption": "CM4 独立 800×600 合成相机测试画面"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.dosbox",
+      "package": "typix-dosbox",
+      "name": {
+        "zh-CN": "DOS 游戏库",
+        "en": "Typix DOSBox"
+      },
+      "summary": {
+        "zh-CN": "本地 DOS 游戏目录、完整 DOSBox 运行与会话管理"
+      },
+      "description": {
+        "zh-CN": "本地 DOS 游戏目录、完整 DOSBox 运行与会话管理。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "Game"
+      ],
+      "desktopFile": "typix-dosbox.desktop",
+      "runtime": {
+        "kind": "python-script",
+        "path": "/usr/share/typix-dosbox/game_library.py"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-dosbox",
+        "/usr/share/typix-dosbox/game_library.py"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 256,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-dosbox_0.1.0-1_all.deb",
+      "sha256": "8708f7756a4dea7d7e58a125b4268af5e598cae67615ced8e4e1a4aac010eae6",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/dosbox.png",
+          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.gomoku",
+      "package": "typix-gomoku",
+      "name": {
+        "zh-CN": "五子棋",
+        "en": "Typix Gomoku"
+      },
+      "summary": {
+        "zh-CN": "人机与双人五子棋、悔棋和自动续局"
+      },
+      "description": {
+        "zh-CN": "人机与双人五子棋、悔棋和自动续局。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "Game"
+      ],
+      "desktopFile": "typix-gomoku.desktop",
+      "runtime": {
+        "kind": "native",
+        "path": "/usr/bin/typix-gomoku"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-gomoku",
+        "/usr/share/typix-gomoku/shared/NotoSansSC-Regular.ttf"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-gomoku_0.1.0-1_arm64.deb",
+      "sha256": "ab1ef1ea12370489841fbfaa4988822585ae1caddc54434657815e746054acfe",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/gomoku.png",
+          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.hidpilot",
+      "package": "typix-hidpilot",
+      "name": {
+        "zh-CN": "USB 键鼠",
+        "en": "Typix HIDPilot"
+      },
+      "summary": {
+        "zh-CN": "在已配置且有权限的 USB HID 节点上发送键鼠输入"
+      },
+      "description": {
+        "zh-CN": "在已配置且有权限的 USB HID 节点上发送键鼠输入。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "Utility"
+      ],
+      "desktopFile": "typix-hidpilot.desktop",
+      "runtime": {
+        "kind": "python-script",
+        "path": "/usr/share/typix-hidpilot/hidpilot.py"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-hidpilot",
+        "/usr/share/typix-hidpilot/hidpilot.py"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-hidpilot_0.1.0-1_all.deb",
+      "sha256": "0f9d89a9d3f7f4d2cea784df8f0ccd8019d5ccfbabb30c2e4582162574d12d91",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/hidpilot.png",
+          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.mail",
+      "package": "typix-mail",
+      "name": {
+        "zh-CN": "邮件",
+        "en": "Typix Mail"
+      },
+      "summary": {
+        "zh-CN": "POP3 收件与 SMTP TLS 纯文本邮件客户端"
+      },
+      "description": {
+        "zh-CN": "POP3 收件与 SMTP TLS 纯文本邮件客户端。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "Network"
+      ],
+      "desktopFile": "typix-mail.desktop",
+      "runtime": {
+        "kind": "native",
+        "path": "/usr/bin/typix-mail"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-mail",
+        "/usr/share/typix-mail/shared/NotoSansSC-Regular.ttf"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-mail_0.1.0-1_arm64.deb",
+      "sha256": "6d1dd314a0812ebb429c24bb2495aa5ddd31741eb4c2a5f60c5c1bb15685f633",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/mail.png",
+          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.moonpilot",
+      "package": "typix-moonpilot",
+      "name": {
+        "zh-CN": "远程桌面 AI",
+        "en": "Typix MoonPilot"
+      },
+      "summary": {
+        "zh-CN": "Sunshine 配对、远程桌面、手动输入与可配置 AI 和语音"
+      },
+      "description": {
+        "zh-CN": "Sunshine 配对、远程桌面、手动输入与可配置 AI 和语音。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "Network"
+      ],
+      "desktopFile": "typix-moonpilot.desktop",
+      "runtime": {
+        "kind": "native",
+        "path": "/usr/bin/typix-moonpilot"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-moonpilot",
+        "/usr/share/typix-moonpilot/shared/NotoSansSC-Regular.ttf"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-moonpilot_0.1.0-1_arm64.deb",
+      "sha256": "2ae1caf6d055b6c2308821334291317e206cd5d5e5866af872c705f3fca36672",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/moonpilot.png",
+          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.piano",
+      "package": "typix-piano",
+      "name": {
+        "zh-CN": "钢琴",
+        "en": "Typix Piano"
+      },
+      "summary": {
+        "zh-CN": "键盘和触控复音钢琴与正常桌面音频输出"
+      },
+      "description": {
+        "zh-CN": "键盘和触控复音钢琴与正常桌面音频输出。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "AudioVideo"
+      ],
+      "desktopFile": "typix-piano.desktop",
+      "runtime": {
+        "kind": "python-script",
+        "path": "/usr/share/typix-piano/piano.py"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-piano",
+        "/usr/share/typix-piano/piano.py"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-piano_0.1.0-1_all.deb",
+      "sha256": "d82957aa9c3febf7beb894a94d9a962c95feb4095290762a42838d43a7e79150",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/piano.png",
+          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.processing",
+      "package": "typix-processing",
+      "name": {
+        "zh-CN": "创意绘图",
+        "en": "Typix Processing 2D"
+      },
+      "summary": {
+        "zh-CN": "QuickJS 驱动的 Processing 风格 2D 子集与草图编辑器"
+      },
+      "description": {
+        "zh-CN": "QuickJS 驱动的 Processing 风格 2D 子集与草图编辑器。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "Development"
+      ],
+      "desktopFile": "typix-processing.desktop",
+      "runtime": {
+        "kind": "native",
+        "path": "/usr/bin/typix-processing"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-processing",
+        "/usr/share/typix-processing/shared/NotoSansSC-Regular.ttf",
+        "/usr/share/typix-processing/processing/api.js",
+        "/usr/share/typix-processing/processing/examples/tree.js",
+        "/usr/share/typix-processing/processing/examples/particles.js",
+        "/usr/share/typix-processing/processing/examples/SOURCES.json",
+        "/usr/share/typix-processing/processing/examples/flocking.js",
+        "/usr/share/typix-processing/processing/examples/koch.js",
+        "/usr/share/typix-processing/processing/examples/upstream/README.md",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Fractals and L-Systems/Koch/Koch.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Fractals and L-Systems/Koch/KochFractal.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Fractals and L-Systems/Koch/KochLine.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Fractals and L-Systems/Tree/Tree.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/MultipleParticleSystems/MultipleParticleSystems.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/MultipleParticleSystems/CrazyParticle.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/MultipleParticleSystems/Particle.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/MultipleParticleSystems/ParticleSystem.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/Flocking/Flocking.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/Flocking/Flock.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/Flocking/Boid.pde",
+        "/usr/share/typix-processing/terminal/assets/terminfo.src",
+        "/usr/share/typix-processing/terminal/assets/inputrc",
+        "/usr/share/typix-processing/terminal/assets/JetBrainsMono-OFL.txt",
+        "/usr/share/typix-processing/terminal/assets/shellrc",
+        "/usr/share/typix-processing/terminal/assets/JetBrainsMono-Bold.ttf",
+        "/usr/share/typix-processing/terminal/assets/JetBrainsMono-Regular.ttf",
+        "/usr/share/typix-processing/terminal/assets/terminfo/63/c1max"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-processing_0.1.0-1_arm64.deb",
+      "sha256": "b110fdca6f4d88f480a2891b9fdccf7f37125507586b1617453384cd64a56ccb",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/processing.png",
+          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.ps1",
+      "package": "typix-ps1",
+      "name": {
+        "zh-CN": "PS1 游戏库",
+        "en": "Typix PS1 Library"
+      },
+      "summary": {
+        "zh-CN": "PS1 光盘游戏库、BIOS 导入与 Mednafen 即时存档运行"
+      },
+      "description": {
+        "zh-CN": "PS1 光盘游戏库、BIOS 导入与 Mednafen 即时存档运行。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "Game"
+      ],
+      "desktopFile": "typix-ps1.desktop",
+      "runtime": {
+        "kind": "python-script",
+        "path": "/usr/share/typix-ps1/game_library.py"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-ps1",
+        "/usr/share/typix-ps1/game_library.py"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 256,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-ps1_0.1.0-1_all.deb",
+      "sha256": "cf449267afb4235a439ec4fa2bdb54995d7e759674b06811086fcbca22253eb1",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/ps1.png",
+          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.streamplayer",
+      "package": "typix-streamplayer",
+      "name": {
+        "zh-CN": "流媒体",
+        "en": "Typix StreamPlayer"
+      },
+      "summary": {
+        "zh-CN": "Emby/Jellyfin 登录、媒体库、服务端转码视频及字幕"
+      },
+      "description": {
+        "zh-CN": "Emby/Jellyfin 登录、媒体库、服务端转码视频及字幕。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "AudioVideo"
+      ],
+      "desktopFile": "typix-streamplayer.desktop",
+      "runtime": {
+        "kind": "native",
+        "path": "/usr/bin/typix-streamplayer"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-streamplayer",
+        "/usr/share/typix-streamplayer/shared/NotoSansSC-Regular.ttf"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-streamplayer_0.1.0-1_arm64.deb",
+      "sha256": "dd611f134d465417d0102974a200ab61fb6378531eb7f4d334911a259588983e",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/streamplayer.png",
+          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+        }
+      ]
+    },
+    {
+      "id": "ai.typixdeck.terminal",
+      "package": "typix-terminal",
+      "name": {
+        "zh-CN": "终端",
+        "en": "Typix Terminal"
+      },
+      "summary": {
+        "zh-CN": "完整 PTY、ANSI、UTF-8 终端和 Linux 命令工具"
+      },
+      "description": {
+        "zh-CN": "完整 PTY、ANSI、UTF-8 终端和 Linux 命令工具。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "categories": [
+        "System"
+      ],
+      "desktopFile": "typix-terminal.desktop",
+      "runtime": {
+        "kind": "native",
+        "path": "/usr/bin/typix-terminal"
+      },
+      "requiredPayload": [
+        "/usr/bin/typix-terminal",
+        "/usr/share/typix-terminal/shared/NotoSansSC-Regular.ttf",
+        "/usr/share/typix-terminal/terminal/assets/terminfo.src",
+        "/usr/share/typix-terminal/terminal/assets/inputrc",
+        "/usr/share/typix-terminal/terminal/assets/JetBrainsMono-OFL.txt",
+        "/usr/share/typix-terminal/terminal/assets/shellrc",
+        "/usr/share/typix-terminal/terminal/assets/JetBrainsMono-Bold.ttf",
+        "/usr/share/typix-terminal/terminal/assets/JetBrainsMono-Regular.ttf",
+        "/usr/share/typix-terminal/terminal/assets/terminfo/63/c1max"
+      ],
+      "compatibility": {
+        "arch": [
+          "arm64"
+        ],
+        "minMemoryMB": 128,
+        "minFreeDiskMB": 64,
+        "display": [
+          "wayland",
+          "x11"
+        ],
+        "requiredFeatures": []
+      },
+      "filename": "typix-terminal_0.1.0-1_arm64.deb",
+      "sha256": "1e8ad980d8682cd206180ea7e94bbce1aba958753c84f636f30174732176f0fa",
+      "sourceRepository": "typixdeck/c1max-suite",
+      "screenshots": [
+        {
+          "path": "docs/screenshots/terminal.png",
+          "caption": "CM4 独立 800×600 测试会话中的实际界面"
         }
       ]
     }
