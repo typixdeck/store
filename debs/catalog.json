@@ -128,9 +128,9 @@
       "categories": [
         "System"
       ],
-      "currentVersion": "0.2.1-1",
+      "currentVersion": "0.2.2-1",
       "description": {
-        "zh-CN": "完整 GTK3 启动器，读取桌面快捷方式，启动应用并请求全屏，应用关闭后返回。顶部显示系统电池或 CW2015 参考电量、Wi-Fi 信号，支持键盘查看详情。"
+        "zh-CN": "完整 GTK3 启动器，每次打开自动读取最新桌面快捷方式，启动应用并请求全屏，应用关闭后返回。顶部用纯图标显示电池电量与 Wi-Fi 信号，悬停可查看详情。"
       },
       "desktopFile": "typix-launcher.desktop",
       "id": "ai.typixdeck.launcher",
@@ -141,7 +141,7 @@
       "package": "typix-launcher",
       "screenshots": [
         {
-          "caption": "0.2.1 电量与 Wi-Fi 状态栏（CM4 GTK 渲染，演示数据）",
+          "caption": "0.2.2 纯图标状态栏与自动刷新（CM4 GTK 渲染，演示数据）",
           "path": "docs/screenshots/status.png"
         },
         {
@@ -162,11 +162,11 @@
           "artifact": {
             "arch": "all",
             "depends": "python3 (>= 3.11), python3-gi, gir1.2-gtk-3.0, xdg-user-dirs",
-            "filename": "typix-launcher_0.2.1-1_all.deb",
-            "installedSizeBytes": 64241,
+            "filename": "typix-launcher_0.2.2-1_all.deb",
+            "installedSizeBytes": 62642,
             "payload": "complete-deb",
-            "sha256": "080d1341ce90b8f00247aee31cb31bbbb0ba249d902722b0cb449cd3e29f46a7",
-            "sizeBytes": 17788
+            "sha256": "542d97c3dd74274672bb6478ffa83ccc3603807497090f56c7645977c149c0f7",
+            "sizeBytes": 17568
           },
           "compatibility": {
             "arch": [
@@ -184,7 +184,7 @@
             ],
             "requiredFeatures": []
           },
-          "version": "0.2.1-1"
+          "version": "0.2.2-1"
         }
       ]
     },
@@ -434,9 +434,9 @@
     }
   ],
   "channel": "github-repository",
-  "expiresAt": "2026-12-29T04:14:46.609770+00:00",
-  "generatedAt": "2026-09-30T04:14:46.609770+00:00",
+  "expiresAt": "2026-12-29T08:48:06.771301+00:00",
+  "generatedAt": "2026-09-30T08:48:06.771301+00:00",
   "repository": "typixdeck/store",
-  "revision": "20260930T041446Z",
+  "revision": "20260930T084806Z",
   "schemaVersion": 1
 }
