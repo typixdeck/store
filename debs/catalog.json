@@ -361,9 +361,9 @@
       "categories": [
         "System"
       ],
-      "currentVersion": "0.2.4-1",
+      "currentVersion": "0.2.5-1",
       "description": {
-        "zh-CN": "原生 GTK3 板载 ESP32-S3 固件商店。0.2.4 预发布版收录 DIY 0.4.1，更新 ESP32-S3 RAM 维护程序并改善进入维护模式的等待处理。统一写入，按需下载校验或复用缓存；支持详细日志。保留 Polkit 授权、板级检查、私有备份和独立回读；完整刷写链路仍待 CM4 验收。"
+        "zh-CN": "原生 GTK3 板载 ESP32-S3 固件商店。0.2.5 支持桌面 HTTP/HTTPS 代理，下载错误区分 DNS、TLS、超时、HTTP、存储及哈希校验；保留签名校验和详细记录。收录 DIY 0.4.1，统一写入并按需下载或复用缓存。完整刷写链路仍待 CM4 验收。"
       },
       "desktopFile": "typix-copilot.desktop",
       "id": "ai.typixdeck.copilot",
@@ -403,11 +403,11 @@
           "artifact": {
             "arch": "arm64",
             "depends": "python3 (>= 3.11), python3-gi, python3-gi-cairo, gir1.2-gtk-3.0, python3-serial (>= 3.3), python3-bitstring (>= 3.1.6), python3-cryptography (>= 43), python3-reedsolo (>= 1.5.3), python3-yaml, python3-intelhex, python3-rich-click, python3-click, pkexec, ca-certificates",
-            "filename": "typix-copilot_0.2.4-1_arm64.deb",
-            "installedSizeBytes": 963254,
+            "filename": "typix-copilot_0.2.5-1_arm64.deb",
+            "installedSizeBytes": 965965,
             "payload": "complete-deb",
-            "sha256": "36feaf0d24b36f41ff2f45e272de9e105ae017ce2b1b9b59dcc3451d30364423",
-            "sizeBytes": 229948
+            "sha256": "6e44b407f0634e3bdb914dba3d56692ffb5bca890e4c775df54d649e2dded7ef",
+            "sizeBytes": 230580
           },
           "compatibility": {
             "arch": [
@@ -424,15 +424,15 @@
             ],
             "requiredFeatures": []
           },
-          "version": "0.2.4-1"
+          "version": "0.2.5-1"
         }
       ]
     }
   ],
   "channel": "github-repository",
-  "expiresAt": "2026-12-28T20:50:20.591895+00:00",
-  "generatedAt": "2026-09-29T20:50:20.591895+00:00",
+  "expiresAt": "2026-12-29T02:29:09.784198+00:00",
+  "generatedAt": "2026-09-30T02:29:09.784198+00:00",
   "repository": "typixdeck/store",
-  "revision": "20260929T205020Z",
+  "revision": "20260930T022909Z",
   "schemaVersion": 1
 }
