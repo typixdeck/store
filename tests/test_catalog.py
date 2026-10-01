@@ -82,6 +82,29 @@ class CatalogTests(unittest.TestCase):
         with self.assertRaises(CatalogError):
             validate_catalog(self.data)
 
+    def test_signed_categories_must_be_bounded_string_names(self):
+        for categories in (None, 1, "Game", [["Game"]], [1], [True], [""], ["Game\n"], ["x" * 65], ["Game"] * 33):
+            with self.subTest(categories=categories):
+                self.data["applications"][0]["categories"] = categories
+                self.write_signed()
+                with self.assertRaisesRegex(CatalogError, "categories"):
+                    self.client.load_catalog()
+        for categories in ([], ["Game", "X-TypixDeck"]):
+            self.data["applications"][0]["categories"] = categories
+            self.write_signed()
+            self.assertEqual(self.client.load_catalog()[0].raw["categories"], categories)
+
+    def test_signed_icon_rejects_nonstring_paths_and_unbounded_names(self):
+        for icon in (1, True, ["icon"], {"name": "icon"}, "", "/tmp/icon.png", "../icon", "icon\n", "x" * 129):
+            with self.subTest(icon=icon):
+                self.data["applications"][0]["icon"] = icon
+                self.write_signed()
+                with self.assertRaisesRegex(CatalogError, "icon"):
+                    self.client.load_catalog()
+        self.data["applications"][0]["icon"] = "typix-reader-symbolic"
+        self.write_signed()
+        self.assertEqual(self.client.load_catalog()[0].raw["icon"], "typix-reader-symbolic")
+
     def test_runtime_capability_compatibility(self):
         self.assertEqual(incompatibility_reasons(self.app.current_record(), self.profile), [])
         small = DeviceProfile("arm64", "raspios-trixie", 64, 10, ("wayland",), frozenset())
@@ -135,6 +158,17 @@ class CatalogTests(unittest.TestCase):
         result = subprocess.CompletedProcess([], 0, "install ok unpacked\n0.2.0-1", "")
         with patch("typix_store.client.subprocess.run", return_value=result):
             self.assertIsNone(self.client.installed_version(self.app))
+
+    def test_expired_signed_catalog_can_locate_installed_launchers_but_never_install(self):
+        self.data["generatedAt"] = "2020-01-01T00:00:00Z"
+        self.data["expiresAt"] = "2021-01-01T00:00:00Z"
+        self.write_signed()
+        with patch.object(self.client, "installed_version", return_value="0.2.0-1"):
+            self.assertEqual([app.package for app in self.client.launch_catalog()], [self.app.package])
+        with self.assertRaises(CatalogError):
+            self.client.trusted_app(self.app)
+        (self.root / "catalog.json.sig").write_bytes(b"invalid signature")
+        self.assertEqual(self.client.launch_catalog(), [])
 
     def test_package_database_failure_explains_recovery(self):
         result = subprocess.CompletedProcess([], 0, b"unfinished package", b"")

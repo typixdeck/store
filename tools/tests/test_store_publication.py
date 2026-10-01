@@ -72,6 +72,14 @@ class CompleteDebPublicationTests(unittest.TestCase):
         self.metadata["sha256"] = sha256_file(self.source / self.filename)
         self.write_manifest()
 
+    def test_invalid_categories_are_rejected_before_signing(self):
+        for value in ([['Game']], [1], 'Game;', ['Game'] * 33, ['G' * 65]):
+            with self.subTest(categories=value):
+                self.metadata['categories'] = value
+                self.write_manifest()
+                with self.assertRaises(PublicationError):
+                    inspect_packages(self.source)
+
     def test_complete_deb_metadata_and_original_bytes_survive_release_publication(self):
         private = self.root / "signing/private.pem"
         key = load_key(private, create=True)
@@ -106,6 +114,22 @@ class CompleteDebPublicationTests(unittest.TestCase):
             output.write(b"tamper")
         with self.assertRaisesRegex(PublicationError, "SHA-256"):
             inspect_packages(self.source)
+
+    def test_application_logo_theme_name_survives_signed_catalog_generation(self):
+        self.metadata['icon'] = 'typix-test'
+        self.write_manifest()
+        entries = inspect_packages(self.source)
+        self.assertEqual(entries[0]['icon'], 'typix-test')
+        raw = catalog_bytes(entries, channel='github-repository', repository='test-owner/fixture')
+        self.assertEqual(json.loads(raw)['applications'][0]['icon'], 'typix-test')
+
+    def test_logo_metadata_cannot_supply_external_or_arbitrary_paths(self):
+        for icon in ['https://example.invalid/icon.svg', '/tmp/icon.svg', '../icon', '', 'x' * 121, 'icon\nname']:
+            with self.subTest(icon=icon):
+                self.metadata['icon'] = icon
+                self.write_manifest()
+                with self.assertRaisesRegex(PublicationError, 'icon'):
+                    inspect_packages(self.source)
 
     def test_missing_runtime_code_is_not_a_complete_application(self):
         (self.stage / "usr/lib/python3/dist-packages/typix_test/app.py").unlink()

@@ -1,0 +1,218 @@
+{
+  "schema": 1,
+  "icons": {
+    "typix-airtune": {
+      "filename": "typix-airtune.png",
+      "iconName": "typix-airtune",
+      "sha256": "876ff8268ef33950be93e73457243f62feb18d83de6b95dd119aa4da23227323",
+      "bytes": 1526593,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/airtune.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-bilibili": {
+      "filename": "typix-bilibili.png",
+      "iconName": "typix-bilibili",
+      "sha256": "3f46546720ae1e7de3abbe802260822e5fb58c10bb74f44d48b55fc83bbfec04",
+      "bytes": 791387,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/bilibili.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-calculator": {
+      "filename": "typix-calculator.png",
+      "iconName": "typix-calculator",
+      "sha256": "b7d65c9832167d3a8e1ab86159a166d650d4f68523930cb09c018074f1ae3173",
+      "bytes": 875188,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/calculator.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-calendar": {
+      "filename": "typix-calendar.png",
+      "iconName": "typix-calendar",
+      "sha256": "87e1cae744cf25d1595f200e7c3a5096dd91ea59758ca0221c95dd47442687ea",
+      "bytes": 831852,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/calendar.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-camera": {
+      "filename": "typix-camera.png",
+      "iconName": "typix-camera",
+      "sha256": "768116491bd12079a612d0e18287c1fd17919352f693d6b4b2a23b34ebead93a",
+      "bytes": 1453211,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/camera.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-copilot": {
+      "filename": "typix-copilot.svg",
+      "iconName": "typix-copilot",
+      "sha256": "d699479d80203cff9d4ec9b23dd723af0b57714bc6112026765799f16b430724",
+      "bytes": 513,
+      "source": "https://github.com/typixdeck/copilot/blob/197dcde/icon.svg",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing TypixDeck Copilot vector, copied byte-for-byte. No standalone asset license was declared in the source; this manifest does not relicense it."
+    },
+    "typix-dosbox": {
+      "filename": "typix-dosbox.png",
+      "iconName": "typix-dosbox",
+      "sha256": "6e315fb1e39f73ca8d2b6cfa986075a70073bfc03372bc5daa18417d4c26243d",
+      "bytes": 1403521,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/dosbox.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-gamer": {
+      "filename": "typix-gamer.svg",
+      "iconName": "typix-gamer",
+      "sha256": "a77e69d158d3c982d80ca2e1538c542844cc6c6e5ae82b1d8cc937c28650593f",
+      "bytes": 860,
+      "source": "Original vector illustration for TypixDeck, 2026-10-01",
+      "license": "MIT",
+      "licenseFile": "LICENSE-original-vectors.txt"
+    },
+    "typix-gomoku": {
+      "filename": "typix-gomoku.png",
+      "iconName": "typix-gomoku",
+      "sha256": "fd4c83152d07a93e9fffecbc8725340d42f038934e9c2dd846f7713f63f6b334",
+      "bytes": 726669,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/gomoku.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-hidpilot": {
+      "filename": "typix-hidpilot.png",
+      "iconName": "typix-hidpilot",
+      "sha256": "9418d12ec7033e2a62de571f198268869e7a521407b65ad8877263fa967cbb79",
+      "bytes": 1145699,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/hidpilot.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-launcher": {
+      "filename": "typix-launcher.svg",
+      "iconName": "ai.typixdeck.launcher",
+      "sha256": "c27bb781ba8901afa29c215f8ed88a21051801c3407706a05cb53ee5dfa54d92",
+      "bytes": 797,
+      "source": "Original vector illustration for TypixDeck, 2026-10-01",
+      "license": "MIT",
+      "licenseFile": "LICENSE-original-vectors.txt"
+    },
+    "typix-mail": {
+      "filename": "typix-mail.png",
+      "iconName": "typix-mail",
+      "sha256": "9f6f58128679de7830793daf4603dfc010a3760e6cc533e8a381b1647aa51009",
+      "bytes": 1648124,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/mail.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-moonpilot": {
+      "filename": "typix-moonpilot.png",
+      "iconName": "typix-moonpilot",
+      "sha256": "5a42d920f2a6cb8f764538ca04e85c422f2bf692d3a1263406271c898d40f7a2",
+      "bytes": 926311,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/moonpilot.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-myai": {
+      "filename": "typix-myai.svg",
+      "iconName": "typix-myai",
+      "sha256": "a820dcc07ed864e9c3b8fc3048e3de060f5ad170cae9ac8e2b4f9fa76ba395f4",
+      "bytes": 782,
+      "source": "Original vector illustration for TypixDeck, 2026-10-01",
+      "license": "MIT",
+      "licenseFile": "LICENSE-original-vectors.txt"
+    },
+    "typix-piano": {
+      "filename": "typix-piano.png",
+      "iconName": "typix-piano",
+      "sha256": "2fa931a4a767316954f469b4aba6d855a73e794895c09c69ea0e0239a5b847a1",
+      "bytes": 1055848,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/piano.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-processing": {
+      "filename": "typix-processing.png",
+      "iconName": "typix-processing",
+      "sha256": "2bbd44248064f0a4ea263c1837df894305838d43c37b8b4ee33f09ed2ca33184",
+      "bytes": 800936,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/processing.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-ps1": {
+      "filename": "typix-ps1.png",
+      "iconName": "typix-ps1",
+      "sha256": "6afa6f628a49add3230f57f93afe3b275cf5405bb0c861064c388fbb551c1c3d",
+      "bytes": 1266529,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/ps1.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-reader": {
+      "filename": "typix-reader.svg",
+      "iconName": "typix-reader",
+      "sha256": "afe4b019b47e9178edefa01d85818df90f3f246b9733c41c2241473bfde63818",
+      "bytes": 885,
+      "source": "Original vector illustration for TypixDeck, 2026-10-01",
+      "license": "MIT",
+      "licenseFile": "LICENSE-original-vectors.txt"
+    },
+    "typix-store": {
+      "filename": "typix-store.svg",
+      "iconName": "typix-store",
+      "sha256": "0aa038b49b24773084a72b240a8ac6cdd33de1ad3e88e0624886f45e8b785e2e",
+      "bytes": 786,
+      "source": "Original vector illustration for TypixDeck, 2026-10-01",
+      "license": "MIT",
+      "licenseFile": "LICENSE-original-vectors.txt"
+    },
+    "typix-streamplayer": {
+      "filename": "typix-streamplayer.png",
+      "iconName": "typix-streamplayer",
+      "sha256": "c225bb0cbdb4f46e3d7d7f1f6df5e899af70c91a4804d0ceabc532924265962c",
+      "bytes": 961166,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/streamplayer.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-terminal": {
+      "filename": "typix-terminal.png",
+      "iconName": "typix-terminal",
+      "sha256": "aba58b2b61b0b1871498484d67d7e596eff050f9e4d48a6f183b5a61cbf2cc47",
+      "bytes": 1073920,
+      "source": "https://github.com/typixdeck/c1max-suite/blob/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/icons/terminal.png",
+      "license": "NOASSERTION",
+      "licenseNote": "Existing C1Max-generated artwork, copied unchanged from the published TypixDeck suite. This manifest does not assign a new license. Original generation provenance is retained in C1Max suite assets/prompts/.",
+      "provenance": "https://github.com/typixdeck/c1max-suite/tree/7440c09c30409fcc748fc8e1d4f45e835a8c74de/assets/prompts"
+    },
+    "typix-wechat": {
+      "filename": "typix-wechat.svg",
+      "iconName": "typix-wechat",
+      "sha256": "96fc4cefee9e2f05cd96285e1bea35cc8aa67369aa1d65a3e1aece18d494387b",
+      "bytes": 897,
+      "source": "Original vector illustration for TypixDeck, 2026-10-01",
+      "license": "MIT",
+      "licenseFile": "LICENSE-original-vectors.txt"
+    }
+  }
+}

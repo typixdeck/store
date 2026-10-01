@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-VERSION=${VERSION:-0.3.0-1}
+VERSION=${VERSION:-0.3.1-1}
 STAGE="$ROOT/build/package"
 DIST="$ROOT/dist"
 rm -rf "$STAGE"
@@ -13,7 +13,8 @@ Architecture: all
 Maintainer: TypixDeck <dev@typixnode.com>
 Section: admin
 Priority: optional
-Depends: python3, python3-gi, python3-cryptography, gir1.2-gtk-3.0, dpkg, packagekit, pkexec, xdg-user-dirs
+Depends: python3, python3-gi, python3-cryptography, gir1.2-gtk-3.0, librsvg2-common, dpkg, packagekit, pkexec, xdg-user-dirs
+Recommends: typix-launcher (>= 0.3.1)
 X-Typix-Compatible-OS: raspios-bookworm, raspios-trixie
 Description: TypixDeck application store client
  Native GTK3 App Store front-end for a signed TypixDeck deb registry.
@@ -29,6 +30,59 @@ RUNNER
 chmod 755 "$STAGE/usr/bin/typix-store"
 cp -R "$ROOT/src/typix_store" "$STAGE/usr/lib/python3/dist-packages/"
 find "$STAGE/usr/lib/python3/dist-packages" -name '__pycache__' -type d -prune -exec rm -rf {} +
+# Offline catalog artwork also serves desktop shortcuts. Validate the fixed
+# local manifest and copy the exact checked bytes, without network requests.
+python3 - "$ROOT/assets/catalog-icons" "$STAGE" <<'ICONS'
+from pathlib import Path
+import hashlib
+import json
+import re
+import stat
+import sys
+
+source, stage = map(Path, sys.argv[1:])
+manifest_bytes = (source / "manifest.json").read_bytes()
+manifest = json.loads(manifest_bytes)
+if manifest.get("schema") != 1 or not isinstance(manifest.get("icons"), dict):
+    raise SystemExit("Invalid catalog icon manifest")
+destination = stage / "usr/share/typix-store/catalog-icons"
+destination.mkdir(parents=True, exist_ok=True)
+seen = set()
+for package, row in manifest["icons"].items():
+    filename = row.get("filename", "")
+    name = row.get("iconName", "")
+    if (not re.fullmatch(r"typix-[a-z0-9-]+", package)
+            or not re.fullmatch(r"typix-[a-z0-9-]+\.(svg|png)", filename)
+            or not re.fullmatch(r"[a-z0-9][a-z0-9.-]*", name)
+            or filename in seen):
+        raise SystemExit("Invalid catalog icon identity")
+    seen.add(filename)
+    path = source / filename
+    if not stat.S_ISREG(path.lstat().st_mode):
+        raise SystemExit("Catalog icon must be a regular file")
+    data = path.read_bytes()
+    if (not 0 < len(data) <= 32 * 1024 * 1024 or len(data) != row.get("bytes")
+            or hashlib.sha256(data).hexdigest() != row.get("sha256")):
+        raise SystemExit("Catalog icon hash or size mismatch")
+    target = destination / filename
+    target.write_bytes(data)
+    target.chmod(0o644)
+    size = "scalable" if filename.endswith(".svg") else "256x256"
+    extension = path.suffix
+    for alias in {package, name}:
+        target = stage / "usr/share/icons/hicolor" / size / "apps" / (alias + extension)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        # Standard icon-theme aliases stay inside /usr/share and avoid shipping
+        # a second copy of each high-resolution PNG.
+        target.symlink_to("../../../../typix-store/catalog-icons/" + filename)
+target = destination / "manifest.json"
+target.write_bytes(manifest_bytes)
+target.chmod(0o644)
+for name in ("README.md", "LICENSE-original-vectors.txt"):
+    target = destination / name
+    target.write_bytes((source / name).read_bytes())
+    target.chmod(0o644)
+ICONS
 # The independently signed development repository is deployed separately. Do
 # not ship the historical unsigned seed as a catalog users can install from.
 if [ -f "$ROOT/config/keys/development.pem" ]; then

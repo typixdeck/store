@@ -1,6 +1,8 @@
-# TypixDeck Store 0.3 Alpha
+# TypixDeck Store 0.3.1 Alpha
 
-原生 GTK3/PyGObject 全屏商店，支持从配置的公开 GitHub 仓库下载**完整 deb 软件包**，然后经过系统授权安装、更新、移除。标准 `.desktop` 快捷方式仍单独管理，安装不会自动向桌面堆放图标。没有浏览器、遥测或整机安装清单上传。
+原生 GTK3/PyGObject 全屏商店，支持从配置的公开 GitHub 仓库下载**完整 deb 软件包**，然后经过系统授权安装、更新、移除。安装后自动加入 Launcher，已安装应用可直接点击「启动」。没有浏览器、遥测或整机安装清单上传。
+
+新增「已安装」与工具、网络、影音、游戏、系统等分类。应用 Logo 随包提供，未安装或离线时也能显示。以下截图是旧版界面；新版取消手动添加快捷方式和返回桌面按钮。
 
 <!-- app-screenshots:start -->
 
@@ -14,11 +16,19 @@
 
 <!-- app-screenshots:end -->
 
-界面沿用 Launcher 的深色背景、青色焦点和系统主题图标。支持搜索、详情、已安装筛选、Tab、方向键、Enter、Esc、Ctrl+F 和 F5。介绍和技术详情滚动，状态和三项操作固定可见。版本 0.3 延续 CM4、官方 Raspberry Pi OS ARM64 和约 800×600 逻辑显示要求。
+界面沿用 Launcher 的深色背景、青色焦点和应用 Logo。支持搜索、分类、详情、Tab、方向键、Enter、Esc、Ctrl+F 和 F5。介绍和技术详情滚动，启动、更新或安装、移除操作固定可见。延续 CM4、官方 Raspberry Pi OS ARM64 和约 800×600 逻辑显示要求。
+
+先更新 Launcher 到 0.3.1，再更新 Store。更新后重新打开 Launcher，让新代码生效，再通过 Launcher 打开 Store；后台应用先保存并正常关闭。Store 的启动请求由 Launcher 统一处理：后台模式使用同一应用跟踪与全屏策略；单应用模式等待 Store 退出后直接启动所选应用，期间不重新显示 Launcher。暂时缺少新版 Launcher 时显示明确更新提示，不绕过其运行模式。
+
+单应用模式请从 Launcher 打开 Store，以建立此次启动的接续通道；从终端直接打开的 Store 会提示重新从 Launcher 进入，不会退出启动器并覆盖正在启动的应用。后台模式也可以通过已运行的 Launcher 接收请求。
+
+Store 开启时检查目录中已安装应用的标准入口，补充缺失的桌面符号链接；安装、更新成功后也会同步。自定义同名文件始终保留，有冲突时使用独立名称。用户删除已管理的快捷方式后，Store 记住隐藏选择，不在每次开启时重复创建；仍可从 Store 启动。卸载只删除 Store 自己创建、且指向原软件包入口的链接，保留用户文档和自定义入口。
+
+安装源出错或过期时，仍可从已验签的本机目录定位已安装应用并启动；这些条目只供本机启动，不获得安装、更新或移除授权。启动器再次核对确切包的已安装状态、系统入口所有权和 dpkg 文件归属，不扫描整机应用清单。
 
 ## 应用目录
 
-当前分发 22 个完整 deb：原有七个应用和新增 15 个 [C1Max Linux 应用](https://github.com/typixdeck/c1max-suite)。其中 Launcher 已更新为支持单应用/后台切换的 0.3.0。新增应用按需单独安装，本批针对官方 Raspberry Pi OS ARM64 Trixie；完整清单和外部设备/服务条件见 [debs/README.md](debs/README.md)。
+当前分发 22 个完整 deb：原有七个应用和新增 15 个 [C1Max Linux 应用](https://github.com/typixdeck/c1max-suite)。本地 0.3.1 候选同步更新 Launcher 与 Store 的启动/分类联动；Copilot 0.2.6 配合 DIY 0.4.4 保留兼容版本的设置。钢琴、DOS、PS1 候选为 0.2.0；10 个原生 ARM64 应用的 0.2.0 界面源码已经完成，deb 仍保留 0.1.0，等待支持的 Linux ARM64 构建和真机验证。拍立得 0.1.0 保持原样。候选未上传，线上版本以实际仓库内容为准。新增应用按需单独安装，本批针对官方 Raspberry Pi OS ARM64 Trixie；完整清单和外部设备/服务条件见 [debs/README.md](debs/README.md)。
 
 ## GitHub 应用源
 
@@ -110,9 +120,9 @@ helper 没有网络请求，不执行 dpkg 安装或系统修复，不修改授�
 /usr/share/typix-store/keys/development.pem
 ```
 
-本机频道为 `development-offline`。历史 `config/catalog.json` 示例不会打进 Store deb。离线包路径、签名及公钥必须由 root 管理才能开启系统事务。用户目录显示“用户目录预览，系统安装待管理员部署”，禁用安装、更新、移除，保留浏览及快捷方式管理。
+本机频道为 `development-offline`。历史 `config/catalog.json` 示例不会打进 Store deb。离线包路径、签名及公钥必须由 root 管理才能开启系统事务。用户目录显示“用户目录预览，系统安装待管理员部署”，禁用安装、更新、移除；保留浏览和已安装应用的启动入口。
 
-桌面目录通过 `xdg-user-dir DESKTOP` 获取。创建指向系统 `.desktop` 的链接，保留已有同名文件；只移除对应链接或完全相同副本，自定义文件交由文件管理器处理。只查询当前签名目录应用的安装状态，不收集整机安装清单。
+桌面目录通过 `xdg-user-dir DESKTOP` 获取。创建指向系统 `.desktop` 的链接，保留已有同名文件；自动同步仅移除已记录、且仍指向原入口的管理链接，自定义文件交由文件管理器处理。只查询当前签名目录应用的安装状态，不收集整机安装清单。
 
 ## 构建和验证
 
@@ -121,9 +131,9 @@ PYTHONPATH=src python3 -m unittest discover -s tests -v
 ./build-deb.sh
 ```
 
-产物 `dist/typix-store_0.3.0-1_all.deb`，架构 `all`，声明 Python/GTK3/cryptography/PackageKit/pkexec/xdg-user-dirs 依赖，以及官方 Raspberry Pi OS Bookworm、Trixie 兼容字段。
+产物 `dist/typix-store_0.3.1-1_all.deb`，架构 `all`，声明 Python/GTK3/librsvg/cryptography/PackageKit/pkexec/xdg-user-dirs 依赖，并建议配套 Launcher ≥ 0.3.1，以及官方 Raspberry Pi OS Bookworm、Trixie 兼容字段。
 
-54 项本机测试覆盖签名、过期、真实 deb 元数据、能力与空间、GitHub URL/跳转约束、网络响应和取消、Range 恢复、损坏缓存重试、未发布目录回退、文件描述符安全与暂存二次验证、PackageKit 错误/取消/超时。网络响应测试使用受控响应，不能替代真实 GitHub 发布后 E2E。CM4 上实际 PackageKit 安装/移除、root 暂存、在线完整包下载及 GTK 验收证据由集成交付记录单独给出。
+本机测试覆盖签名、过期、真实 deb 元数据、能力与空间、GitHub URL/跳转约束、网络响应和取消、Range 恢复、损坏缓存重试、未发布目录回退、文件描述符安全与暂存二次验证、PackageKit 错误/取消/超时。网络响应测试使用受控响应，不能替代真实 GitHub 发布后 E2E。CM4 上实际 PackageKit 安装/移除、root 暂存、在线完整包下载及 GTK 验收证据由集成交付记录单独给出。
 
 URL 规则依据 [GitHub Release 链接文档](https://docs.github.com/en/repositories/releasing-projects-on-github/linking-to-releases) 和 [GitHub 仓库内容文档](https://docs.github.com/en/rest/repos/contents)。
 

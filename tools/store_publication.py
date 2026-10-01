@@ -365,7 +365,10 @@ def inspect_packages(source: Path = DEFAULT_SOURCE) -> list[dict[str, Any]]:
             require(isinstance(compatibility.get(name), list) and all(isinstance(value, str) for value in compatibility[name]), f"Invalid {name}")
         require(set(compatibility["display"]).issubset({"wayland", "x11"}), "Unsupported display declaration")
         require(set(compatibility["requiredFeatures"]).issubset({"wayland", "x11", "touch", "keyboard", "audio", "network", "opengl-es-3", "vulkan", "nvme", "usb-serial"}), "Unknown required feature")
-        require(isinstance(metadata.get("categories", []), list) and all(isinstance(value, str) for value in metadata.get("categories", [])), "Invalid categories")
+        categories = metadata.get("categories", [])
+        require(isinstance(categories, list) and len(categories) <= 32
+                and all(isinstance(value, str) and re.fullmatch(r"[A-Za-z][A-Za-z0-9-]{0,63}", value) for value in categories),
+                "Invalid categories: provide up to 32 bounded FreeDesktop tokens")
         installed_size = verify_complete_payload(path, metadata)
         compatibility["minFreeDiskMB"] = max(compatibility["minFreeDiskMB"], (installed_size + 1024 * 1024 - 1) // (1024 * 1024) + 64)
         entries.append({"id": identity, "package": fields["Package"], "currentVersion": fields["Version"],
@@ -376,6 +379,10 @@ def inspect_packages(source: Path = DEFAULT_SOURCE) -> list[dict[str, Any]]:
                             "sizeBytes": path.stat().st_size, "installedSizeBytes": installed_size,
                             "depends": fields["Depends"], "payload": "complete-deb"},
                             "compatibility": compatibility}]})
+        if "icon" in metadata:
+            require(isinstance(metadata["icon"], str) and bool(re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{0,119}", metadata["icon"])),
+                    "Application icon must be a bounded theme name, not a URL or file path")
+            entries[-1]["icon"] = metadata["icon"]
         if "sourceRepository" in metadata or "screenshots" in metadata:
             repo, shots = metadata.get("sourceRepository"), metadata.get("screenshots")
             require(isinstance(repo, str) and bool(REPOSITORY_RE.fullmatch(repo)), "Invalid application sourceRepository")

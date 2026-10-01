@@ -19,6 +19,8 @@ PACKAGE_RE = re.compile(r"^[a-z0-9][a-z0-9+.-]+$")
 DEB_VERSION_RE = re.compile(r"^[0-9][A-Za-z0-9.+~:-]*$")
 FILENAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9.+_~:-]*\.deb$")
 OS_RE = re.compile(r"^[a-z0-9]+-[a-z0-9]+$")
+CATEGORY_RE = re.compile(r"[A-Za-z][A-Za-z0-9-]{0,63}")
+ICON_RE = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,127}")
 
 
 class CatalogError(ValueError):
@@ -164,6 +166,12 @@ def validate_catalog(data: Any, now: datetime | None = None, expected_repository
         _require(isinstance(version, str) and bool(DEB_VERSION_RE.fullmatch(version)), "版本格式错误")
         desktop = raw.get("desktopFile")
         _require(desktop is None or (isinstance(desktop, str) and re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*\.desktop", desktop)), "desktopFile 格式错误")
+        categories = raw.get("categories", [])
+        _require(isinstance(categories, list) and len(categories) <= 32
+                 and all(isinstance(item, str) and CATEGORY_RE.fullmatch(item) for item in categories),
+                 "categories 必须是不超过 32 项的分类名称数组")
+        icon = raw.get("icon")
+        _require(icon is None or isinstance(icon, str) and bool(ICON_RE.fullmatch(icon)), "icon 必须是有效的本地图标主题名称")
         records = raw.get("versions")
         _require(isinstance(records, list) and all(isinstance(item, dict) for item in records), "versions 格式错误")
         records = [item for item in records if item.get("version") == version]

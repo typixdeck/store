@@ -70,7 +70,8 @@
           "path": "docs/screenshots/reader-pdf.png",
           "caption": "CM4 独立 800×600 显示会话中的原创 PDF 页面"
         }
-      ]
+      ],
+      "icon": "typix-reader"
     },
     {
       "id": "ai.typixdeck.gamer",
@@ -120,7 +121,8 @@
           "path": "docs/screenshots/library.png",
           "caption": "尚未导入 ROM 的游戏库与本地导入入口"
         }
-      ]
+      ],
+      "icon": "typix-gamer"
     },
     {
       "id": "ai.typixdeck.launcher",
@@ -130,7 +132,7 @@
         "en": "Typix Launcher"
       },
       "summary": {
-        "zh-CN": "支持单应用省内存与后台切换的原生全屏启动器"
+        "zh-CN": "桌面快捷方式启动器，支持 Store 启动与单应用模式"
       },
       "description": {
         "zh-CN": "完整 GTK3 启动器，只读取桌面快捷方式。设置中可选择自动、单应用省内存或后台模式：后台保留 Launcher 窗口供 Alt+Tab 切换，重复点击运行中的启动项优先切回；单应用启动前退出 Launcher，应用关闭后返回。顶部显示电量与 Wi-Fi 纯图标。"
@@ -154,7 +156,10 @@
         "/usr/lib/python3/dist-packages/typix_launcher/status_ui.py",
         "/usr/lib/python3/dist-packages/typix_launcher/battery.py",
         "/usr/lib/tmpfiles.d/typix-launcher.conf",
-        "/usr/lib/python3/dist-packages/typix_launcher/runtime.py"
+        "/usr/lib/python3/dist-packages/typix_launcher/runtime.py",
+        "/usr/lib/python3/dist-packages/typix_launcher/handoff.py",
+        "/usr/lib/python3/dist-packages/typix_launcher/desktop.py",
+        "/usr/lib/python3/dist-packages/typix_launcher/supervisor.py"
       ],
       "compatibility": {
         "arch": [
@@ -168,8 +173,9 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-launcher_0.3.0-1_all.deb",
-      "sha256": "d29978a232f15e63cf4a46e23c12bce0b0a34983fe1a4c4e54b8e981635b4ee8",
+      "icon": "ai.typixdeck.launcher",
+      "filename": "typix-launcher_0.3.1-1_all.deb",
+      "sha256": "56a50b2373faea7fff334715a25750631eb33b43aec98688a09c11c7ff9cafd8",
       "sourceRepository": "typixdeck/launcher",
       "screenshots": [
         {
@@ -193,17 +199,15 @@
     {
       "id": "ai.typixdeck.store",
       "package": "typix-store",
-      "filename": "typix-store_0.3.0-1_all.deb",
-      "sha256": "be00e32375042ce022b1a85dfae052660db0749ed6424bc86d5c55a734551d41",
       "name": {
         "zh-CN": "Typix 应用商店",
         "en": "Typix Store"
       },
       "summary": {
-        "zh-CN": "签名 GitHub deb 下载与系统授权安装"
+        "zh-CN": "已安装应用直接启动，安装后自动对接 Launcher 分类"
       },
       "description": {
-        "zh-CN": "完整 GTK3 商店，支持签名应用源、完整 deb 下载、独立授权校验、安装更新移除和桌面快捷方式管理。"
+        "zh-CN": "完整 GTK3 商店，支持签名应用源、完整 deb 下载、独立授权安装更新移除。已安装应用可直接启动；安装后自动建立桌面快捷方式并按类别出现在 Launcher，保留用户的自定义快捷方式及手动移除选择。"
       },
       "categories": [
         "System"
@@ -224,7 +228,14 @@
         "/usr/lib/python3/dist-packages/typix_store/client.py",
         "/usr/lib/python3/dist-packages/typix_store/remote.py",
         "/usr/lib/python3/dist-packages/typix_store/staging.py",
-        "/usr/lib/python3/dist-packages/typix_store/transactions.py"
+        "/usr/lib/python3/dist-packages/typix_store/transactions.py",
+        "/usr/lib/python3/dist-packages/typix_store/integration.py",
+        "/usr/lib/python3/dist-packages/typix_store/icons.py",
+        "/usr/share/typix-store/catalog-icons/manifest.json",
+        "/usr/share/typix-store/catalog-icons/typix-store.svg",
+        "/usr/share/typix-store/catalog-icons/README.md",
+        "/usr/share/typix-store/catalog-icons/LICENSE-original-vectors.txt",
+        "/usr/lib/python3/dist-packages/typix_store/presentation.py"
       ],
       "compatibility": {
         "arch": [
@@ -238,6 +249,9 @@
         ],
         "requiredFeatures": []
       },
+      "icon": "typix-store",
+      "filename": "typix-store_0.3.1-1_all.deb",
+      "sha256": "ed06dbe6386fa21731ef059ee894015cd0afb1f3a3415abccf6a0e660f63855d",
       "sourceRepository": "typixdeck/store",
       "screenshots": [
         {
@@ -313,7 +327,8 @@
           "path": "docs/screenshots/home.png",
           "caption": "CM4 独立显示会话中的聊天区局部截图（未绑定账号、网络隔离）"
         }
-      ]
+      ],
+      "icon": "typix-myai"
     },
     {
       "id": "ai.typixdeck.wechat",
@@ -369,7 +384,8 @@
           "path": "docs/screenshots/setup.png",
           "caption": "CM4 独立 800×600 显示会话中的首次安装界面（未安装状态测试桩）"
         }
-      ]
+      ],
+      "icon": "typix-wechat"
     },
     {
       "id": "ai.typixdeck.copilot",
@@ -418,7 +434,11 @@
         "/usr/lib/python3/dist-packages/typix_copilot/firmware-index.json",
         "/usr/lib/python3/dist-packages/typix_copilot/firmware-index.json.sig",
         "/usr/lib/python3/dist-packages/typix_copilot/firmware-public-key.pem",
-        "/usr/lib/python3/dist-packages/typix_copilot/diagnostics.py"
+        "/usr/lib/python3/dist-packages/typix_copilot/diagnostics.py",
+        "/usr/lib/python3/dist-packages/typix_copilot/settings.py",
+        "/usr/lib/python3/dist-packages/typix_copilot/companion.py",
+        "/usr/lib/python3/dist-packages/typix_copilot/firmware-index-v2.json",
+        "/usr/lib/python3/dist-packages/typix_copilot/firmware-index-v2.json.sig"
       ],
       "compatibility": {
         "arch": [
@@ -432,8 +452,8 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-copilot_0.2.5-1_arm64.deb",
-      "sha256": "6e44b407f0634e3bdb914dba3d56692ffb5bca890e4c775df54d649e2dded7ef",
+      "filename": "typix-copilot_0.2.6-1_arm64.deb",
+      "sha256": "a49e2354ae5452e12fe324a106f40cbef349e78b763371eaadfaa55a6863d552",
       "sourceRepository": "typixdeck/copilot",
       "screenshots": [
         {
@@ -456,7 +476,8 @@
           "path": "docs/screenshots/history-stages.png",
           "caption": "阶段耗时与读取进度（测试记录）"
         }
-      ]
+      ],
+      "icon": "typix-copilot"
     },
     {
       "id": "ai.typixdeck.airtune",
@@ -503,7 +524,8 @@
           "path": "docs/screenshots/airtune.png",
           "caption": "CM4 独立 800×600 测试会话中的实际界面"
         }
-      ]
+      ],
+      "icon": "typix-airtune"
     },
     {
       "id": "ai.typixdeck.bilibili",
@@ -550,7 +572,8 @@
           "path": "docs/screenshots/bilibili.png",
           "caption": "CM4 独立 800×600 测试会话中的实际界面"
         }
-      ]
+      ],
+      "icon": "typix-bilibili"
     },
     {
       "id": "ai.typixdeck.calculator",
@@ -597,7 +620,8 @@
           "path": "docs/screenshots/calculator.png",
           "caption": "CM4 独立 800×600 测试会话中的实际界面"
         }
-      ]
+      ],
+      "icon": "typix-calculator"
     },
     {
       "id": "ai.typixdeck.calendar",
@@ -644,7 +668,8 @@
           "path": "docs/screenshots/calendar.png",
           "caption": "CM4 独立 800×600 测试会话中的实际界面"
         }
-      ]
+      ],
+      "icon": "typix-calendar"
     },
     {
       "id": "ai.typixdeck.camera",
@@ -699,7 +724,8 @@
           "path": "docs/screenshots/camera.png",
           "caption": "CM4 独立 800×600 合成相机测试画面"
         }
-      ]
+      ],
+      "icon": "typix-camera"
     },
     {
       "id": "ai.typixdeck.dosbox",
@@ -718,6 +744,7 @@
         "Game"
       ],
       "desktopFile": "typix-dosbox.desktop",
+      "icon": "typix-dosbox",
       "runtime": {
         "kind": "python-script",
         "path": "/usr/share/typix-dosbox/game_library.py"
@@ -738,13 +765,13 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-dosbox_0.1.0-1_all.deb",
-      "sha256": "8708f7756a4dea7d7e58a125b4268af5e598cae67615ced8e4e1a4aac010eae6",
+      "filename": "typix-dosbox_0.2.0-1_all.deb",
+      "sha256": "3a62f1045f66dae0ec4a23318e9a37244b40753fded98b2be9eba0daeb732274",
       "sourceRepository": "typixdeck/c1max-suite",
       "screenshots": [
         {
           "path": "docs/screenshots/dosbox.png",
-          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+          "caption": "0.1.0 CM4 隔离显示中的界面参考；未验证本次候选版本"
         }
       ]
     },
@@ -793,7 +820,8 @@
           "path": "docs/screenshots/gomoku.png",
           "caption": "CM4 独立 800×600 测试会话中的实际界面"
         }
-      ]
+      ],
+      "icon": "typix-gomoku"
     },
     {
       "id": "ai.typixdeck.hidpilot",
@@ -840,7 +868,8 @@
           "path": "docs/screenshots/hidpilot.png",
           "caption": "CM4 独立 800×600 测试会话中的实际界面"
         }
-      ]
+      ],
+      "icon": "typix-hidpilot"
     },
     {
       "id": "ai.typixdeck.mail",
@@ -887,7 +916,8 @@
           "path": "docs/screenshots/mail.png",
           "caption": "CM4 独立 800×600 测试会话中的实际界面"
         }
-      ]
+      ],
+      "icon": "typix-mail"
     },
     {
       "id": "ai.typixdeck.moonpilot",
@@ -934,7 +964,8 @@
           "path": "docs/screenshots/moonpilot.png",
           "caption": "CM4 独立 800×600 测试会话中的实际界面"
         }
-      ]
+      ],
+      "icon": "typix-moonpilot"
     },
     {
       "id": "ai.typixdeck.piano",
@@ -953,6 +984,7 @@
         "AudioVideo"
       ],
       "desktopFile": "typix-piano.desktop",
+      "icon": "typix-piano",
       "runtime": {
         "kind": "python-script",
         "path": "/usr/share/typix-piano/piano.py"
@@ -973,13 +1005,13 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-piano_0.1.0-1_all.deb",
-      "sha256": "d82957aa9c3febf7beb894a94d9a962c95feb4095290762a42838d43a7e79150",
+      "filename": "typix-piano_0.2.0-1_all.deb",
+      "sha256": "21fad55d4b1f86851e96a0254d8ca6e487d0dd6153f08fc32ba3ee31e8ba2709",
       "sourceRepository": "typixdeck/c1max-suite",
       "screenshots": [
         {
           "path": "docs/screenshots/piano.png",
-          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+          "caption": "0.1.0 CM4 隔离显示中的界面参考；未验证本次候选版本"
         }
       ]
     },
@@ -1053,7 +1085,8 @@
           "path": "docs/screenshots/processing.png",
           "caption": "CM4 独立 800×600 测试会话中的实际界面"
         }
-      ]
+      ],
+      "icon": "typix-processing"
     },
     {
       "id": "ai.typixdeck.ps1",
@@ -1072,6 +1105,7 @@
         "Game"
       ],
       "desktopFile": "typix-ps1.desktop",
+      "icon": "typix-ps1",
       "runtime": {
         "kind": "python-script",
         "path": "/usr/share/typix-ps1/game_library.py"
@@ -1092,13 +1126,13 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-ps1_0.1.0-1_all.deb",
-      "sha256": "cf449267afb4235a439ec4fa2bdb54995d7e759674b06811086fcbca22253eb1",
+      "filename": "typix-ps1_0.2.0-1_all.deb",
+      "sha256": "3f26a072ae41120655f72ee18589ac9a9b7970aeffd5c9199a4315345440157e",
       "sourceRepository": "typixdeck/c1max-suite",
       "screenshots": [
         {
           "path": "docs/screenshots/ps1.png",
-          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+          "caption": "0.1.0 CM4 隔离显示中的界面参考；未验证本次候选版本"
         }
       ]
     },
@@ -1147,7 +1181,8 @@
           "path": "docs/screenshots/streamplayer.png",
           "caption": "CM4 独立 800×600 测试会话中的实际界面"
         }
-      ]
+      ],
+      "icon": "typix-streamplayer"
     },
     {
       "id": "ai.typixdeck.terminal",
@@ -1201,7 +1236,8 @@
           "path": "docs/screenshots/terminal.png",
           "caption": "CM4 独立 800×600 测试会话中的实际界面"
         }
-      ]
+      ],
+      "icon": "typix-terminal"
     }
   ]
 }

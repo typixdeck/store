@@ -2,6 +2,9 @@
 from __future__ import annotations
 
 import os
+import configparser
+import json
+from datetime import datetime
 import shutil
 import stat
 import subprocess
@@ -10,6 +13,7 @@ import time
 from pathlib import Path
 
 from .catalog import CatalogError, DeviceProfile, StoreApp, incompatibility_reasons, load_catalog_file, verify_deb_metadata, verify_hash
+from .integration import ShortcutManager, category_name
 
 DEFAULT_REPOSITORY = Path("/usr/share/typix-store/repository")
 DEFAULT_PUBLIC_KEY = Path("/usr/share/typix-store/keys/development.pem")
@@ -32,6 +36,69 @@ class StoreClient:
         self.remote = None
         self.source_notice = "离线应用源；尚未配置 GitHub 完整软件包下载"
         self.source_title = "离线应用源"
+        self.shortcuts = ShortcutManager()
+        self.display_apps = []
+
+    def launch_catalog(self) -> list[StoreApp]:
+        """Offline display only: expired signatures never authorize installs."""
+        sources = [(self.repository / "catalog.json", self.repository / "catalog.json.sig", self.public_key, None, "development-offline")]
+        try:
+            if self.github_config and self.github_config.exists():
+                from .remote import GitHubSource, load_config
+                config = load_config(self.github_config)
+                cache = GitHubSource(config).cache
+                digest = (cache / "current").read_text().strip()
+                import re
+                if re.fullmatch(r"[0-9a-f]{64}", digest):
+                    sources.insert(0, (cache / digest / "catalog.json", cache / digest / "catalog.json.sig",
+                                       config.public_key, config.repository, config.channel))
+        except (OSError, CatalogError):
+            pass
+        for path, signature, key, repository, channel in sources:
+            try:
+                if path.stat().st_size > 4 * 1024 * 1024:
+                    continue
+                # Signature/schema validation still runs. Only the validity date
+                # is relaxed for locating already installed local launchers.
+                published = datetime.fromisoformat(json.loads(path.read_bytes())["generatedAt"].replace("Z", "+00:00"))
+                apps = load_catalog_file(path, signature=signature, public_key=key, now=published,
+                                         expected_repository=repository, expected_channel=channel)
+                return [app for app in apps if self.installed_version(app)]
+            except (OSError, ValueError, KeyError, TypeError):
+                pass
+        return list(self.display_apps)
+
+    def sync_shortcuts(self, apps, installed, desktop):
+        warnings = []
+        for app in apps:
+            try:
+                self.shortcuts.sync(app, desktop, bool(installed.get(app.id)))
+            except (OSError, ValueError, KeyError, configparser.Error) as exc:
+                warnings.append(str(exc))
+        return "；".join(warnings[:2])
+
+    def launch(self, app):
+        if not app.desktop_file or not self.installed_version(app):
+            raise CatalogError("应用尚未安装或没有启动入口")
+        helper = Path("/usr/bin/typix-launcher")
+        if not helper.is_file():
+            raise CatalogError("请先更新 Launcher，再从 Launcher 打开 Store")
+        version = self.installed_version(StoreApp({"package": "typix-launcher"}))
+        if version != "0.3.1-1" and not self.has_update("0.3.1-1", version or "0"):
+            raise CatalogError("请先更新 Launcher 到 0.3.1，再启动此应用")
+        try:
+            result = subprocess.run([str(helper), "--open-installed", app.package, app.desktop_file],
+                                    capture_output=True, text=True, timeout=12, check=False)
+        except (OSError, subprocess.TimeoutExpired):
+            raise CatalogError("启动请求失败，请确认 Launcher 已更新并正在运行") from None
+        mode = result.stdout.strip()
+        if result.returncode != 0 or mode not in {"handoff", "resident"}:
+            raise CatalogError("请先从 Launcher 打开 Store，再启动此应用")
+        return mode
+
+    @staticmethod
+    def category(app):
+        return category_name(app.raw.get("categories", []))
 
     def load_catalog(self, cancelled=lambda: False) -> list[StoreApp]:
         self.remote = None

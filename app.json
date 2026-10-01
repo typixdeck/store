@@ -10,10 +10,10 @@
       "en": "Typix Store"
     },
     "summary": {
-      "zh-CN": "签名 GitHub deb 下载与系统授权安装"
+      "zh-CN": "已安装应用直接启动，安装后自动对接 Launcher 分类"
     },
     "description": {
-      "zh-CN": "完整 GTK3 商店，支持签名应用源、完整 deb 下载、独立授权校验、安装更新移除和桌面快捷方式管理。"
+      "zh-CN": "完整 GTK3 商店，支持签名应用源、完整 deb 下载、独立授权安装更新移除。已安装应用可直接启动；安装后自动建立桌面快捷方式并按类别出现在 Launcher，保留用户的自定义快捷方式及手动移除选择。"
     },
     "categories": [
       "System"
@@ -34,7 +34,14 @@
       "/usr/lib/python3/dist-packages/typix_store/client.py",
       "/usr/lib/python3/dist-packages/typix_store/remote.py",
       "/usr/lib/python3/dist-packages/typix_store/staging.py",
-      "/usr/lib/python3/dist-packages/typix_store/transactions.py"
+      "/usr/lib/python3/dist-packages/typix_store/transactions.py",
+      "/usr/lib/python3/dist-packages/typix_store/integration.py",
+      "/usr/lib/python3/dist-packages/typix_store/icons.py",
+      "/usr/share/typix-store/catalog-icons/manifest.json",
+      "/usr/share/typix-store/catalog-icons/typix-store.svg",
+      "/usr/share/typix-store/catalog-icons/README.md",
+      "/usr/share/typix-store/catalog-icons/LICENSE-original-vectors.txt",
+      "/usr/lib/python3/dist-packages/typix_store/presentation.py"
     ],
     "compatibility": {
       "arch": [
@@ -47,12 +54,14 @@
         "x11"
       ],
       "requiredFeatures": []
-    }
+    },
+    "icon": "typix-store"
   },
   "release": {
-    "version": "0.3.0-1",
-    "file": "dist/typix-store_0.3.0-1_all.deb",
-    "sha256": "be00e32375042ce022b1a85dfae052660db0749ed6424bc86d5c55a734551d41"
+    "version": "0.3.1-1",
+    "file": "dist/typix-store_0.3.1-1_all.deb",
+    "sha256": "ed06dbe6386fa21731ef059ee894015cd0afb1f3a3415abccf6a0e660f63855d",
+    "sizeBytes": 16151156
   },
   "screenshots": [
     {

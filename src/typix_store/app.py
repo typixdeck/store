@@ -9,11 +9,13 @@ import gi
 
 gi.require_version("Gtk", "3.0")
 gi.require_version("Gdk", "3.0")
-from gi.repository import Gdk, Gio, GLib, Gtk, Pango
+from gi.repository import Gdk, GdkPixbuf, Gio, GLib, Gtk, Pango
 
 from .catalog import CatalogError, DeviceProfile, StoreApp, incompatibility_reasons
 from .client import PROTECTED_PACKAGES, StoreClient
 from .transactions import PackageTransaction, PK_FILTER_INSTALLED
+from .icons import icon_file
+from .presentation import actions as action_state
 
 APP_ID = "ai.typixdeck.store"
 CSS = b"""
@@ -69,6 +71,8 @@ class StoreApplication(Gtk.Application):
         self.cancel_event = threading.Event()
         self.rows = {}
         self._mapped_once = False
+        self.operation_app = None
+        self.operation_action = None
 
     def do_activate(self):
         if self.window:
@@ -96,9 +100,6 @@ class StoreApplication(Gtk.Application):
         self.refresh_button = Gtk.Button(label="刷新")
         self.refresh_button.connect("clicked", lambda *_: self.reload())
         header.pack_start(self.refresh_button, False, False, 0)
-        close_button = Gtk.Button(label="返回桌面")
-        close_button.connect("clicked", lambda *_: self.window.close())
-        header.pack_start(close_button, False, False, 0)
         root.pack_start(header, False, False, 0)
 
         search_box = Gtk.Box(spacing=10)
@@ -106,9 +107,12 @@ class StoreApplication(Gtk.Application):
         self.search.set_placeholder_text("搜索应用")
         self.search.connect("search-changed", lambda *_: self.filter_rows())
         search_box.pack_start(self.search, True, True, 0)
-        self.installed_filter = Gtk.CheckButton(label="已安装")
-        self.installed_filter.connect("toggled", lambda *_: self.filter_rows())
-        search_box.pack_start(self.installed_filter, False, False, 0)
+        self.category_filter = Gtk.ComboBoxText()
+        for name in ("全部", "已安装", "工具", "网络", "影音", "游戏", "系统", "应用"):
+            self.category_filter.append(name, name)
+        self.category_filter.set_active_id("全部")
+        self.category_filter.connect("changed", lambda *_: self.filter_rows())
+        search_box.pack_start(self.category_filter, False, False, 0)
         root.pack_start(search_box, False, False, 0)
 
         body = Gtk.Paned(orientation=Gtk.Orientation.HORIZONTAL)
@@ -164,15 +168,16 @@ class StoreApplication(Gtk.Application):
         self.install_button = Gtk.Button(label="安装")
         self.install_button.get_style_context().add_class("suggested-action")
         self.install_button.connect("clicked", lambda *_: self.confirm_operation("install"))
+        self.launch_button = Gtk.Button(label="启动")
+        self.launch_button.get_style_context().add_class("suggested-action")
+        self.launch_button.connect("clicked", self.on_launch)
         self.remove_button = Gtk.Button(label="移除应用")
         self.remove_button.connect("clicked", lambda *_: self.confirm_operation("remove"))
         actions.pack_start(self.install_button, True, True, 0)
+        actions.pack_start(self.launch_button, True, True, 0)
         actions.pack_start(self.remove_button, True, True, 0)
         action_panel.pack_start(actions, False, False, 0)
-        self.shortcut_button = Gtk.Button(label="添加到桌面")
-        self.shortcut_button.connect("clicked", self.on_shortcut)
-        action_panel.pack_start(self.shortcut_button, False, False, 0)
-        for button in (self.install_button, self.remove_button, self.shortcut_button):
+        for button in (self.install_button, self.launch_button, self.remove_button):
             button.set_size_request(-1, 48)
         detail_column.pack_start(action_panel, False, False, 0)
         self.progress_bar = Gtk.ProgressBar()
@@ -214,8 +219,14 @@ class StoreApplication(Gtk.Application):
         self.set_busy(True, cancel=True)
         self.status.set_text("正在刷新应用源、验证签名与检查本机兼容性…")
         def work():
-            apps = self.client.load_catalog(self.cancel_event.is_set)
-            source_error = self.client.installation_source_error()
+            try:
+                apps = self.client.load_catalog(self.cancel_event.is_set)
+                source_error = self.client.installation_source_error()
+            except CatalogError as exc:
+                if self.cancel_event.is_set():
+                    raise
+                apps = self.client.launch_catalog()
+                source_error = str(exc) + "；仅显示已安装应用，可直接启动"
             profile = DeviceProfile.from_environment()
             installed = {app.id: self.client.installed_version(app) for app in apps}
             updates = {app.id: self.client.has_update(installed[app.id], app.current_version) for app in apps}
@@ -223,7 +234,8 @@ class StoreApplication(Gtk.Application):
                 desktop = self.client.desktop_directory()
             except CatalogError:
                 desktop = None
-            return apps, profile, installed, updates, desktop, source_error
+            shortcut_warning = self.client.sync_shortcuts(apps, installed, desktop)
+            return apps, profile, installed, updates, desktop, source_error, shortcut_warning
         def done(result, error):
             previous = self.selected.id if self.selected else None
             self.selected = None
@@ -235,7 +247,8 @@ class StoreApplication(Gtk.Application):
                 self.detail_title.set_text("无法加载可信目录")
                 self.status.set_text(error + "。更新离线仓库后点击刷新。")
             else:
-                self.apps, self.profile, self.installed, self.updates, self.desktop, self.source_error = result
+                self.apps, self.profile, self.installed, self.updates, self.desktop, self.source_error, shortcut_warning = result
+                self.client.display_apps = list(self.apps)
                 self.source_subtitle.set_text("ALPHA  ·  " + self.client.source_title)
                 for app in self.apps:
                     row = Gtk.ListBoxRow()
@@ -250,15 +263,16 @@ class StoreApplication(Gtk.Application):
                     box.pack_start(summary, False, False, 0)
                     box.pack_start(label(state, "accent"), False, False, 0)
                     row_content = Gtk.Box(spacing=4)
-                    icon = Gtk.Image.new_from_icon_name(self.icon_name(app), Gtk.IconSize.DND)
-                    icon.set_pixel_size(32)
+                    icon = Gtk.Image()
+                    self.set_icon(icon, app, 32)
                     row_content.pack_start(icon, False, False, 3)
                     row_content.pack_start(box, True, True, 0)
                     row.add(row_content)
                     self.list_box.add(row)
                     self.rows[app.id] = row
                 self.list_box.show_all()
-                self.status.set_text(message or self.source_error or self.client.source_notice)
+                self.status.set_text((message or self.source_error or self.client.source_notice) +
+                                     ("；" + shortcut_warning if shortcut_warning else ""))
             self.set_busy(False)
             self.filter_rows(previous)
             return False
@@ -269,7 +283,9 @@ class StoreApplication(Gtk.Application):
         visible = []
         for app in self.apps:
             show = query in (app.name() + " " + app.summary() + " " + app.package).casefold()
-            show = show and (not self.installed_filter.get_active() or bool(self.installed.get(app.id)))
+            category = self.category_filter.get_active_id() or "全部"
+            show = show and (category == "全部" or category == "已安装" and bool(self.installed.get(app.id))
+                             or category == self.client.category(app))
             self.rows[app.id].set_visible(show)
             if show:
                 visible.append(self.rows[app.id])
@@ -285,8 +301,19 @@ class StoreApplication(Gtk.Application):
 
     @staticmethod
     def icon_name(app):
-        fallback = {"typix-reader": "accessories-text-editor", "typix-gamer": "applications-games", "typix-myai": "audio-input-microphone"}
-        return app.raw.get("icon") or fallback.get(app.package, "application-x-executable")
+        from .presentation import icon_name
+        return icon_name(app)
+
+    def set_icon(self, image, app, size):
+        path = icon_file(app.package)
+        if path:
+            try:
+                image.set_from_pixbuf(GdkPixbuf.Pixbuf.new_from_file_at_scale(str(path), size, size, True))
+                return
+            except GLib.Error:
+                pass
+        image.set_from_icon_name(self.icon_name(app), Gtk.IconSize.DIALOG)
+        image.set_pixel_size(size)
 
     def on_selected(self, _box, row):
         if self.selected is None or row is None or self.selected.id != row.app.id:
@@ -298,7 +325,7 @@ class StoreApplication(Gtk.Application):
         if not hasattr(self, "install_button"):
             return
         app = self.selected
-        for button in (self.install_button, self.remove_button, self.shortcut_button):
+        for button in (self.install_button, self.remove_button, self.launch_button):
             button.set_sensitive(False)
         self.package_expander.set_visible(app is not None)
         if not app:
@@ -309,7 +336,7 @@ class StoreApplication(Gtk.Application):
         installed = self.installed.get(app.id)
         update = self.updates.get(app.id, False)
         self.detail_title.set_text(app.name())
-        self.detail_icon.set_from_icon_name(self.icon_name(app), Gtk.IconSize.DIALOG)
+        self.set_icon(self.detail_icon, app, 56)
         self.detail_summary.set_text(app.summary())
         self.detail_description.set_text(app.description())
         artifact = record["artifact"]
@@ -318,12 +345,14 @@ class StoreApplication(Gtk.Application):
         reasons = incompatibility_reasons(record, self.profile)
         self.detail_meta.set_text(f"{app.package}\n依赖：{depends}\n适用系统：{', '.join(record['compatibility']['os'])}\n本机：{self.profile.os} · {self.profile.arch}\n内存 {self.profile.memory_mb} MB · 可用空间 {self.profile.free_disk_mb} MB" + ("\n兼容性：" + "；".join(reasons) if reasons else "\n兼容性：通过"))
         self.detail_status.set_text(self.source_error or ("本机暂不兼容，展开软件包详情查看原因" if reasons else ("本机兼容 · " + (f"已安装 {installed}" + (" · 可更新" if update else "") if installed else "可安装"))))
-        self.install_button.set_label("更新" if update else "已安装" if installed else "安装")
-        self.install_button.set_sensitive(not self.busy and not self.source_error and not reasons and (not installed or update))
+        state = action_state(installed=installed, update=update, source_error=self.source_error,
+                             incompatible=reasons, busy=self.busy, desktop_entry=app.desktop_file)
+        self.launch_button.set_visible(state["launch_visible"])
+        self.launch_button.set_sensitive(state["launch_enabled"])
+        self.install_button.set_visible(state["install_visible"])
+        self.install_button.set_label("更新" if update else "安装")
+        self.install_button.set_sensitive(state["install_enabled"])
         self.remove_button.set_sensitive(not self.busy and not self.source_error and bool(installed) and app.package not in PROTECTED_PACKAGES)
-        shortcut = self.desktop and self.client.shortcut_exists(app, self.desktop)
-        self.shortcut_button.set_label("从桌面移除快捷方式" if shortcut else "添加到桌面")
-        self.shortcut_button.set_sensitive(not self.busy and bool(installed or shortcut) and bool(app.desktop_file) and self.desktop is not None)
 
     def confirm_operation(self, action):
         if self.busy or not self.selected:
@@ -344,6 +373,7 @@ class StoreApplication(Gtk.Application):
             self.begin_operation(app, action)
 
     def begin_operation(self, app, action):
+        self.operation_app, self.operation_action = app, action
         self.cancel_event.clear()
         self.set_busy(True, cancel=True)
         self.status.set_text("正在重新验证签名、软件包和系统状态…")
@@ -397,7 +427,13 @@ class StoreApplication(Gtk.Application):
         self.transaction = None
         self.set_busy(False)
         self.progress_bar.set_fraction(0)
-        message = "系统事务完成；桌面快捷方式可单独管理。" if success else "操作未完成：" + (detail or "系统拒绝或取消了事务") + "。可刷新状态后重试；不会自动重放操作。"
+        message = "系统事务完成，正在更新 Launcher 入口。" if success else "操作未完成：" + (detail or "系统拒绝或取消了事务") + "。可刷新状态后重试；不会自动重放操作。"
+        if success and self.operation_app and self.desktop is not None:
+            try:
+                self.client.shortcuts.sync(self.operation_app, self.desktop, self.operation_action != "remove")
+            except (OSError, ValueError, KeyError) as exc:
+                message += " " + str(exc)
+        self.operation_app = self.operation_action = None
         self.reload(message)
 
     def on_cancel(self, *_args):
@@ -414,17 +450,22 @@ class StoreApplication(Gtk.Application):
             self.status.set_text("正在取消准备操作…")
             self.cancel_button.set_sensitive(False)
 
-    def on_shortcut(self, *_args):
-        if self.busy or not self.selected or self.desktop is None:
+    def on_launch(self, *_args):
+        if self.busy or not self.selected:
             return
-        app, desktop = self.selected, self.desktop
-        enabled = not self.client.shortcut_exists(app, desktop)
+        app = self.selected
         self.set_busy(True)
-        def done(_result, error):
+        self.status.set_text("正在启动应用…")
+        def done(mode, error):
             self.set_busy(False)
-            self.status.set_text(error or ("已添加桌面快捷方式，Launcher 会自动刷新。" if enabled else "已移除桌面快捷方式，应用仍然保留。"))
+            if error:
+                self.status.set_text(error)
+            elif mode == "handoff":
+                self.quit()
+            else:
+                self.status.set_text("已请求启动应用；Alt+Tab 可返回商店")
             return False
-        self.worker(lambda: self.client.set_shortcut(app, desktop, enabled), done)
+        self.worker(lambda: self.client.launch(app), done)
 
     def on_first_map(self, window, _event):
         if not self._mapped_once:
