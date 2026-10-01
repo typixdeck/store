@@ -398,7 +398,7 @@
         "zh-CN": "TypixDeck 板载 ESP32-S3 固件商店"
       },
       "description": {
-        "zh-CN": "原生 GTK3 板载 ESP32-S3 固件商店。0.2.5 支持桌面 HTTP/HTTPS 代理，下载错误区分 DNS、TLS、超时、HTTP、存储及哈希校验；保留签名校验和详细记录。收录 DIY 0.4.1，统一写入并按需下载或复用缓存。完整刷写链路仍待 CM4 验收。"
+        "zh-CN": "原生 GTK3 板载 ESP32-S3 固件商店。0.2.6 使用签名 v2 目录，在应用摘要和完整分区匹配时保留 DIY 的 Wi-Fi、时区和外观设置，并协调 CDC 服务维护。收录 DIY 0.4.4，统一写入并按需下载或复用缓存；支持桌面代理、错误分类和详细记录。完整刷写链路仍待 CM4 验收。"
       },
       "categories": [
         "System"
@@ -496,6 +496,7 @@
         "AudioVideo"
       ],
       "desktopFile": "typix-airtune.desktop",
+      "icon": "typix-airtune",
       "runtime": {
         "kind": "native",
         "path": "/usr/bin/typix-airtune"
@@ -516,16 +517,15 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-airtune_0.1.0-1_arm64.deb",
-      "sha256": "4ecd37b58213a84f7cf77b04bc6a0316df71eb3b9e2a041bb33b30e99ae2e111",
+      "filename": "typix-airtune_0.2.0-1_arm64.deb",
+      "sha256": "0609d8bdd5be7e89758118407f8b6aa3653e25921508896224a535389921f266",
       "sourceRepository": "typixdeck/c1max-suite",
       "screenshots": [
         {
-          "path": "docs/screenshots/airtune.png",
-          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+          "path": "docs/screenshots/airtune-0-2-0-arm64.png",
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务"
         }
-      ],
-      "icon": "typix-airtune"
+      ]
     },
     {
       "id": "ai.typixdeck.bilibili",
@@ -544,6 +544,7 @@
         "AudioVideo"
       ],
       "desktopFile": "typix-bilibili.desktop",
+      "icon": "typix-bilibili",
       "runtime": {
         "kind": "native",
         "path": "/usr/bin/typix-bilibili"
@@ -564,16 +565,15 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-bilibili_0.1.0-1_arm64.deb",
-      "sha256": "ce1853bc71447a6d6d8db5ac3abd153a55643d896da795d7c7321f95f06e9c77",
+      "filename": "typix-bilibili_0.2.0-1_arm64.deb",
+      "sha256": "49dd99eb60b6c0c5bb0408f064fbea5bb0c898830867dbbc30ea5d65efcaa8c4",
       "sourceRepository": "typixdeck/c1max-suite",
       "screenshots": [
         {
-          "path": "docs/screenshots/bilibili.png",
-          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+          "path": "docs/screenshots/bilibili-0-2-0-arm64.png",
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务"
         }
-      ],
-      "icon": "typix-bilibili"
+      ]
     },
     {
       "id": "ai.typixdeck.calculator",
@@ -592,6 +592,7 @@
         "Utility"
       ],
       "desktopFile": "typix-calculator.desktop",
+      "icon": "typix-calculator",
       "runtime": {
         "kind": "native",
         "path": "/usr/bin/typix-calculator"
@@ -612,16 +613,15 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-calculator_0.1.0-1_arm64.deb",
-      "sha256": "d91db4a6af389d8c0883b2c7ffe602ba1aa40488d91a1bf656e6c2282dbef18f",
+      "filename": "typix-calculator_0.2.0-1_arm64.deb",
+      "sha256": "7fdc9659972482066e52d6db6d21185dcc13a38d20b3e5499e0324bd8259a306",
       "sourceRepository": "typixdeck/c1max-suite",
       "screenshots": [
         {
-          "path": "docs/screenshots/calculator.png",
-          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+          "path": "docs/screenshots/calculator-0-2-0-arm64.png",
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务"
         }
-      ],
-      "icon": "typix-calculator"
+      ]
     },
     {
       "id": "ai.typixdeck.calendar",
@@ -640,6 +640,7 @@
         "Office"
       ],
       "desktopFile": "typix-calendar.desktop",
+      "icon": "typix-calendar",
       "runtime": {
         "kind": "native",
         "path": "/usr/bin/typix-calendar"
@@ -660,16 +661,15 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-calendar_0.1.0-1_arm64.deb",
-      "sha256": "cb8f2bc6054d21554ffc390fc9ef177fe31202a60a6666624b5a9e7d3a16b9ab",
+      "filename": "typix-calendar_0.2.0-1_arm64.deb",
+      "sha256": "91e192760b81e30769fe298c6bde4d458fea4cee26794396d425a3dd686fd775",
       "sourceRepository": "typixdeck/c1max-suite",
       "screenshots": [
         {
-          "path": "docs/screenshots/calendar.png",
-          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+          "path": "docs/screenshots/calendar-0-2-0-arm64.png",
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务"
         }
-      ],
-      "icon": "typix-calendar"
+      ]
     },
     {
       "id": "ai.typixdeck.camera",
@@ -792,6 +792,7 @@
         "Game"
       ],
       "desktopFile": "typix-gomoku.desktop",
+      "icon": "typix-gomoku",
       "runtime": {
         "kind": "native",
         "path": "/usr/bin/typix-gomoku"
@@ -812,16 +813,15 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-gomoku_0.1.0-1_arm64.deb",
-      "sha256": "ab1ef1ea12370489841fbfaa4988822585ae1caddc54434657815e746054acfe",
+      "filename": "typix-gomoku_0.2.0-1_arm64.deb",
+      "sha256": "498516bec2d23442b438c8304c38d423b51acdeef354bb0e8f0511e1b9faf31d",
       "sourceRepository": "typixdeck/c1max-suite",
       "screenshots": [
         {
-          "path": "docs/screenshots/gomoku.png",
-          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+          "path": "docs/screenshots/gomoku-0-2-0-arm64.png",
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务"
         }
-      ],
-      "icon": "typix-gomoku"
+      ]
     },
     {
       "id": "ai.typixdeck.hidpilot",
@@ -888,6 +888,7 @@
         "Network"
       ],
       "desktopFile": "typix-mail.desktop",
+      "icon": "typix-mail",
       "runtime": {
         "kind": "native",
         "path": "/usr/bin/typix-mail"
@@ -908,16 +909,15 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-mail_0.1.0-1_arm64.deb",
-      "sha256": "6d1dd314a0812ebb429c24bb2495aa5ddd31741eb4c2a5f60c5c1bb15685f633",
+      "filename": "typix-mail_0.2.0-1_arm64.deb",
+      "sha256": "2ba3f7187f7a0979cc3223f20c0b5acfd7ca733c220bb8c07b4dd08b5fd37cbf",
       "sourceRepository": "typixdeck/c1max-suite",
       "screenshots": [
         {
-          "path": "docs/screenshots/mail.png",
-          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+          "path": "docs/screenshots/mail-0-2-0-arm64.png",
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务"
         }
-      ],
-      "icon": "typix-mail"
+      ]
     },
     {
       "id": "ai.typixdeck.moonpilot",
@@ -936,6 +936,7 @@
         "Network"
       ],
       "desktopFile": "typix-moonpilot.desktop",
+      "icon": "typix-moonpilot",
       "runtime": {
         "kind": "native",
         "path": "/usr/bin/typix-moonpilot"
@@ -956,16 +957,15 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-moonpilot_0.1.0-1_arm64.deb",
-      "sha256": "2ae1caf6d055b6c2308821334291317e206cd5d5e5866af872c705f3fca36672",
+      "filename": "typix-moonpilot_0.2.0-1_arm64.deb",
+      "sha256": "eacb74e51fa64478a33e6f7ed8747104e277ee38652ad9ac9473c36db66ef5ee",
       "sourceRepository": "typixdeck/c1max-suite",
       "screenshots": [
         {
-          "path": "docs/screenshots/moonpilot.png",
-          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+          "path": "docs/screenshots/moonpilot-0-2-0-arm64.png",
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务"
         }
-      ],
-      "icon": "typix-moonpilot"
+      ]
     },
     {
       "id": "ai.typixdeck.piano",
@@ -1032,6 +1032,7 @@
         "Development"
       ],
       "desktopFile": "typix-processing.desktop",
+      "icon": "typix-processing",
       "runtime": {
         "kind": "native",
         "path": "/usr/bin/typix-processing"
@@ -1041,29 +1042,29 @@
         "/usr/share/typix-processing/shared/NotoSansSC-Regular.ttf",
         "/usr/share/typix-processing/processing/api.js",
         "/usr/share/typix-processing/processing/examples/tree.js",
-        "/usr/share/typix-processing/processing/examples/particles.js",
+        "/usr/share/typix-processing/terminal/assets/JetBrainsMono-Bold.ttf",
+        "/usr/share/typix-processing/terminal/assets/JetBrainsMono-Regular.ttf",
+        "/usr/share/typix-processing/terminal/assets/terminfo.src",
+        "/usr/share/typix-processing/terminal/assets/shellrc",
+        "/usr/share/typix-processing/terminal/assets/inputrc",
+        "/usr/share/typix-processing/terminal/assets/JetBrainsMono-OFL.txt",
+        "/usr/share/typix-processing/terminal/assets/terminfo/63/c1max",
         "/usr/share/typix-processing/processing/examples/SOURCES.json",
         "/usr/share/typix-processing/processing/examples/flocking.js",
         "/usr/share/typix-processing/processing/examples/koch.js",
+        "/usr/share/typix-processing/processing/examples/particles.js",
         "/usr/share/typix-processing/processing/examples/upstream/README.md",
-        "/usr/share/typix-processing/processing/examples/upstream/Topics/Fractals and L-Systems/Koch/Koch.pde",
-        "/usr/share/typix-processing/processing/examples/upstream/Topics/Fractals and L-Systems/Koch/KochFractal.pde",
-        "/usr/share/typix-processing/processing/examples/upstream/Topics/Fractals and L-Systems/Koch/KochLine.pde",
         "/usr/share/typix-processing/processing/examples/upstream/Topics/Fractals and L-Systems/Tree/Tree.pde",
-        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/MultipleParticleSystems/MultipleParticleSystems.pde",
-        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/MultipleParticleSystems/CrazyParticle.pde",
-        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/MultipleParticleSystems/Particle.pde",
-        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/MultipleParticleSystems/ParticleSystem.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Fractals and L-Systems/Koch/KochFractal.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Fractals and L-Systems/Koch/Koch.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Fractals and L-Systems/Koch/KochLine.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/Flocking/Boid.pde",
         "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/Flocking/Flocking.pde",
         "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/Flocking/Flock.pde",
-        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/Flocking/Boid.pde",
-        "/usr/share/typix-processing/terminal/assets/terminfo.src",
-        "/usr/share/typix-processing/terminal/assets/inputrc",
-        "/usr/share/typix-processing/terminal/assets/JetBrainsMono-OFL.txt",
-        "/usr/share/typix-processing/terminal/assets/shellrc",
-        "/usr/share/typix-processing/terminal/assets/JetBrainsMono-Bold.ttf",
-        "/usr/share/typix-processing/terminal/assets/JetBrainsMono-Regular.ttf",
-        "/usr/share/typix-processing/terminal/assets/terminfo/63/c1max"
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/MultipleParticleSystems/ParticleSystem.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/MultipleParticleSystems/Particle.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/MultipleParticleSystems/MultipleParticleSystems.pde",
+        "/usr/share/typix-processing/processing/examples/upstream/Topics/Simulate/MultipleParticleSystems/CrazyParticle.pde"
       ],
       "compatibility": {
         "arch": [
@@ -1077,16 +1078,15 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-processing_0.1.0-1_arm64.deb",
-      "sha256": "b110fdca6f4d88f480a2891b9fdccf7f37125507586b1617453384cd64a56ccb",
+      "filename": "typix-processing_0.2.0-1_arm64.deb",
+      "sha256": "8e89b6d583714a7024c4b8f1d555b7aff8f866a516e278799f0f4b8a933c9a9b",
       "sourceRepository": "typixdeck/c1max-suite",
       "screenshots": [
         {
-          "path": "docs/screenshots/processing.png",
-          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+          "path": "docs/screenshots/processing-0-2-0-arm64.png",
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务"
         }
-      ],
-      "icon": "typix-processing"
+      ]
     },
     {
       "id": "ai.typixdeck.ps1",
@@ -1153,6 +1153,7 @@
         "AudioVideo"
       ],
       "desktopFile": "typix-streamplayer.desktop",
+      "icon": "typix-streamplayer",
       "runtime": {
         "kind": "native",
         "path": "/usr/bin/typix-streamplayer"
@@ -1173,16 +1174,15 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-streamplayer_0.1.0-1_arm64.deb",
-      "sha256": "dd611f134d465417d0102974a200ab61fb6378531eb7f4d334911a259588983e",
+      "filename": "typix-streamplayer_0.2.0-1_arm64.deb",
+      "sha256": "352de67e17840bbc4bed43c4222aa61064fbf7d7ee812d3a5227db4dee23410a",
       "sourceRepository": "typixdeck/c1max-suite",
       "screenshots": [
         {
-          "path": "docs/screenshots/streamplayer.png",
-          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+          "path": "docs/screenshots/streamplayer-0-2-0-arm64.png",
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务"
         }
-      ],
-      "icon": "typix-streamplayer"
+      ]
     },
     {
       "id": "ai.typixdeck.terminal",
@@ -1201,6 +1201,7 @@
         "System"
       ],
       "desktopFile": "typix-terminal.desktop",
+      "icon": "typix-terminal",
       "runtime": {
         "kind": "native",
         "path": "/usr/bin/typix-terminal"
@@ -1208,12 +1209,12 @@
       "requiredPayload": [
         "/usr/bin/typix-terminal",
         "/usr/share/typix-terminal/shared/NotoSansSC-Regular.ttf",
-        "/usr/share/typix-terminal/terminal/assets/terminfo.src",
-        "/usr/share/typix-terminal/terminal/assets/inputrc",
-        "/usr/share/typix-terminal/terminal/assets/JetBrainsMono-OFL.txt",
-        "/usr/share/typix-terminal/terminal/assets/shellrc",
         "/usr/share/typix-terminal/terminal/assets/JetBrainsMono-Bold.ttf",
         "/usr/share/typix-terminal/terminal/assets/JetBrainsMono-Regular.ttf",
+        "/usr/share/typix-terminal/terminal/assets/terminfo.src",
+        "/usr/share/typix-terminal/terminal/assets/shellrc",
+        "/usr/share/typix-terminal/terminal/assets/inputrc",
+        "/usr/share/typix-terminal/terminal/assets/JetBrainsMono-OFL.txt",
         "/usr/share/typix-terminal/terminal/assets/terminfo/63/c1max"
       ],
       "compatibility": {
@@ -1228,16 +1229,15 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-terminal_0.1.0-1_arm64.deb",
-      "sha256": "1e8ad980d8682cd206180ea7e94bbce1aba958753c84f636f30174732176f0fa",
+      "filename": "typix-terminal_0.2.0-1_arm64.deb",
+      "sha256": "6024a43003f877548269420b7011b4b31285dbafb71088d11f95d9305a45a296",
       "sourceRepository": "typixdeck/c1max-suite",
       "screenshots": [
         {
-          "path": "docs/screenshots/terminal.png",
-          "caption": "CM4 独立 800×600 测试会话中的实际界面"
+          "path": "docs/screenshots/terminal-0-2-0-arm64.png",
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务"
         }
-      ],
-      "icon": "typix-terminal"
+      ]
     }
   ]
 }

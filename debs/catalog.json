@@ -377,7 +377,7 @@
       ],
       "currentVersion": "0.2.6-1",
       "description": {
-        "zh-CN": "原生 GTK3 板载 ESP32-S3 固件商店。0.2.5 支持桌面 HTTP/HTTPS 代理，下载错误区分 DNS、TLS、超时、HTTP、存储及哈希校验；保留签名校验和详细记录。收录 DIY 0.4.1，统一写入并按需下载或复用缓存。完整刷写链路仍待 CM4 验收。"
+        "zh-CN": "原生 GTK3 板载 ESP32-S3 固件商店。0.2.6 使用签名 v2 目录，在应用摘要和完整分区匹配时保留 DIY 的 Wi-Fi、时区和外观设置，并协调 CDC 服务维护。收录 DIY 0.4.4，统一写入并按需下载或复用缓存；支持桌面代理、错误分类和详细记录。完整刷写链路仍待 CM4 验收。"
       },
       "desktopFile": "typix-copilot.desktop",
       "icon": "typix-copilot",
@@ -447,7 +447,7 @@
       "categories": [
         "AudioVideo"
       ],
-      "currentVersion": "0.1.0-1",
+      "currentVersion": "0.2.0-1",
       "description": {
         "zh-CN": "电台目录、搜索、收藏、自定义电台与本地列表。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
       },
@@ -461,8 +461,8 @@
       "package": "typix-airtune",
       "screenshots": [
         {
-          "caption": "CM4 独立 800×600 测试会话中的实际界面",
-          "path": "docs/screenshots/airtune.png"
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务",
+          "path": "docs/screenshots/airtune-0-2-0-arm64.png"
         }
       ],
       "sourceRepository": "typixdeck/c1max-suite",
@@ -473,12 +473,12 @@
         {
           "artifact": {
             "arch": "arm64",
-            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.11.7), libstdc++6 (>= 11), mplayer, wget, ca-certificates, wireplumber",
-            "filename": "typix-airtune_0.1.0-1_arm64.deb",
-            "installedSizeBytes": 14476592,
+            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.21.5), libstdc++6 (>= 14), mplayer, wget, ca-certificates, wireplumber",
+            "filename": "typix-airtune_0.2.0-1_arm64.deb",
+            "installedSizeBytes": 13759091,
             "payload": "complete-deb",
-            "sha256": "4ecd37b58213a84f7cf77b04bc6a0316df71eb3b9e2a041bb33b30e99ae2e111",
-            "sizeBytes": 7868364
+            "sha256": "0609d8bdd5be7e89758118407f8b6aa3653e25921508896224a535389921f266",
+            "sizeBytes": 8005808
           },
           "compatibility": {
             "arch": [
@@ -495,7 +495,7 @@
             ],
             "requiredFeatures": []
           },
-          "version": "0.1.0-1"
+          "version": "0.2.0-1"
         }
       ]
     },
@@ -503,7 +503,7 @@
       "categories": [
         "AudioVideo"
       ],
-      "currentVersion": "0.1.0-1",
+      "currentVersion": "0.2.0-1",
       "description": {
         "zh-CN": "热门、搜索、BV、分 P、扫码登录与直连 MP4。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
       },
@@ -517,8 +517,8 @@
       "package": "typix-bilibili",
       "screenshots": [
         {
-          "caption": "CM4 独立 800×600 测试会话中的实际界面",
-          "path": "docs/screenshots/bilibili.png"
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务",
+          "path": "docs/screenshots/bilibili-0-2-0-arm64.png"
         }
       ],
       "sourceRepository": "typixdeck/c1max-suite",
@@ -529,68 +529,12 @@
         {
           "artifact": {
             "arch": "arm64",
-            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.11.7), libstdc++6 (>= 13.1), mplayer, wget, ca-certificates, wireplumber",
-            "filename": "typix-bilibili_0.1.0-1_arm64.deb",
-            "installedSizeBytes": 14003680,
+            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.21.5), libstdc++6 (>= 14), mplayer, wget, ca-certificates, wireplumber",
+            "filename": "typix-bilibili_0.2.0-1_arm64.deb",
+            "installedSizeBytes": 13220611,
             "payload": "complete-deb",
-            "sha256": "ce1853bc71447a6d6d8db5ac3abd153a55643d896da795d7c7321f95f06e9c77",
-            "sizeBytes": 7193992
-          },
-          "compatibility": {
-            "arch": [
-              "arm64"
-            ],
-            "display": [
-              "wayland",
-              "x11"
-            ],
-            "minFreeDiskMB": 78,
-            "minMemoryMB": 128,
-            "os": [
-              "raspios-trixie"
-            ],
-            "requiredFeatures": []
-          },
-          "version": "0.1.0-1"
-        }
-      ]
-    },
-    {
-      "categories": [
-        "Utility"
-      ],
-      "currentVersion": "0.1.0-1",
-      "description": {
-        "zh-CN": "四则、括号、乘方、历史与实体键盘计算。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
-      },
-      "desktopFile": "typix-calculator.desktop",
-      "icon": "typix-calculator",
-      "id": "ai.typixdeck.calculator",
-      "name": {
-        "en": "Typix Calculator",
-        "zh-CN": "计算器"
-      },
-      "package": "typix-calculator",
-      "screenshots": [
-        {
-          "caption": "CM4 独立 800×600 测试会话中的实际界面",
-          "path": "docs/screenshots/calculator.png"
-        }
-      ],
-      "sourceRepository": "typixdeck/c1max-suite",
-      "summary": {
-        "zh-CN": "四则、括号、乘方、历史与实体键盘计算"
-      },
-      "versions": [
-        {
-          "artifact": {
-            "arch": "arm64",
-            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.11.7), libstdc++6 (>= 11)",
-            "filename": "typix-calculator_0.1.0-1_arm64.deb",
-            "installedSizeBytes": 12905595,
-            "payload": "complete-deb",
-            "sha256": "d91db4a6af389d8c0883b2c7ffe602ba1aa40488d91a1bf656e6c2282dbef18f",
-            "sizeBytes": 6989018
+            "sha256": "49dd99eb60b6c0c5bb0408f064fbea5bb0c898830867dbbc30ea5d65efcaa8c4",
+            "sizeBytes": 7356240
           },
           "compatibility": {
             "arch": [
@@ -607,7 +551,63 @@
             ],
             "requiredFeatures": []
           },
-          "version": "0.1.0-1"
+          "version": "0.2.0-1"
+        }
+      ]
+    },
+    {
+      "categories": [
+        "Utility"
+      ],
+      "currentVersion": "0.2.0-1",
+      "description": {
+        "zh-CN": "四则、括号、乘方、历史与实体键盘计算。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
+      },
+      "desktopFile": "typix-calculator.desktop",
+      "icon": "typix-calculator",
+      "id": "ai.typixdeck.calculator",
+      "name": {
+        "en": "Typix Calculator",
+        "zh-CN": "计算器"
+      },
+      "package": "typix-calculator",
+      "screenshots": [
+        {
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务",
+          "path": "docs/screenshots/calculator-0-2-0-arm64.png"
+        }
+      ],
+      "sourceRepository": "typixdeck/c1max-suite",
+      "summary": {
+        "zh-CN": "四则、括号、乘方、历史与实体键盘计算"
+      },
+      "versions": [
+        {
+          "artifact": {
+            "arch": "arm64",
+            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.21.5), libstdc++6 (>= 11)",
+            "filename": "typix-calculator_0.2.0-1_arm64.deb",
+            "installedSizeBytes": 12778086,
+            "payload": "complete-deb",
+            "sha256": "7fdc9659972482066e52d6db6d21185dcc13a38d20b3e5499e0324bd8259a306",
+            "sizeBytes": 7196372
+          },
+          "compatibility": {
+            "arch": [
+              "arm64"
+            ],
+            "display": [
+              "wayland",
+              "x11"
+            ],
+            "minFreeDiskMB": 77,
+            "minMemoryMB": 128,
+            "os": [
+              "raspios-trixie"
+            ],
+            "requiredFeatures": []
+          },
+          "version": "0.2.0-1"
         }
       ]
     },
@@ -615,7 +615,7 @@
       "categories": [
         "Office"
       ],
-      "currentVersion": "0.1.0-1",
+      "currentVersion": "0.2.0-1",
       "description": {
         "zh-CN": "月历、本地日程、ICS 导入导出与订阅。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
       },
@@ -629,8 +629,8 @@
       "package": "typix-calendar",
       "screenshots": [
         {
-          "caption": "CM4 独立 800×600 测试会话中的实际界面",
-          "path": "docs/screenshots/calendar.png"
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务",
+          "path": "docs/screenshots/calendar-0-2-0-arm64.png"
         }
       ],
       "sourceRepository": "typixdeck/c1max-suite",
@@ -641,12 +641,12 @@
         {
           "artifact": {
             "arch": "arm64",
-            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.11.7), libstdc++6 (>= 11), wget, ca-certificates",
-            "filename": "typix-calendar_0.1.0-1_arm64.deb",
-            "installedSizeBytes": 13781912,
+            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.21.5), libstdc++6 (>= 14), wget, ca-certificates",
+            "filename": "typix-calendar_0.2.0-1_arm64.deb",
+            "installedSizeBytes": 13195451,
             "payload": "complete-deb",
-            "sha256": "cb8f2bc6054d21554ffc390fc9ef177fe31202a60a6666624b5a9e7d3a16b9ab",
-            "sizeBytes": 7192902
+            "sha256": "91e192760b81e30769fe298c6bde4d458fea4cee26794396d425a3dd686fd775",
+            "sizeBytes": 7358616
           },
           "compatibility": {
             "arch": [
@@ -656,14 +656,14 @@
               "wayland",
               "x11"
             ],
-            "minFreeDiskMB": 78,
+            "minFreeDiskMB": 77,
             "minMemoryMB": 128,
             "os": [
               "raspios-trixie"
             ],
             "requiredFeatures": []
           },
-          "version": "0.1.0-1"
+          "version": "0.2.0-1"
         }
       ]
     },
@@ -783,7 +783,7 @@
       "categories": [
         "Game"
       ],
-      "currentVersion": "0.1.0-1",
+      "currentVersion": "0.2.0-1",
       "description": {
         "zh-CN": "人机与双人五子棋、悔棋和自动续局。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
       },
@@ -797,8 +797,8 @@
       "package": "typix-gomoku",
       "screenshots": [
         {
-          "caption": "CM4 独立 800×600 测试会话中的实际界面",
-          "path": "docs/screenshots/gomoku.png"
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务",
+          "path": "docs/screenshots/gomoku-0-2-0-arm64.png"
         }
       ],
       "sourceRepository": "typixdeck/c1max-suite",
@@ -809,12 +809,12 @@
         {
           "artifact": {
             "arch": "arm64",
-            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.11.7), libstdc++6 (>= 11)",
-            "filename": "typix-gomoku_0.1.0-1_arm64.deb",
-            "installedSizeBytes": 13348655,
+            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.21.5), libstdc++6 (>= 14)",
+            "filename": "typix-gomoku_0.2.0-1_arm64.deb",
+            "installedSizeBytes": 12893370,
             "payload": "complete-deb",
-            "sha256": "ab1ef1ea12370489841fbfaa4988822585ae1caddc54434657815e746054acfe",
-            "sizeBytes": 7008878
+            "sha256": "498516bec2d23442b438c8304c38d423b51acdeef354bb0e8f0511e1b9faf31d",
+            "sizeBytes": 7147652
           },
           "compatibility": {
             "arch": [
@@ -831,7 +831,7 @@
             ],
             "requiredFeatures": []
           },
-          "version": "0.1.0-1"
+          "version": "0.2.0-1"
         }
       ]
     },
@@ -895,7 +895,7 @@
       "categories": [
         "Network"
       ],
-      "currentVersion": "0.1.0-1",
+      "currentVersion": "0.2.0-1",
       "description": {
         "zh-CN": "POP3 收件与 SMTP TLS 纯文本邮件客户端。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
       },
@@ -909,8 +909,8 @@
       "package": "typix-mail",
       "screenshots": [
         {
-          "caption": "CM4 独立 800×600 测试会话中的实际界面",
-          "path": "docs/screenshots/mail.png"
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务",
+          "path": "docs/screenshots/mail-0-2-0-arm64.png"
         }
       ],
       "sourceRepository": "typixdeck/c1max-suite",
@@ -921,12 +921,12 @@
         {
           "artifact": {
             "arch": "arm64",
-            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.11.7), libstdc++6 (>= 11), ca-certificates",
-            "filename": "typix-mail_0.1.0-1_arm64.deb",
-            "installedSizeBytes": 15188188,
+            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.21.5), libstdc++6 (>= 14), ca-certificates",
+            "filename": "typix-mail_0.2.0-1_arm64.deb",
+            "installedSizeBytes": 14405175,
             "payload": "complete-deb",
-            "sha256": "6d1dd314a0812ebb429c24bb2495aa5ddd31741eb4c2a5f60c5c1bb15685f633",
-            "sizeBytes": 8166242
+            "sha256": "2ba3f7187f7a0979cc3223f20c0b5acfd7ca733c220bb8c07b4dd08b5fd37cbf",
+            "sizeBytes": 8358442
           },
           "compatibility": {
             "arch": [
@@ -936,14 +936,14 @@
               "wayland",
               "x11"
             ],
-            "minFreeDiskMB": 79,
+            "minFreeDiskMB": 78,
             "minMemoryMB": 128,
             "os": [
               "raspios-trixie"
             ],
             "requiredFeatures": []
           },
-          "version": "0.1.0-1"
+          "version": "0.2.0-1"
         }
       ]
     },
@@ -951,7 +951,7 @@
       "categories": [
         "Network"
       ],
-      "currentVersion": "0.1.0-1",
+      "currentVersion": "0.2.0-1",
       "description": {
         "zh-CN": "Sunshine 配对、远程桌面、手动输入与可配置 AI 和语音。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
       },
@@ -965,8 +965,8 @@
       "package": "typix-moonpilot",
       "screenshots": [
         {
-          "caption": "CM4 独立 800×600 测试会话中的实际界面",
-          "path": "docs/screenshots/moonpilot.png"
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务",
+          "path": "docs/screenshots/moonpilot-0-2-0-arm64.png"
         }
       ],
       "sourceRepository": "typixdeck/c1max-suite",
@@ -977,12 +977,12 @@
         {
           "artifact": {
             "arch": "arm64",
-            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.11.7), libstdc++6 (>= 11), mplayer, wget, ca-certificates, alsa-utils",
-            "filename": "typix-moonpilot_0.1.0-1_arm64.deb",
-            "installedSizeBytes": 15124351,
+            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.21.5), libstdc++6 (>= 14), mplayer, wget, ca-certificates, alsa-utils",
+            "filename": "typix-moonpilot_0.2.0-1_arm64.deb",
+            "installedSizeBytes": 14208778,
             "payload": "complete-deb",
-            "sha256": "2ae1caf6d055b6c2308821334291317e206cd5d5e5866af872c705f3fca36672",
-            "sizeBytes": 7623472
+            "sha256": "eacb74e51fa64478a33e6f7ed8747104e277ee38652ad9ac9473c36db66ef5ee",
+            "sizeBytes": 7883616
           },
           "compatibility": {
             "arch": [
@@ -992,14 +992,14 @@
               "wayland",
               "x11"
             ],
-            "minFreeDiskMB": 79,
+            "minFreeDiskMB": 78,
             "minMemoryMB": 128,
             "os": [
               "raspios-trixie"
             ],
             "requiredFeatures": []
           },
-          "version": "0.1.0-1"
+          "version": "0.2.0-1"
         }
       ]
     },
@@ -1063,7 +1063,7 @@
       "categories": [
         "Development"
       ],
-      "currentVersion": "0.1.0-1",
+      "currentVersion": "0.2.0-1",
       "description": {
         "zh-CN": "QuickJS 驱动的 Processing 风格 2D 子集与草图编辑器。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
       },
@@ -1077,8 +1077,8 @@
       "package": "typix-processing",
       "screenshots": [
         {
-          "caption": "CM4 独立 800×600 测试会话中的实际界面",
-          "path": "docs/screenshots/processing.png"
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务",
+          "path": "docs/screenshots/processing-0-2-0-arm64.png"
         }
       ],
       "sourceRepository": "typixdeck/c1max-suite",
@@ -1089,12 +1089,12 @@
         {
           "artifact": {
             "arch": "arm64",
-            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.11.7), libstdc++6 (>= 11)",
-            "filename": "typix-processing_0.1.0-1_arm64.deb",
-            "installedSizeBytes": 14991108,
+            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.21.5), libstdc++6 (>= 14)",
+            "filename": "typix-processing_0.2.0-1_arm64.deb",
+            "installedSizeBytes": 14535671,
             "payload": "complete-deb",
-            "sha256": "b110fdca6f4d88f480a2891b9fdccf7f37125507586b1617453384cd64a56ccb",
-            "sizeBytes": 7620302
+            "sha256": "8e89b6d583714a7024c4b8f1d555b7aff8f866a516e278799f0f4b8a933c9a9b",
+            "sizeBytes": 7921614
           },
           "compatibility": {
             "arch": [
@@ -1104,14 +1104,14 @@
               "wayland",
               "x11"
             ],
-            "minFreeDiskMB": 79,
+            "minFreeDiskMB": 78,
             "minMemoryMB": 128,
             "os": [
               "raspios-trixie"
             ],
             "requiredFeatures": []
           },
-          "version": "0.1.0-1"
+          "version": "0.2.0-1"
         }
       ]
     },
@@ -1175,7 +1175,7 @@
       "categories": [
         "AudioVideo"
       ],
-      "currentVersion": "0.1.0-1",
+      "currentVersion": "0.2.0-1",
       "description": {
         "zh-CN": "Emby/Jellyfin 登录、媒体库、服务端转码视频及字幕。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
       },
@@ -1189,8 +1189,8 @@
       "package": "typix-streamplayer",
       "screenshots": [
         {
-          "caption": "CM4 独立 800×600 测试会话中的实际界面",
-          "path": "docs/screenshots/streamplayer.png"
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务",
+          "path": "docs/screenshots/streamplayer-0-2-0-arm64.png"
         }
       ],
       "sourceRepository": "typixdeck/c1max-suite",
@@ -1201,12 +1201,12 @@
         {
           "artifact": {
             "arch": "arm64",
-            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 4.5), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.11.7), libstdc++6 (>= 13.1), mplayer, wget, ca-certificates, wireplumber",
-            "filename": "typix-streamplayer_0.1.0-1_arm64.deb",
-            "installedSizeBytes": 14239181,
+            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 4.5), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.21.5), libstdc++6 (>= 14), mplayer, wget, ca-certificates, wireplumber",
+            "filename": "typix-streamplayer_0.2.0-1_arm64.deb",
+            "installedSizeBytes": 13456128,
             "payload": "complete-deb",
-            "sha256": "dd611f134d465417d0102974a200ab61fb6378531eb7f4d334911a259588983e",
-            "sizeBytes": 7420382
+            "sha256": "352de67e17840bbc4bed43c4222aa61064fbf7d7ee812d3a5227db4dee23410a",
+            "sizeBytes": 7534200
           },
           "compatibility": {
             "arch": [
@@ -1216,14 +1216,14 @@
               "wayland",
               "x11"
             ],
-            "minFreeDiskMB": 78,
+            "minFreeDiskMB": 77,
             "minMemoryMB": 128,
             "os": [
               "raspios-trixie"
             ],
             "requiredFeatures": []
           },
-          "version": "0.1.0-1"
+          "version": "0.2.0-1"
         }
       ]
     },
@@ -1231,7 +1231,7 @@
       "categories": [
         "System"
       ],
-      "currentVersion": "0.1.0-1",
+      "currentVersion": "0.2.0-1",
       "description": {
         "zh-CN": "完整 PTY、ANSI、UTF-8 终端和 Linux 命令工具。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
       },
@@ -1245,8 +1245,8 @@
       "package": "typix-terminal",
       "screenshots": [
         {
-          "caption": "CM4 独立 800×600 测试会话中的实际界面",
-          "path": "docs/screenshots/terminal.png"
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务",
+          "path": "docs/screenshots/terminal-0-2-0-arm64.png"
         }
       ],
       "sourceRepository": "typixdeck/c1max-suite",
@@ -1257,12 +1257,12 @@
         {
           "artifact": {
             "arch": "arm64",
-            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.11.7), libstdc++6 (>= 11), bash, less, nano, openssh-client, ncurses-term",
-            "filename": "typix-terminal_0.1.0-1_arm64.deb",
-            "installedSizeBytes": 13795245,
+            "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.21.5), libstdc++6 (>= 11), bash, less, nano, openssh-client, ncurses-term",
+            "filename": "typix-terminal_0.2.0-1_arm64.deb",
+            "installedSizeBytes": 13602024,
             "payload": "complete-deb",
-            "sha256": "1e8ad980d8682cd206180ea7e94bbce1aba958753c84f636f30174732176f0fa",
-            "sizeBytes": 7425314
+            "sha256": "6024a43003f877548269420b7011b4b31285dbafb71088d11f95d9305a45a296",
+            "sizeBytes": 7625944
           },
           "compatibility": {
             "arch": [
@@ -1272,22 +1272,22 @@
               "wayland",
               "x11"
             ],
-            "minFreeDiskMB": 78,
+            "minFreeDiskMB": 77,
             "minMemoryMB": 128,
             "os": [
               "raspios-trixie"
             ],
             "requiredFeatures": []
           },
-          "version": "0.1.0-1"
+          "version": "0.2.0-1"
         }
       ]
     }
   ],
   "channel": "github-repository",
-  "expiresAt": "2026-12-30T05:01:21.886188+00:00",
-  "generatedAt": "2026-10-01T05:01:21.886188+00:00",
+  "expiresAt": "2026-12-30T06:36:07.567511+00:00",
+  "generatedAt": "2026-10-01T06:36:07.567511+00:00",
   "repository": "typixdeck/store",
-  "revision": "20261001T050121Z",
+  "revision": "20261001T063607Z",
   "schemaVersion": 1
 }
