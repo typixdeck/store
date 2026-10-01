@@ -72,6 +72,81 @@ class CompleteDebPublicationTests(unittest.TestCase):
         self.metadata["sha256"] = sha256_file(self.source / self.filename)
         self.write_manifest()
 
+    def add_other_package(self, *, shared_path=None, shared_bytes=None, symlink=False):
+        """Create a second real application deb with distinct runtime paths."""
+        other_stage = self.root / "other-package"
+        for source in self.stage.rglob("*"):
+            if source.is_dir():
+                continue
+            relative = str(source.relative_to(self.stage)).replace("typix-test", "typix-other").replace("typix_test", "typix_other")
+            target = other_stage / relative
+            target.parent.mkdir(parents=True, exist_ok=True)
+            if source.is_symlink():
+                target.symlink_to(source.readlink())
+            else:
+                target.write_bytes(source.read_bytes().replace(b"typix-test", b"typix-other").replace(b"typix_test", b"typix_other"))
+                target.chmod(source.stat().st_mode & 0o777)
+        if shared_path is not None:
+            target = other_stage / shared_path
+            target.unlink(missing_ok=True)
+            if symlink:
+                target.symlink_to(shared_bytes)
+            else:
+                target.write_bytes(shared_bytes)
+        metadata = json.loads(json.dumps(self.metadata).replace("typix-test", "typix-other")
+                              .replace("typix_test", "typix_other").replace("ai.typixdeck.test", "ai.typixdeck.other"))
+        package = self.source / metadata["filename"]
+        subprocess.run(["dpkg-deb", "--root-owner-group", "--build", str(other_stage), str(package)], check=True, capture_output=True)
+        metadata["sha256"] = sha256_file(package)
+        (self.source / "manifest.json").write_text(json.dumps({"schemaVersion": 1, "applications": [self.metadata, metadata]}))
+
+    def test_cross_package_identical_and_different_icon_files_are_rejected(self):
+        name = "usr/share/icons/hicolor/scalable/apps/shared-icon.svg"
+        self.write_file(name, "same public artwork")
+        self.build()
+        for payload in (b"same public artwork", b"different public artwork"):
+            with self.subTest(identical=payload == b"same public artwork"):
+                other_stage = self.root / "other-package"
+                if other_stage.exists():
+                    shutil.rmtree(other_stage)
+                self.add_other_package(shared_path=name, shared_bytes=payload)
+                with self.assertRaisesRegex(PublicationError, r"ownership conflict: /usr/share/icons/.*typix-test.*typix-other"):
+                    inspect_packages(self.source)
+
+    def test_cross_package_icon_file_and_symlink_are_rejected(self):
+        name = "usr/share/icons/hicolor/scalable/apps/shared-icon.svg"
+        self.write_file(name, "public artwork")
+        self.build()
+        self.add_other_package(shared_path=name, shared_bytes="../../../../typix-other/icon.svg", symlink=True)
+        with self.assertRaisesRegex(PublicationError, "ownership conflict"):
+            inspect_packages(self.source)
+
+    def test_cross_package_matching_symlinks_are_rejected(self):
+        name = "usr/share/icons/hicolor/scalable/apps/shared-icon.svg"
+        target = self.stage / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.symlink_to("../../../../catalog/icon.svg")
+        self.build()
+        self.add_other_package()
+        with self.assertRaisesRegex(PublicationError, "ownership conflict"):
+            inspect_packages(self.source)
+
+    def test_distinct_application_files_can_share_parent_directories(self):
+        self.add_other_package()
+        self.assertEqual([row["package"] for row in inspect_packages(self.source)], ["typix-test", "typix-other"])
+
+    def test_ownership_sink_includes_unrequested_files_and_links_but_not_directories(self):
+        self.write_file("usr/share/typix-test/art.svg", "logo")
+        link = self.stage / "usr/share/typix-test/art-link.svg"
+        link.symlink_to("art.svg")
+        self.build()
+        owned = set()
+        files, _ = read_payload(self.source / self.filename, {"usr/bin/typix-test"}, owned_paths=owned)
+        self.assertEqual(set(files), {"usr/bin/typix-test"})
+        self.assertIn("usr/share/typix-test/art.svg", owned)
+        self.assertIn("usr/share/typix-test/art-link.svg", owned)
+        self.assertNotIn("usr/share/typix-test", owned)
+
     def test_invalid_categories_are_rejected_before_signing(self):
         for value in ([['Game']], [1], 'Game;', ['Game'] * 33, ['G' * 65]):
             with self.subTest(categories=value):

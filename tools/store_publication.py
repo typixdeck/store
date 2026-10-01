@@ -142,10 +142,17 @@ class PayloadFile:
     size: int
 
 
-def read_payload(path: Path, wanted: set[str], *, timeout: float = 30) -> tuple[dict[str, PayloadFile], int]:
-    """Read requested regular files from data.tar; never extract or execute them."""
+def read_payload(path: Path, wanted: set[str], *, timeout: float = 30,
+                 owned_paths: set[str] | None = None) -> tuple[dict[str, PayloadFile], int]:
+    """Read requested regular files, optionally collecting all non-directory paths.
+
+    Ownership includes links and files outside requiredPayload. Directories can
+    be shared by Debian packages; other paths must have one package owner.
+    Nothing is extracted or executed, and the return pair remains unchanged.
+    """
     files: dict[str, PayloadFile] = {}
     seen: set[str] = set()
+    non_directories: set[str] = set()
     total = 0
     inspected = 0
     process = subprocess.Popen(["dpkg-deb", "--fsys-tarfile", str(path)], stdout=subprocess.PIPE,
@@ -202,8 +209,11 @@ def read_payload(path: Path, wanted: set[str], *, timeout: float = 30) -> tuple[
                     continue
                 require(not name.startswith("/") and ".." not in PurePosixPath(name).parts and "\\" not in name,
                         "deb data archive contains a traversal path")
+                name = str(PurePosixPath(name))
                 require(name not in seen, f"Duplicate payload member: {name}")
                 seen.add(name)
+                if not member.isdir():
+                    non_directories.add(name)
                 total += max(0, member.size)
                 require(len(seen) <= 100000 and total <= MAX_PAYLOAD_BYTES, "deb expanded payload exceeds inspection limits")
                 if name not in wanted:
@@ -239,6 +249,8 @@ def read_payload(path: Path, wanted: set[str], *, timeout: float = 30) -> tuple[
     missing = wanted - set(files)
     require(not timed_out.is_set(), "deb payload inspection exceeded its wall deadline")
     require(not missing, "Incomplete application payload; missing: " + ", ".join("/" + value for value in sorted(missing)))
+    if owned_paths is not None:
+        owned_paths.update(non_directories)
     return files, total
 
 
@@ -252,7 +264,7 @@ def _launcher_command(data: bytes) -> list[str]:
     return commands[0][1:]
 
 
-def verify_complete_payload(path: Path, metadata: dict[str, Any]) -> int:
+def verify_complete_payload(path: Path, metadata: dict[str, Any], *, owned_paths: set[str] | None = None) -> int:
     desktop = metadata.get("desktopFile")
     require(isinstance(desktop, str) and bool(re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*\.desktop", desktop)), "Invalid desktopFile")
     required = metadata.get("requiredPayload")
@@ -274,7 +286,7 @@ def verify_complete_payload(path: Path, metadata: dict[str, Any]) -> int:
     else:
         raise PublicationError("Supported reviewed runtimes are python-module, python-script and native")
     require(implementation.issubset(wanted), "requiredPayload omits the runtime implementation")
-    files, installed_size = read_payload(path, wanted)
+    files, installed_size = read_payload(path, wanted, owned_paths=owned_paths)
     try:
         desktop_data = configparser.ConfigParser(interpolation=None, strict=True)
         desktop_data.optionxform = str
@@ -335,6 +347,7 @@ def inspect_packages(source: Path = DEFAULT_SOURCE) -> list[dict[str, Any]]:
     ids: set[str] = set()
     packages: set[str] = set()
     filenames: set[str] = set()
+    owners: dict[str, str] = {}
     for metadata in load_manifest(source):
         require(isinstance(metadata, dict), "Application metadata must be an object")
         filename, identity = metadata.get("filename"), metadata.get("id")
@@ -369,7 +382,14 @@ def inspect_packages(source: Path = DEFAULT_SOURCE) -> list[dict[str, Any]]:
         require(isinstance(categories, list) and len(categories) <= 32
                 and all(isinstance(value, str) and re.fullmatch(r"[A-Za-z][A-Za-z0-9-]{0,63}", value) for value in categories),
                 "Invalid categories: provide up to 32 bounded FreeDesktop tokens")
-        installed_size = verify_complete_payload(path, metadata)
+        owned_paths: set[str] = set()
+        installed_size = verify_complete_payload(path, metadata, owned_paths=owned_paths)
+        for owned_path in sorted(owned_paths):
+            previous_owner = owners.get(owned_path)
+            require(previous_owner is None,
+                    f"Package file ownership conflict: /{owned_path} is owned by both "
+                    f"{previous_owner} and {fields['Package']}; shared files or links are not publishable")
+            owners[owned_path] = fields["Package"]
         compatibility["minFreeDiskMB"] = max(compatibility["minFreeDiskMB"], (installed_size + 1024 * 1024 - 1) // (1024 * 1024) + 64)
         entries.append({"id": identity, "package": fields["Package"], "currentVersion": fields["Version"],
                         "name": metadata["name"], "summary": metadata["summary"], "description": metadata["description"],

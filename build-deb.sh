@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-VERSION=${VERSION:-0.3.1-1}
+VERSION=${VERSION:-0.3.2-1}
 STAGE="$ROOT/build/package"
 DIST="$ROOT/dist"
 rm -rf "$STAGE"
@@ -30,8 +30,9 @@ RUNNER
 chmod 755 "$STAGE/usr/bin/typix-store"
 cp -R "$ROOT/src/typix_store" "$STAGE/usr/lib/python3/dist-packages/"
 find "$STAGE/usr/lib/python3/dist-packages" -name '__pycache__' -type d -prune -exec rm -rf {} +
-# Offline catalog artwork also serves desktop shortcuts. Validate the fixed
-# local manifest and copy the exact checked bytes, without network requests.
+# Catalog artwork belongs to Store's private directory. Other applications own
+# their desktop icon paths; sharing those paths would make dpkg reject upgrades.
+# Validate the fixed local manifest and copy checked bytes without network.
 python3 - "$ROOT/assets/catalog-icons" "$STAGE" <<'ICONS'
 from pathlib import Path
 import hashlib
@@ -67,13 +68,12 @@ for package, row in manifest["icons"].items():
     target = destination / filename
     target.write_bytes(data)
     target.chmod(0o644)
-    size = "scalable" if filename.endswith(".svg") else "256x256"
-    extension = path.suffix
-    for alias in {package, name}:
-        target = stage / "usr/share/icons/hicolor" / size / "apps" / (alias + extension)
+    if package == "typix-store":
+        size = "scalable" if filename.endswith(".svg") else "256x256"
+        target = stage / "usr/share/icons/hicolor" / size / "apps" / (package + path.suffix)
         target.parent.mkdir(parents=True, exist_ok=True)
-        # Standard icon-theme aliases stay inside /usr/share and avoid shipping
-        # a second copy of each high-resolution PNG.
+        # Only Store's own theme icon is exported. Catalog rows are rendered
+        # directly from private files, including before the app is installed.
         target.symlink_to("../../../../typix-store/catalog-icons/" + filename)
 target = destination / "manifest.json"
 target.write_bytes(manifest_bytes)

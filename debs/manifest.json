@@ -250,8 +250,8 @@
         "requiredFeatures": []
       },
       "icon": "typix-store",
-      "filename": "typix-store_0.3.1-1_all.deb",
-      "sha256": "ed06dbe6386fa21731ef059ee894015cd0afb1f3a3415abccf6a0e660f63855d",
+      "filename": "typix-store_0.3.2-1_all.deb",
+      "sha256": "c7050035f3960e11f52d920ad7e40d0b497922833c24ba031f0868ee73d0a25f",
       "sourceRepository": "typixdeck/store",
       "screenshots": [
         {
@@ -565,13 +565,13 @@
         ],
         "requiredFeatures": []
       },
-      "filename": "typix-bilibili_0.2.0-1_arm64.deb",
-      "sha256": "49dd99eb60b6c0c5bb0408f064fbea5bb0c898830867dbbc30ea5d65efcaa8c4",
+      "filename": "typix-bilibili_0.2.1-1_arm64.deb",
+      "sha256": "7a93b1b1470796bdd4e2c728a2bc97fe11e809d8cf1b031a0672b594af883f6f",
       "sourceRepository": "typixdeck/c1max-suite",
       "screenshots": [
         {
           "path": "docs/screenshots/bilibili-0-2-0-arm64.png",
-          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务"
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；0.2.1 仅修复 HTTPS 传输，界面未变；未验证本次 CM4 实体触摸、音频及外部服务"
         }
       ]
     },

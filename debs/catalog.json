@@ -199,7 +199,7 @@
       "categories": [
         "System"
       ],
-      "currentVersion": "0.3.1-1",
+      "currentVersion": "0.3.2-1",
       "description": {
         "zh-CN": "完整 GTK3 商店，支持签名应用源、完整 deb 下载、独立授权安装更新移除。已安装应用可直接启动；安装后自动建立桌面快捷方式并按类别出现在 Launcher，保留用户的自定义快捷方式及手动移除选择。"
       },
@@ -230,11 +230,11 @@
           "artifact": {
             "arch": "all",
             "depends": "python3, python3-gi, python3-cryptography, gir1.2-gtk-3.0, librsvg2-common, dpkg, packagekit, pkexec, xdg-user-dirs",
-            "filename": "typix-store_0.3.1-1_all.deb",
-            "installedSizeBytes": 16601651,
+            "filename": "typix-store_0.3.2-1_all.deb",
+            "installedSizeBytes": 16601831,
             "payload": "complete-deb",
-            "sha256": "ed06dbe6386fa21731ef059ee894015cd0afb1f3a3415abccf6a0e660f63855d",
-            "sizeBytes": 16151156
+            "sha256": "c7050035f3960e11f52d920ad7e40d0b497922833c24ba031f0868ee73d0a25f",
+            "sizeBytes": 16150840
           },
           "compatibility": {
             "arch": [
@@ -252,7 +252,7 @@
             ],
             "requiredFeatures": []
           },
-          "version": "0.3.1-1"
+          "version": "0.3.2-1"
         }
       ]
     },
@@ -503,7 +503,7 @@
       "categories": [
         "AudioVideo"
       ],
-      "currentVersion": "0.2.0-1",
+      "currentVersion": "0.2.1-1",
       "description": {
         "zh-CN": "热门、搜索、BV、分 P、扫码登录与直连 MP4。完整原生 Linux 应用；保留用户自己的数据。硬件和服务依赖请见应用说明。"
       },
@@ -517,7 +517,7 @@
       "package": "typix-bilibili",
       "screenshots": [
         {
-          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；未验证 CM4 实体触摸、音频及外部服务",
+          "caption": "0.2.0 ARM64 deb 实际 GTK 界面，800×600，隔离 Trixie/Xvfb；0.2.1 仅修复 HTTPS 传输，界面未变；未验证本次 CM4 实体触摸、音频及外部服务",
           "path": "docs/screenshots/bilibili-0-2-0-arm64.png"
         }
       ],
@@ -530,11 +530,11 @@
           "artifact": {
             "arch": "arm64",
             "depends": "libc6 (>= 2.38), libcairo2 (>= 1.2.4), libgcc-s1 (>= 3.0), libglib2.0-0t64 (>= 2.12.0), libgtk-3-0t64 (>= 3.21.5), libstdc++6 (>= 14), mplayer, wget, ca-certificates, wireplumber",
-            "filename": "typix-bilibili_0.2.0-1_arm64.deb",
-            "installedSizeBytes": 13220611,
+            "filename": "typix-bilibili_0.2.1-1_arm64.deb",
+            "installedSizeBytes": 13221002,
             "payload": "complete-deb",
-            "sha256": "49dd99eb60b6c0c5bb0408f064fbea5bb0c898830867dbbc30ea5d65efcaa8c4",
-            "sizeBytes": 7356240
+            "sha256": "7a93b1b1470796bdd4e2c728a2bc97fe11e809d8cf1b031a0672b594af883f6f",
+            "sizeBytes": 7356390
           },
           "compatibility": {
             "arch": [
@@ -551,7 +551,7 @@
             ],
             "requiredFeatures": []
           },
-          "version": "0.2.0-1"
+          "version": "0.2.1-1"
         }
       ]
     },
@@ -1285,9 +1285,9 @@
     }
   ],
   "channel": "github-repository",
-  "expiresAt": "2026-12-30T06:36:07.567511+00:00",
-  "generatedAt": "2026-10-01T06:36:07.567511+00:00",
+  "expiresAt": "2026-12-30T07:40:22.605106+00:00",
+  "generatedAt": "2026-10-01T07:40:22.605106+00:00",
   "repository": "typixdeck/store",
-  "revision": "20261001T063607Z",
+  "revision": "20261001T074022Z",
   "schemaVersion": 1
 }

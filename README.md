@@ -1,4 +1,4 @@
-# TypixDeck Store 0.3.1 Alpha
+# TypixDeck Store 0.3.2 Alpha
 
 原生 GTK3/PyGObject 全屏商店，支持从配置的公开 GitHub 仓库下载**完整 deb 软件包**，然后经过系统授权安装、更新、移除。安装后自动加入 Launcher，已安装应用可直接点击「启动」。没有浏览器、遥测或整机安装清单上传。
 
@@ -28,7 +28,7 @@ Store 开启时检查目录中已安装应用的标准入口，补充缺失的�
 
 ## 应用目录
 
-当前分发 22 个完整 deb：原有七个应用和新增 15 个 [C1Max Linux 应用](https://github.com/typixdeck/c1max-suite)。Launcher 与 Store 0.3.1 同步更新启动/分类联动；Copilot 0.2.6 配合 DIY 0.4.4 保留兼容版本的设置。13 个套件应用提供 0.2.0 完整 deb，其中 10 个原生 ARM64 应用已在 Linux Trixie 隔离环境完成 GTK/Xvfb 启动及界面检查；钢琴、DOS、PS1 提供实际 Python 源码包。新版尚待 CM4 实体触摸、音频及外部服务验收。USB 键鼠与拍立得 0.1.0 保持原样。线上版本与下载校验值以本仓库签名目录为准。新增应用按需单独安装，本批针对官方 Raspberry Pi OS ARM64 Trixie；完整清单和外部设备/服务条件见 [debs/README.md](debs/README.md)。
+当前分发 22 个完整 deb：原有七个应用和新增 15 个 [C1Max Linux 应用](https://github.com/typixdeck/c1max-suite)。Launcher 0.3.1 与 Store 0.3.2 提供启动/分类联动；Copilot 0.2.6 配合 DIY 0.4.4 保留兼容版本的设置。12 个套件应用提供 0.2.0 完整 deb，哔哩哔哩提供修复 HTTPS 视频请求头的 0.2.1，其中 10 个原生 ARM64 应用已在 Linux Trixie 隔离环境完成 GTK/Xvfb 启动及界面检查；钢琴、DOS、PS1 提供实际 Python 源码包。新版尚待 CM4 实体触摸、音频及外部服务验收。USB 键鼠与拍立得 0.1.0 保持原样。线上版本与下载校验值以本仓库签名目录为准。新增应用按需单独安装，本批针对官方 Raspberry Pi OS ARM64 Trixie；完整清单和外部设备/服务条件见 [debs/README.md](debs/README.md)。
 
 ## GitHub 应用源
 
@@ -127,11 +127,14 @@ helper 没有网络请求，不执行 dpkg 安装或系统修复，不修改授�
 ## 构建和验证
 
 ```sh
-PYTHONPATH=src python3 -m unittest discover -s tests -v
 ./build-deb.sh
+PYTHONPATH=src python3 -m unittest discover -s tests -v
+python3 -m unittest discover -s tools/tests -v
 ```
 
-产物 `dist/typix-store_0.3.1-1_all.deb`，架构 `all`，声明 Python/GTK3/librsvg/cryptography/PackageKit/pkexec/xdg-user-dirs 依赖，并建议配套 Launcher ≥ 0.3.1，以及官方 Raspberry Pi OS Bookworm、Trixie 兼容字段。
+产物 `dist/typix-store_0.3.2-1_all.deb`，架构 `all`，声明 Python/GTK3/librsvg/cryptography/PackageKit/pkexec/xdg-user-dirs 依赖，并建议配套 Launcher ≥ 0.3.1，以及官方 Raspberry Pi OS Bookworm、Trixie 兼容字段。
+
+0.3.2 修正 Store 更新时的图标文件冲突：目录中 22 个应用的 logo 保留在 Store 私有目录，商店直接读取这些文件；每个应用的标准桌面图标仍由自己的 deb 管理。Store 不覆盖其他软件包的图标，也不使用 `Replaces` 或强制覆盖选项。发布工具在签名之前检查所有 deb 的非目录路径，拒绝多个包占用同一个文件或链接，即使内容相同；共享目录允许。已安装应用、用户数据和桌面快捷方式不需要移除。
 
 本机测试覆盖签名、过期、真实 deb 元数据、能力与空间、GitHub URL/跳转约束、网络响应和取消、Range 恢复、损坏缓存重试、未发布目录回退、文件描述符安全与暂存二次验证、PackageKit 错误/取消/超时。网络响应测试使用受控响应，不能替代真实 GitHub 发布后 E2E。CM4 上实际 PackageKit 安装/移除、root 暂存、在线完整包下载及 GTK 验收证据由集成交付记录单独给出。
 
