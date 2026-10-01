@@ -28,7 +28,7 @@ Store 开启时检查目录中已安装应用的标准入口，补充缺失的�
 
 ## 应用目录
 
-当前分发 22 个完整 deb：原有七个应用和新增 15 个 [C1Max Linux 应用](https://github.com/typixdeck/c1max-suite)。本地 0.3.1 候选同步更新 Launcher 与 Store 的启动/分类联动；Copilot 0.2.6 配合 DIY 0.4.4 保留兼容版本的设置。钢琴、DOS、PS1 候选为 0.2.0；10 个原生 ARM64 应用的 0.2.0 界面源码已经完成，deb 仍保留 0.1.0，等待支持的 Linux ARM64 构建和真机验证。拍立得 0.1.0 保持原样。候选未上传，线上版本以实际仓库内容为准。新增应用按需单独安装，本批针对官方 Raspberry Pi OS ARM64 Trixie；完整清单和外部设备/服务条件见 [debs/README.md](debs/README.md)。
+当前分发 22 个完整 deb：原有七个应用和新增 15 个 [C1Max Linux 应用](https://github.com/typixdeck/c1max-suite)。Launcher 与 Store 0.3.1 同步更新启动/分类联动；Copilot 0.2.6 配合 DIY 0.4.4 保留兼容版本的设置。钢琴、DOS、PS1 为 0.2.0；10 个原生 ARM64 应用的 0.2.0 界面源码已经完成，deb 仍保留 0.1.0，等待支持的 Linux ARM64 构建和真机验证。拍立得 0.1.0 保持原样。线上版本与下载校验值以本仓库签名目录为准。新增应用按需单独安装，本批针对官方 Raspberry Pi OS ARM64 Trixie；完整清单和外部设备/服务条件见 [debs/README.md](debs/README.md)。
 
 ## GitHub 应用源
 
