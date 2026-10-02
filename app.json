@@ -6,8 +6,8 @@
     "id": "ai.typixdeck.store",
     "package": "typix-store",
     "name": {
-      "zh-CN": "Typix 应用商店",
-      "en": "Typix Store"
+      "zh-CN": "应用商店",
+      "en": "Store"
     },
     "summary": {
       "zh-CN": "已安装应用直接启动，安装后自动对接 Launcher 分类"
@@ -41,7 +41,8 @@
       "/usr/share/typix-store/catalog-icons/typix-store.svg",
       "/usr/share/typix-store/catalog-icons/README.md",
       "/usr/share/typix-store/catalog-icons/LICENSE-original-vectors.txt",
-      "/usr/lib/python3/dist-packages/typix_store/presentation.py"
+      "/usr/lib/python3/dist-packages/typix_store/presentation.py",
+      "/usr/lib/python3/dist-packages/typix_store/names.py"
     ],
     "compatibility": {
       "arch": [
@@ -58,10 +59,10 @@
     "icon": "typix-store"
   },
   "release": {
-    "version": "0.3.2-1",
-    "file": "dist/typix-store_0.3.2-1_all.deb",
-    "sha256": "c7050035f3960e11f52d920ad7e40d0b497922833c24ba031f0868ee73d0a25f",
-    "sizeBytes": 16150840
+    "version": "0.3.3-1",
+    "file": "dist/typix-store_0.3.3-1_all.deb",
+    "sha256": "c4d75a8afbeb6f34301ce6d5751cdf18c2c53dfb2f8093761ae3c21b3a6b2aa1",
+    "sizeBytes": 16151088
   },
   "screenshots": [
     {

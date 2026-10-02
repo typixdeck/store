@@ -14,6 +14,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from .names import display_name
+
 KNOWN_FEATURES = {"wayland", "x11", "touch", "keyboard", "audio", "network", "opengl-es-3", "vulkan", "nvme", "usb-serial"}
 PACKAGE_RE = re.compile(r"^[a-z0-9][a-z0-9+.-]+$")
 DEB_VERSION_RE = re.compile(r"^[0-9][A-Za-z0-9.+~:-]*$")
@@ -116,7 +118,7 @@ class StoreApp:
         return self.raw.get("desktopFile")
 
     def name(self, locale: str = "zh-CN") -> str:
-        return localize(self.raw.get("name", self.id), locale)
+        return display_name(localize(self.raw.get("name", self.id), locale))
 
     def summary(self, locale: str = "zh-CN") -> str:
         return localize(self.raw.get("summary", ""), locale)

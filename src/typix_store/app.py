@@ -79,7 +79,7 @@ class StoreApplication(Gtk.Application):
             self.window.present()
             return
         self.window = Gtk.ApplicationWindow(application=self)
-        self.window.set_title("TypixDeck 应用商店")
+        self.window.set_title("应用商店")
         self.window.set_default_size(800, 600)
         self.window.connect("key-press-event", self.on_key)
         self.window.connect("delete-event", self.on_close)

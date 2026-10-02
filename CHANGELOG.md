@@ -1,5 +1,12 @@
 # Changes
 
+## 0.3.3
+
+- Simplify application display names in the catalog, details, search and
+  confirmations by removing standalone Typix / TypixDeck prefixes.
+- Keep signed records, package names and desktop launch identities unchanged.
+- Retain the private-icon ownership fix introduced in 0.3.2.
+
 ## 0.3.2
 
 - Fix Store self-updates failing when an installed application's desktop icon

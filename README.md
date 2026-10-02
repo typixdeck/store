@@ -1,4 +1,6 @@
-# TypixDeck Store 0.3.2 Alpha
+# TypixDeck Store 0.3.3 Alpha
+
+0.3.3 简化目录中的应用显示名：列表、详情、搜索和操作确认去掉独立的 Typix / TypixDeck 前缀，窗口标题为「应用商店」。包名、应用 ID、桌面入口和签名记录保持原有标识，以继续正常升级。此版本继续使用私有目录图标，避免公共图标路径与应用包冲突。本轮构建包尚未发布或安装到 CM4，线上目录仍以已签名版本为准。
 
 原生 GTK3/PyGObject 全屏商店，支持从配置的公开 GitHub 仓库下载**完整 deb 软件包**，然后经过系统授权安装、更新、移除。安装后自动加入 Launcher，已安装应用可直接点击「启动」。没有浏览器、遥测或整机安装清单上传。
 
@@ -132,7 +134,7 @@ PYTHONPATH=src python3 -m unittest discover -s tests -v
 python3 -m unittest discover -s tools/tests -v
 ```
 
-产物 `dist/typix-store_0.3.2-1_all.deb`，架构 `all`，声明 Python/GTK3/librsvg/cryptography/PackageKit/pkexec/xdg-user-dirs 依赖，并建议配套 Launcher ≥ 0.3.1，以及官方 Raspberry Pi OS Bookworm、Trixie 兼容字段。
+产物 `dist/typix-store_0.3.3-1_all.deb`，架构 `all`，声明 Python/GTK3/librsvg/cryptography/PackageKit/pkexec/xdg-user-dirs 依赖，并建议配套 Launcher ≥ 0.3.1，以及官方 Raspberry Pi OS Bookworm、Trixie 兼容字段。
 
 0.3.2 修正 Store 更新时的图标文件冲突：目录中 22 个应用的 logo 保留在 Store 私有目录，商店直接读取这些文件；每个应用的标准桌面图标仍由自己的 deb 管理。Store 不覆盖其他软件包的图标，也不使用 `Replaces` 或强制覆盖选项。发布工具在签名之前检查所有 deb 的非目录路径，拒绝多个包占用同一个文件或链接，即使内容相同；共享目录允许。已安装应用、用户数据和桌面快捷方式不需要移除。
 
