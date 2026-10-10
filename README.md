@@ -30,7 +30,7 @@ Store 开启时检查目录中已安装应用的标准入口，补充缺失的�
 
 ## 应用目录
 
-当前分发 22 个完整 deb：原有七个应用和新增 15 个 [C1Max Linux 应用](https://github.com/typixdeck/c1max-suite)。Launcher 0.3.4 与 Store 0.3.4 提供启动/分类联动及权限修复；Copilot 0.2.6 配合 DIY 0.4.4 保留兼容版本的设置。12 个套件应用提供 0.2.0 完整 deb，哔哩哔哩提供修复 HTTPS 视频请求头的 0.2.1，其中 10 个原生 ARM64 应用已在 Linux Trixie 隔离环境完成 GTK/Xvfb 启动及界面检查；钢琴、DOS、PS1 提供实际 Python 源码包。新版尚待 CM4 实体触摸、音频及外部服务验收。USB 键鼠与拍立得 0.1.0 保持原样。线上版本与下载校验值以本仓库签名目录为准。新增应用按需单独安装，本批针对官方 Raspberry Pi OS ARM64 Trixie；完整清单和外部设备/服务条件见 [debs/README.md](debs/README.md)。
+当前分发 22 个完整 deb：原有七个应用和新增 15 个 [C1Max Linux 应用](https://github.com/typixdeck/c1max-suite)。Launcher 0.3.5 与 Store 0.3.4 提供启动/分类联动及权限修复；Copilot 0.2.6 配合 DIY 0.4.4 保留兼容版本的设置。12 个套件应用提供 0.2.0 完整 deb，哔哩哔哩提供修复 HTTPS 视频请求头的 0.2.1，其中 10 个原生 ARM64 应用已在 Linux Trixie 隔离环境完成 GTK/Xvfb 启动及界面检查；钢琴、DOS、PS1 提供实际 Python 源码包。新版尚待 CM4 实体触摸、音频及外部服务验收。USB 键鼠与拍立得 0.1.0 保持原样。线上版本与下载校验值以本仓库签名目录为准。新增应用按需单独安装，本批针对官方 Raspberry Pi OS ARM64 Trixie；完整清单和外部设备/服务条件见 [debs/README.md](debs/README.md)。
 
 ## GitHub 应用源
 
