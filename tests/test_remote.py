@@ -28,6 +28,20 @@ class Response(io.BytesIO):
 
 
 class RemoteTests(unittest.TestCase):
+    def test_inaccessible_source_parent_is_not_treated_as_offline_or_missing(self):
+        from typix_store.client import StoreClient
+        with patch.object(Path, "lstat", side_effect=PermissionError("fixture")):
+            with self.assertRaisesRegex(CatalogError, "安装脚本修复权限"):
+                StoreClient().load_catalog()
+
+    def test_unreadable_source_and_key_have_actionable_permission_error(self):
+        for target in ("typix_store.remote.require_system_owned", "pathlib.Path.read_bytes", "pathlib.Path.open"):
+            config = self.root / "github.json"
+            config.write_text(json.dumps({"repository": "owner/project", "publicKey": str(self.public)}))
+            with patch("typix_store.remote.require_system_owned"), patch(target, side_effect=PermissionError("fixture")):
+                with self.assertRaisesRegex(CatalogError, "安装脚本修复权限"):
+                    load_config(config)
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)

@@ -245,7 +245,7 @@ class StoreApplication(Gtk.Application):
             self.rows.clear()
             if error:
                 self.detail_title.set_text("无法加载可信目录")
-                self.status.set_text(error + "。更新离线仓库后点击刷新。")
+                self.status.set_text(error + "。处理后点击刷新。")
             else:
                 self.apps, self.profile, self.installed, self.updates, self.desktop, self.source_error, shortcut_warning = result
                 self.client.display_apps = list(self.apps)
@@ -296,7 +296,7 @@ class StoreApplication(Gtk.Application):
         self.list_box.select_row(row)
         if row is None:
             self.selected = None
-            self.detail_title.set_text("没有匹配的应用" if self.apps else "离线目录不可用或尚无应用")
+            self.detail_title.set_text("没有匹配的应用" if self.apps else "应用目录暂不可用，请查看下方提示")
             self.render_details()
 
     @staticmethod

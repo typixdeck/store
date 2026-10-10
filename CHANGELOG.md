@@ -1,5 +1,15 @@
 # Changes
 
+## 0.3.4
+
+- Repair legacy bootstrap-created 0700 public source directories during package
+  configuration; preserve source contents and reject unsafe ownership/symlinks.
+- Explain unreadable source configuration or public keys without disguising a
+  permissions failure as an empty offline catalog.
+- Publish Launcher 0.3.4 with touch-adjustable fan curves and a bootstrap script
+  that creates public directories correctly under umask 077 and repairs existing
+  trusted sources after normal verification and administrator authorization.
+
 ## 0.3.3
 
 - Simplify application display names in the catalog, details, search and

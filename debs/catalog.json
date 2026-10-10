@@ -130,19 +130,27 @@
       "categories": [
         "System"
       ],
-      "currentVersion": "0.3.1-1",
+      "currentVersion": "0.3.4-1",
       "description": {
-        "zh-CN": "完整 GTK3 启动器，只读取桌面快捷方式。设置中可选择自动、单应用省内存或后台模式：后台保留 Launcher 窗口供 Alt+Tab 切换，重复点击运行中的启动项优先切回；单应用启动前退出 Launcher，应用关闭后返回。顶部显示电量与 Wi-Fi 纯图标。"
+        "zh-CN": "原生 GTK3 启动器，只读取桌面快捷方式，合并相同启动行为的副本，保留不同文件和 URL 参数。支持自动、单应用省内存或后台运行模式。设置内提供 CN5 EMC2301 四点可触摸拖动温控曲线、手动滑块和百分比输入和实时 PWM/RPM/温度，保留过热和异常全速保护；缺少驱动时禁用调速。"
       },
       "desktopFile": "typix-launcher.desktop",
       "icon": "ai.typixdeck.launcher",
       "id": "ai.typixdeck.launcher",
       "name": {
-        "en": "Typix Launcher",
-        "zh-CN": "Typix 启动器"
+        "en": "Launcher",
+        "zh-CN": "启动器"
       },
       "package": "typix-launcher",
       "screenshots": [
+        {
+          "caption": "0.3.3 横向分类标签（CM4 GTK 隔离演示）",
+          "path": "docs/screenshots/categories.png"
+        },
+        {
+          "caption": "0.3.4 可触摸拖动风扇曲线（800×600 GTK 隔离演示）",
+          "path": "docs/screenshots/fan-curve.png"
+        },
         {
           "caption": "0.3.0 应用运行模式设置（CM4 GTK 演示预览）",
           "path": "docs/screenshots/runtime-settings.png"
@@ -162,18 +170,18 @@
       ],
       "sourceRepository": "typixdeck/launcher",
       "summary": {
-        "zh-CN": "桌面快捷方式启动器，支持 Store 启动与单应用模式"
+        "zh-CN": "横向分类、桌面快捷方式去重、应用运行模式和触摸风扇温控曲线"
       },
       "versions": [
         {
           "artifact": {
             "arch": "all",
-            "depends": "python3 (>= 3.11), python3-gi, gir1.2-gtk-3.0, xdg-user-dirs",
-            "filename": "typix-launcher_0.3.1-1_all.deb",
-            "installedSizeBytes": 84560,
+            "depends": "python3 (>= 3.11), python3-gi, python3-gi-cairo, gir1.2-gtk-3.0, xdg-user-dirs, pkexec, polkitd, systemd",
+            "filename": "typix-launcher_0.3.4-1_all.deb",
+            "installedSizeBytes": 157818,
             "payload": "complete-deb",
-            "sha256": "56a50b2373faea7fff334715a25750631eb33b43aec98688a09c11c7ff9cafd8",
-            "sizeBytes": 22568
+            "sha256": "5732b66c7dc292817295eade7df79e7c6d7a2257f07f8e011b67e015554bb9e1",
+            "sizeBytes": 39992
           },
           "compatibility": {
             "arch": [
@@ -191,7 +199,7 @@
             ],
             "requiredFeatures": []
           },
-          "version": "0.3.1-1"
+          "version": "0.3.4-1"
         }
       ]
     },
@@ -199,7 +207,7 @@
       "categories": [
         "System"
       ],
-      "currentVersion": "0.3.2-1",
+      "currentVersion": "0.3.4-1",
       "description": {
         "zh-CN": "完整 GTK3 商店，支持签名应用源、完整 deb 下载、独立授权安装更新移除。已安装应用可直接启动；安装后自动建立桌面快捷方式并按类别出现在 Launcher，保留用户的自定义快捷方式及手动移除选择。"
       },
@@ -207,8 +215,8 @@
       "icon": "typix-store",
       "id": "ai.typixdeck.store",
       "name": {
-        "en": "Typix Store",
-        "zh-CN": "Typix 应用商店"
+        "en": "Store",
+        "zh-CN": "应用商店"
       },
       "package": "typix-store",
       "screenshots": [
@@ -230,11 +238,11 @@
           "artifact": {
             "arch": "all",
             "depends": "python3, python3-gi, python3-cryptography, gir1.2-gtk-3.0, librsvg2-common, dpkg, packagekit, pkexec, xdg-user-dirs",
-            "filename": "typix-store_0.3.2-1_all.deb",
-            "installedSizeBytes": 16601831,
+            "filename": "typix-store_0.3.4-1_all.deb",
+            "installedSizeBytes": 16602876,
             "payload": "complete-deb",
-            "sha256": "c7050035f3960e11f52d920ad7e40d0b497922833c24ba031f0868ee73d0a25f",
-            "sizeBytes": 16150840
+            "sha256": "60f1fe50f5d2fe8d5cea8d8d608cc9c1f5ec999441d6f2921070b3ac85afc874",
+            "sizeBytes": 16151900
           },
           "compatibility": {
             "arch": [
@@ -252,7 +260,7 @@
             ],
             "requiredFeatures": []
           },
-          "version": "0.3.2-1"
+          "version": "0.3.4-1"
         }
       ]
     },
@@ -1285,9 +1293,9 @@
     }
   ],
   "channel": "github-repository",
-  "expiresAt": "2026-12-30T07:40:22.605106+00:00",
-  "generatedAt": "2026-10-01T07:40:22.605106+00:00",
+  "expiresAt": "2027-01-08T04:58:55.535525+00:00",
+  "generatedAt": "2026-10-10T04:58:55.535525+00:00",
   "repository": "typixdeck/store",
-  "revision": "20261001T074022Z",
+  "revision": "20261010T045855Z",
   "schemaVersion": 1
 }

@@ -1,11 +1,15 @@
 #!/bin/sh
 set -eu
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-VERSION=${VERSION:-0.3.3-1}
+VERSION=${VERSION:-0.3.4-1}
 STAGE="$ROOT/build/package"
 DIST="$ROOT/dist"
 rm -rf "$STAGE"
 mkdir -p "$STAGE/DEBIAN" "$STAGE/usr/bin" "$STAGE/usr/lib/python3/dist-packages" "$STAGE/usr/share/typix-store" "$STAGE/usr/share/applications" "$STAGE/usr/share/doc/typix-store" "$DIST"
+# This is public source metadata. Shipping the directory with an explicit mode
+# supplies the default for new installs; postinst repairs legacy permissions.
+# configuration contents remain administrator-owned and are never overwritten.
+install -d -m 755 "$STAGE/etc/typix-store"
 cat > "$STAGE/DEBIAN/control" <<CONTROL
 Package: typix-store
 Version: $VERSION
@@ -92,4 +96,5 @@ fi
 mkdir -p "$STAGE/usr/libexec"
 install -m 755 "$ROOT/packaging/typix-store-stage" "$STAGE/usr/libexec/typix-store-stage"
 install -m 644 "$ROOT/packaging/typix-store.desktop" "$STAGE/usr/share/applications/typix-store.desktop"
+install -m 755 "$ROOT/packaging/postinst" "$STAGE/DEBIAN/postinst"
 dpkg-deb --root-owner-group --build "$STAGE" "$DIST/typix-store_${VERSION}_all.deb"

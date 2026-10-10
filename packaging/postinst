@@ -1,0 +1,28 @@
+#!/bin/sh
+set -eu
+if [ "${1:-}" = configure ]; then
+    /usr/bin/python3 -I - <<'PY'
+from pathlib import Path
+import stat
+import sys
+
+# dpkg preserves existing directory modes on upgrade. Older bootstrap scripts
+# created these public metadata directories under umask 077, leaving them 0700.
+# Touch only package-owned public directories, not files, custom key locations,
+# arbitrary ancestors or user caches. Never follow symlinks or user-owned paths.
+for directory in (Path("/etc/typix-store"), Path("/usr/share/typix-store"),
+                  Path("/usr/share/typix-store/keys")):
+    try:
+        for component in (directory, *directory.parents):
+            info = component.lstat()
+            if not stat.S_ISDIR(info.st_mode) or info.st_uid != 0 or info.st_mode & 0o022:
+                raise ValueError("unexpected ownership, symlink or permissions")
+        directory.chmod(0o755)
+    except FileNotFoundError:
+        pass
+    except (OSError, ValueError):
+        print("typix-store: public source directory permissions were preserved; "
+              "administrator review required: " + str(directory), file=sys.stderr)
+PY
+fi
+exit 0

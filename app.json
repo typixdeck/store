@@ -59,10 +59,10 @@
     "icon": "typix-store"
   },
   "release": {
-    "version": "0.3.3-1",
-    "file": "dist/typix-store_0.3.3-1_all.deb",
-    "sha256": "c4d75a8afbeb6f34301ce6d5751cdf18c2c53dfb2f8093761ae3c21b3a6b2aa1",
-    "sizeBytes": 16151088
+    "version": "0.3.4-1",
+    "file": "dist/typix-store_0.3.4-1_all.deb",
+    "sha256": "60f1fe50f5d2fe8d5cea8d8d608cc9c1f5ec999441d6f2921070b3ac85afc874",
+    "sizeBytes": 16151900
   },
   "screenshots": [
     {

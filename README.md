@@ -1,6 +1,6 @@
-# TypixDeck Store 0.3.3 Alpha
+# TypixDeck Store 0.3.4 Alpha
 
-0.3.3 简化目录中的应用显示名：列表、详情、搜索和操作确认去掉独立的 Typix / TypixDeck 前缀，窗口标题为「应用商店」。包名、应用 ID、桌面入口和签名记录保持原有标识，以继续正常升级。此版本继续使用私有目录图标，避免公共图标路径与应用包冲突。本轮构建包尚未发布或安装到 CM4，线上目录仍以已签名版本为准。
+0.3.4 修复旧版一键安装后应用源配置目录权限不足的问题，并提供明确的修复提示。保留 0.3.3 的简洁应用名：列表、详情、搜索和操作确认去掉独立的 Typix / TypixDeck 前缀。包名、应用 ID、桌面入口和签名记录保持原有标识，以继续正常升级；目录图标仍放在 Store 私有目录。
 
 原生 GTK3/PyGObject 全屏商店，支持从配置的公开 GitHub 仓库下载**完整 deb 软件包**，然后经过系统授权安装、更新、移除。安装后自动加入 Launcher，已安装应用可直接点击「启动」。没有浏览器、遥测或整机安装清单上传。
 
@@ -30,11 +30,21 @@ Store 开启时检查目录中已安装应用的标准入口，补充缺失的�
 
 ## 应用目录
 
-当前分发 22 个完整 deb：原有七个应用和新增 15 个 [C1Max Linux 应用](https://github.com/typixdeck/c1max-suite)。Launcher 0.3.1 与 Store 0.3.2 提供启动/分类联动；Copilot 0.2.6 配合 DIY 0.4.4 保留兼容版本的设置。12 个套件应用提供 0.2.0 完整 deb，哔哩哔哩提供修复 HTTPS 视频请求头的 0.2.1，其中 10 个原生 ARM64 应用已在 Linux Trixie 隔离环境完成 GTK/Xvfb 启动及界面检查；钢琴、DOS、PS1 提供实际 Python 源码包。新版尚待 CM4 实体触摸、音频及外部服务验收。USB 键鼠与拍立得 0.1.0 保持原样。线上版本与下载校验值以本仓库签名目录为准。新增应用按需单独安装，本批针对官方 Raspberry Pi OS ARM64 Trixie；完整清单和外部设备/服务条件见 [debs/README.md](debs/README.md)。
+当前分发 22 个完整 deb：原有七个应用和新增 15 个 [C1Max Linux 应用](https://github.com/typixdeck/c1max-suite)。Launcher 0.3.4 与 Store 0.3.4 提供启动/分类联动及权限修复；Copilot 0.2.6 配合 DIY 0.4.4 保留兼容版本的设置。12 个套件应用提供 0.2.0 完整 deb，哔哩哔哩提供修复 HTTPS 视频请求头的 0.2.1，其中 10 个原生 ARM64 应用已在 Linux Trixie 隔离环境完成 GTK/Xvfb 启动及界面检查；钢琴、DOS、PS1 提供实际 Python 源码包。新版尚待 CM4 实体触摸、音频及外部服务验收。USB 键鼠与拍立得 0.1.0 保持原样。线上版本与下载校验值以本仓库签名目录为准。新增应用按需单独安装，本批针对官方 Raspberry Pi OS ARM64 Trixie；完整清单和外部设备/服务条件见 [debs/README.md](debs/README.md)。
 
 ## GitHub 应用源
 
 管理员配置文件固定为 `/etc/typix-store/github.json`。配置、公钥及所有上级路径必须 root 所有、非符号链接且不可由普通用户改写。没有配置时继续使用签名离线应用源，不猜测仓库。
+
+### 修复「github.json 权限不足」
+
+旧版 Launcher 一键安装脚本可能在 `umask 077` 下建立 `0700` 的公共配置目录，普通用户因此无法读取应用源。新版脚本修复了目录创建，并能在验证与授权后恢复已有配置的访问权限。出现该错误时，在设备的普通桌面用户终端执行：
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/typixdeck/launcher/main/install.sh | sh
+```
+
+完成后关闭并重新打开商店。Store 0.3.4 的包配置阶段也会检查并修复自己管理的公共目录权限；dpkg 仅解包会保留旧目录权限，因此修复在正常配置阶段完成。配置内容、用户缓存和自定义密钥位置不被替换。公共目录应为 `0755`，公开应用源 JSON 与公钥应为 `0644`，由 root 持有；不要使用 `chmod -R 777` 或用 root 启动商店。
 
 本项目目标仓库的 raw 模式示例见 [config/github.example.json](config/github.example.json)：
 

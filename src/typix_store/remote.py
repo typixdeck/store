@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from .catalog import CatalogError, load_catalog_file, verify_hash
-from .client import require_system_owned
+from .client import SOURCE_PERMISSION_ERROR, require_system_owned
 
 CONFIG_PATH = Path("/etc/typix-store/github.json")
 MAX_CATALOG = 4 * 1024 * 1024
@@ -51,10 +51,10 @@ class GitHubConfig:
 
 
 def load_config(path=CONFIG_PATH):
-    require_system_owned(path)
-    if path.stat().st_size > 8192:
-        raise CatalogError("GitHub 配置过大")
     try:
+        require_system_owned(path)
+        if path.stat().st_size > 8192:
+            raise CatalogError("GitHub 配置过大")
         raw = json.loads(path.read_bytes())
         repository = raw["repository"]
         if not isinstance(repository, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9-]*/[A-Za-z0-9][A-Za-z0-9_.-]*", repository):
@@ -63,6 +63,8 @@ def load_config(path=CONFIG_PATH):
         if not key.is_absolute():
             raise ValueError("publicKey")
         require_system_owned(key)
+        with key.open("rb"):
+            pass
         mode = raw.get("mode", "release")
         if mode not in {"release", "raw"}:
             raise ValueError("mode")
@@ -74,6 +76,8 @@ def load_config(path=CONFIG_PATH):
         if not isinstance(directory, str) or not re.fullmatch(r"[A-Za-z0-9_-]+(?:/[A-Za-z0-9_.-]+)*", directory) or ".." in directory:
             raise ValueError("directory")
         return GitHubConfig(repository, key, mode, release, ref, directory)
+    except PermissionError as exc:
+        raise CatalogError(SOURCE_PERMISSION_ERROR) from exc
     except (KeyError, ValueError, TypeError) as exc:
         raise CatalogError("GitHub 系统配置无效，请管理员检查仓库、版本和公钥") from exc
 

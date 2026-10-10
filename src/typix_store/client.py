@@ -18,6 +18,20 @@ from .integration import ShortcutManager, category_name
 DEFAULT_REPOSITORY = Path("/usr/share/typix-store/repository")
 DEFAULT_PUBLIC_KEY = Path("/usr/share/typix-store/keys/development.pem")
 PROTECTED_PACKAGES = frozenset({"typix-launcher", "typix-store"})
+SOURCE_PERMISSION_ERROR = "应用源配置或公钥权限不足；请重新运行新版 Launcher 安装脚本修复权限，再刷新商店"
+
+
+def source_config_exists(path: Path | None) -> bool:
+    if path is None:
+        return False
+    try:
+        path.lstat()
+        return True
+    except FileNotFoundError:
+        return False
+    except PermissionError as exc:
+        # Do not confuse an inaccessible parent directory with a missing source.
+        raise CatalogError(SOURCE_PERMISSION_ERROR) from exc
 
 
 def require_system_owned(path: Path) -> None:
@@ -43,7 +57,7 @@ class StoreClient:
         """Offline display only: expired signatures never authorize installs."""
         sources = [(self.repository / "catalog.json", self.repository / "catalog.json.sig", self.public_key, None, "development-offline")]
         try:
-            if self.github_config and self.github_config.exists():
+            if source_config_exists(self.github_config):
                 from .remote import GitHubSource, load_config
                 config = load_config(self.github_config)
                 cache = GitHubSource(config).cache
@@ -102,7 +116,7 @@ class StoreClient:
 
     def load_catalog(self, cancelled=lambda: False) -> list[StoreApp]:
         self.remote = None
-        if self.github_config is not None and self.github_config.exists():
+        if source_config_exists(self.github_config):
             from .remote import GitHubSource, load_config
             config = load_config(self.github_config)
             remote = GitHubSource(config)
